@@ -1,0 +1,294 @@
+{
+  "chapter": 5,
+  "source": {
+    "book": "Hands-On Large Language Models (2024)",
+    "pdf_pages": "192-235",
+    "page_numbering": "PDF physical pages"
+  },
+  "sections": [
+    {
+      "source_title": "ArXiv’s Articles: Computation and Language",
+      "pdf_page": 193,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "arXiv cs.CL 44,949개 초록",
+        "제목/초록의 행 정렬",
+        "데이터 범위와 연도"
+      ]
+    },
+    {
+      "source_title": "A Common Pipeline for Text Clustering",
+      "pdf_page": 194,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "임베딩-차원축소-군집화",
+        "각 단계의 행렬 모양",
+        "모듈의 역할"
+      ]
+    },
+    {
+      "source_title": "Embedding Documents",
+      "pdf_page": 195,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "gte-small과 384차원",
+        "군집화 평가와 비용의 균형",
+        "코사인 유사도"
+      ]
+    },
+    {
+      "source_title": "Reducing the Dimensionality of Embeddings",
+      "pdf_page": 196,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "PCA와 UMAP",
+        "5차원 군집화",
+        "min_dist/metric/random_state",
+        "차원축소의 정보 손실"
+      ]
+    },
+    {
+      "source_title": "Cluster the Reduced Embeddings",
+      "pdf_page": 199,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "k-means와 HDBSCAN 비교",
+        "min_cluster_size",
+        "euclidean/eom",
+        "이상치 -1",
+        "고유 라벨 156과 정상 토픽 155"
+      ]
+    },
+    {
+      "source_title": "Inspecting the Clusters",
+      "pdf_page": 201,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "대표/표본 문서 읽기",
+        "수어 군집",
+        "2차원 투영",
+        "색상 반복",
+        "원문 변수명/타입 주의"
+      ]
+    },
+    {
+      "source_title": "From Text Clustering to Topic Modeling",
+      "pdf_page": 204,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "토픽 키워드와 자연어 이름",
+        "LDA와 어휘 분포",
+        "임베딩 기반 군집화와의 차이"
+      ]
+    },
+    {
+      "source_title": "BERTopic: A Modular Topic Modeling Framework",
+      "pdf_page": 206,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "군집과 표현의 분리",
+        "BoW와 군집별 집계",
+        "정규화 cTF",
+        "IDF와 A/F 정의",
+        "모듈성/토픽 모델링 변형",
+        "get_topic_info/get_topic/find_topics/topics_",
+        "문서 지도/막대/유사도행렬/계층"
+      ]
+    },
+    {
+      "source_title": "Adding a Special Lego Block",
+      "pdf_page": 220,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "표현 블록 재정렬",
+        "deepcopy와 전후 비교",
+        "KeyBERTInspired 대표 문서",
+        "약어 손실",
+        "MMR 관련성과 다양성",
+        "후보 제약"
+      ]
+    },
+    {
+      "source_title": "The Text Generation Lego Block",
+      "pdf_page": 228,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "대표 문서와 키워드 프롬프트",
+        "토픽당 생성 호출",
+        "Flan-T5와 whitespace 길이 제한",
+        "GPT-3.5의 2024년 예제",
+        "다중 표현 보존",
+        "이름의 근거/범위",
+        "datamap과 medoid"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 233,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "전체 파이프라인 통합",
+        "검토 질문",
+        "다음 프롬프트 장과의 연결",
+        "원문 참고문헌"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 5-1",
+      "pdf_page": 192,
+      "explained_in": "study.md#intro"
+    },
+    {
+      "label": "Figure 5-2",
+      "pdf_page": 193,
+      "explained_in": "study.md#intro"
+    },
+    {
+      "label": "Figure 5-3",
+      "pdf_page": 195,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 5-4",
+      "pdf_page": 197,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 5-5",
+      "pdf_page": 197,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 5-6",
+      "pdf_page": 199,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 5-7",
+      "pdf_page": 200,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 5-8",
+      "pdf_page": 204,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 5-9",
+      "pdf_page": 205,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 5-10",
+      "pdf_page": 206,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 5-11",
+      "pdf_page": 207,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 5-12",
+      "pdf_page": 207,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 5-13",
+      "pdf_page": 208,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 5-14",
+      "pdf_page": 209,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 5-15",
+      "pdf_page": 210,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 5-16",
+      "pdf_page": 210,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 5-17",
+      "pdf_page": 211,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 5-18",
+      "pdf_page": 219,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 5-19",
+      "pdf_page": 220,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 5-20",
+      "pdf_page": 221,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 5-21",
+      "pdf_page": 222,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 5-22",
+      "pdf_page": 224,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 5-23",
+      "pdf_page": 228,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 5-24",
+      "pdf_page": 233,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Unnumbered output table: get_topic_info",
+      "pdf_page": 215,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Unnumbered comparison table: KeyBERTInspired",
+      "pdf_page": 225,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Unnumbered comparison table: MMR",
+      "pdf_page": 227,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Unnumbered comparison table: Flan-T5",
+      "pdf_page": 230,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Unnumbered comparison table: GPT-3.5",
+      "pdf_page": 231,
+      "explained_in": "study.md#sec-10"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true
+  },
+  "limitations": [
+    "실제 arXiv 다운로드 및 임베딩·UMAP·HDBSCAN·BERTopic·생성 모델 실행은 수행하지 않음.",
+    "Python 실습과 상호작용 시각화는 가상 문서/좌표/벡터로 DBSCAN·기본 c-TF-IDF·MMR 원리를 계산함.",
+    "2024년 원문의 모델/API 사용 가능성 및 최신 패키지 호환성은 검증하지 않음."
+  ]
+}

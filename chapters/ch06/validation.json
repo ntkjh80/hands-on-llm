@@ -1,0 +1,82 @@
+{
+  "chapter": 6,
+  "markdown_links_checked": 198,
+  "source_sections_covered": 19,
+  "source_figures_covered": 21,
+  "source_tables_covered": 1,
+  "quiz_questions": 18,
+  "mermaid_diagrams": 5,
+  "interactive_experiments": 3,
+  "lab": {
+    "command": "python3 chapters/ch06/lab.py",
+    "saved_output": "lab-output.txt",
+    "reproduced_exactly": true,
+    "additional_run": "--temperature 2 --top-p 0.95",
+    "help_checked": true
+  },
+  "visuals": {
+    "sha256": "4cad73f1798489d5b89c4df60b450cabb7ab1858c1a6546376c9ceb78c47a0fa",
+    "inline_javascript_syntax": "passed",
+    "calculation_and_event_simulation": "passed",
+    "browser_evidence": {
+      "chapter": "ch06",
+      "sha256": "4cad73f1798489d5b89c4df60b450cabb7ab1858c1a6546376c9ceb78c47a0fa",
+      "errors": [],
+      "interactions": [
+        {
+          "id": "temperature",
+          "type": "range",
+          "textChanged": true,
+          "markupChanged": true
+        },
+        {
+          "id": "top-p",
+          "type": "range",
+          "textChanged": true,
+          "markupChanged": true
+        },
+        {
+          "id": "top-k",
+          "type": "select-one",
+          "textChanged": true,
+          "markupChanged": true
+        },
+        {
+          "id": "accuracy",
+          "type": "range",
+          "textChanged": true,
+          "markupChanged": true
+        },
+        {
+          "id": "samples",
+          "type": "range",
+          "textChanged": true,
+          "markupChanged": true
+        },
+        {
+          "id": "correlation",
+          "type": "select-one",
+          "textChanged": true,
+          "markupChanged": true
+        }
+      ],
+      "overflow": {
+        "document": 390,
+        "viewport": 390,
+        "elements": []
+      }
+    },
+    "desktop_and_mobile_screenshots_reviewed": true,
+    "static_svg_rendered_and_reviewed": true
+  },
+  "math": {
+    "github_block_delimiter": "$$",
+    "github_inline_delimiter": "$",
+    "blocks_checked": 3
+  },
+  "limitations": [
+    "실제 Phi-3 모델 추론, API 및 GPU 실습은 수행하지 않았다. 원문의 2024년 예제는 역사적 학습 맥락으로 설명했다.",
+    "학습 수식과 가상 데이터 실습은 실제 모델 성능 측정이 아니다.",
+    "문자 trie는 제약 생성 원리의 축소 모형이며 서브워드 토크나이저나 전체 JSON 문법 구현이 아니다."
+  ]
+}

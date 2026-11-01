@@ -1,0 +1,116 @@
+{
+  "number": 1,
+  "title_en": "1. An Introduction to Large Language Models",
+  "title_ko": "언어 모델 입문",
+  "pdf_start": 23,
+  "pdf_end": 66,
+  "source": "source/ch01.txt",
+  "directory": "chapters/ch01",
+  "sections": [
+    {
+      "title": "What Is Language AI?",
+      "pdf_page": 24,
+      "depth": 1
+    },
+    {
+      "title": "A Recent History of Language AI",
+      "pdf_page": 25,
+      "depth": 1
+    },
+    {
+      "title": "Representing Language as a Bag-of-Words",
+      "pdf_page": 26,
+      "depth": 2
+    },
+    {
+      "title": "Better Representations with Dense Vector Embeddings",
+      "pdf_page": 28,
+      "depth": 2
+    },
+    {
+      "title": "Types of Embeddings",
+      "pdf_page": 31,
+      "depth": 2
+    },
+    {
+      "title": "Encoding and Decoding Context with Attention",
+      "pdf_page": 32,
+      "depth": 2
+    },
+    {
+      "title": "Attention Is All You Need",
+      "pdf_page": 37,
+      "depth": 2
+    },
+    {
+      "title": "Representation Models: Encoder-Only Models",
+      "pdf_page": 42,
+      "depth": 2
+    },
+    {
+      "title": "Generative Models: Decoder-Only Models",
+      "pdf_page": 45,
+      "depth": 2
+    },
+    {
+      "title": "The Year of Generative AI",
+      "pdf_page": 49,
+      "depth": 2
+    },
+    {
+      "title": "The Moving Definition of a “Large Language Model”",
+      "pdf_page": 50,
+      "depth": 1
+    },
+    {
+      "title": "The Training Paradigm of Large Language Models",
+      "pdf_page": 51,
+      "depth": 1
+    },
+    {
+      "title": "Large Language Model Applications: What Makes Them So Useful?",
+      "pdf_page": 53,
+      "depth": 1
+    },
+    {
+      "title": "Responsible LLM Development and Usage",
+      "pdf_page": 55,
+      "depth": 1
+    },
+    {
+      "title": "Limited Resources Are All You Need",
+      "pdf_page": 56,
+      "depth": 1
+    },
+    {
+      "title": "Interfacing with Large Language Models",
+      "pdf_page": 57,
+      "depth": 1
+    },
+    {
+      "title": "Proprietary, Private Models",
+      "pdf_page": 57,
+      "depth": 2
+    },
+    {
+      "title": "Open Models",
+      "pdf_page": 59,
+      "depth": 2
+    },
+    {
+      "title": "Open Source Frameworks",
+      "pdf_page": 60,
+      "depth": 2
+    },
+    {
+      "title": "Generating Your First Text",
+      "pdf_page": 61,
+      "depth": 1
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 64,
+      "depth": 1
+    }
+  ]
+}

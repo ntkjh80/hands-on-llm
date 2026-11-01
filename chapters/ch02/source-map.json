@@ -1,0 +1,101 @@
+{
+  "number": 2,
+  "title_en": "2. Tokens and Embeddings",
+  "title_ko": "토큰과 임베딩",
+  "pdf_start": 67,
+  "pdf_end": 115,
+  "source": "source/ch02.txt",
+  "directory": "chapters/ch02",
+  "sections": [
+    {
+      "title": "LLM Tokenization",
+      "pdf_page": 68,
+      "depth": 1
+    },
+    {
+      "title": "How Tokenizers Prepare the Inputs to the Language Model",
+      "pdf_page": 68,
+      "depth": 2
+    },
+    {
+      "title": "Downloading and Running an LLM",
+      "pdf_page": 69,
+      "depth": 2
+    },
+    {
+      "title": "How Does the Tokenizer Break Down Text?",
+      "pdf_page": 74,
+      "depth": 2
+    },
+    {
+      "title": "Word Versus Subword Versus Character Versus Byte Tokens",
+      "pdf_page": 75,
+      "depth": 2
+    },
+    {
+      "title": "Comparing Trained LLM Tokenizers",
+      "pdf_page": 78,
+      "depth": 2
+    },
+    {
+      "title": "Tokenizer Properties",
+      "pdf_page": 91,
+      "depth": 2
+    },
+    {
+      "title": "Token Embeddings",
+      "pdf_page": 94,
+      "depth": 1
+    },
+    {
+      "title": "A Language Model Holds Embeddings for the Vocabulary of Its Tokenizer",
+      "pdf_page": 95,
+      "depth": 2
+    },
+    {
+      "title": "Creating Contextualized Word Embeddings with Language Models",
+      "pdf_page": 96,
+      "depth": 2
+    },
+    {
+      "title": "Text Embeddings (for Sentences and Whole Documents)",
+      "pdf_page": 100,
+      "depth": 1
+    },
+    {
+      "title": "Word Embeddings Beyond LLMs",
+      "pdf_page": 102,
+      "depth": 1
+    },
+    {
+      "title": "Using pretrained Word Embeddings",
+      "pdf_page": 103,
+      "depth": 2
+    },
+    {
+      "title": "The Word2vec Algorithm and Contrastive Training",
+      "pdf_page": 103,
+      "depth": 2
+    },
+    {
+      "title": "Embeddings for Recommendation Systems",
+      "pdf_page": 108,
+      "depth": 1
+    },
+    {
+      "title": "Recommending Songs by Embeddings",
+      "pdf_page": 108,
+      "depth": 2
+    },
+    {
+      "title": "Training a Song Embedding Model",
+      "pdf_page": 110,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 113,
+      "depth": 1
+    }
+  ]
+}

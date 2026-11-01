@@ -1,0 +1,68 @@
+{
+  "chapter": 4,
+  "status": "complete",
+  "title": "텍스트 분류",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "assets/threshold-demo.svg",
+    "assets/cosine-demo.svg",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "coverage.json",
+    "source-map.json",
+    "status.json",
+    ".gitignore"
+  ],
+  "lab_command": "python3 chapters/ch04/lab.py",
+  "validation": [
+    "all Markdown links and explicit anchors",
+    "balanced code and details fences",
+    "unique HTML IDs and valid links",
+    "no external required resources",
+    "valid SVG XML",
+    "Python syntax",
+    "default lab rerun matches saved output",
+    "help and alternate arguments",
+    "all source sections matched in order",
+    "all coverage targets exist",
+    "initial confusion matrix",
+    "threshold 0.8",
+    "threshold 1.0",
+    "cosine length invariance",
+    "cosine tie",
+    "label-coordinate change",
+    "strict parser valid and invalid",
+    "mobile overflow",
+    "no page errors",
+    "final desktop and 390px screenshots visually inspected",
+    "PDF physical pages 170 and 182 rendered and inspected"
+  ],
+  "counts": {
+    "study_characters": 35427,
+    "study_korean_syllables": 18634,
+    "script_characters": 11790,
+    "script_korean_syllables": 7520,
+    "source_sections": 11,
+    "source_figures": 23,
+    "source_reports": 5,
+    "mermaid_diagrams": 5,
+    "svg_figures": 2,
+    "quiz_questions": 16
+  },
+  "limitations": [
+    "원문 신경망 모델·GPU·API 실습은 실행하지 않았다. 책의 F1은 원문 보고값으로 표시했다.",
+    "로컬 Python 실습은 직접 작성한 소규모 교육용 데이터와 고정 단어 특징을 사용하며, 일반화 성능 추정용 벤치마크가 아니다.",
+    "현재 API 제공 모델·가격·SDK 호환성을 검증하지 않았다. 원문의 2024년 예제로 범위를 명시했다."
+  ],
+  "notes": [
+    "출력은 Markdown 기본 형식이다. 상호작용만 HTML이고 GitHub 정적 열람용 SVG 2개를 포함한다.",
+    "원문의 weighted F1·코사인·T5 층수·출력 파싱 가정에 필요한 보충 설명을 명시했다.",
+    "qa/는 로컬 검증 자료와 원문 페이지 렌더링을 포함하므로 장별 .gitignore로 제외했다."
+  ]
+}

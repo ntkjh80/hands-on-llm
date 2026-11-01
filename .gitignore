@@ -1,0 +1,26 @@
+# 원문과 전체 본문 추출은 개인 참고용이며 저장소에 게시하지 않습니다.
+*.pdf
+source/pages.json
+source/ch*.txt
+source/*.png
+source/*.jpg
+source/*.jpeg
+# 실행 중 캐시와 임시 파일
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+tmp/
+output/qa/
+# 개별 챗 생성/진행 기록은 로컬 전용
+source/threads.json
+STUDY_CONTRACT.txt
+# 각 장에서 원문 확인용으로 렌더링한 페이지
+chapters/**/source-*.png
+chapters/**/source-*.jpg
+chapters/**/reference-*.png
+chapters/**/qa/
+chapters/**/.qa/
+chapters/**/tmp/
+# 같은 자료를 중복 커밋하지 않기 위한 배포 압축 파일 제외
+output/*.zip

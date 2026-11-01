@@ -1,0 +1,240 @@
+{
+  "chapter": 7,
+  "sections": [
+    {
+      "source_title": "Model I/O: Loading Quantized Models with LangChain",
+      "pdf_page": 281,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "GGUF and precision",
+        "FP16 versus 8-bit source inconsistency",
+        "quantization size and error",
+        "loading parameters"
+      ]
+    },
+    {
+      "source_title": "Chains: Extending the Capabilities of LLMs",
+      "pdf_page": 284,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "chain definition",
+        "module boundaries",
+        "I/O contracts"
+      ]
+    },
+    {
+      "source_title": "A Single Link in the Chain: Prompt Template",
+      "pdf_page": 285,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "chat format versus task template",
+        "Phi-3 delimiters",
+        "PromptTemplate fields",
+        "invoke"
+      ]
+    },
+    {
+      "source_title": "A Chain with Multiple Prompts",
+      "pdf_page": 289,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "title, character, story",
+        "state preservation",
+        "output_key",
+        "error propagation and latency"
+      ]
+    },
+    {
+      "source_title": "Memory: Helping LLMs to Remember Conversations",
+      "pdf_page": 293,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "stateless calls",
+        "external state",
+        "training and KV cache distinction"
+      ]
+    },
+    {
+      "source_title": "Conversation Buffer",
+      "pdf_page": 295,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "chat_history and memory_key",
+        "load before, save after",
+        "cumulative input"
+      ]
+    },
+    {
+      "source_title": "Windowed Conversation Buffer",
+      "pdf_page": 297,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "last k interactions",
+        "name repetition and age loss",
+        "turn count versus token budget"
+      ]
+    },
+    {
+      "source_title": "Conversation Summary",
+      "pdf_page": 300,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "summary and new_lines",
+        "separate summary call",
+        "loss and error propagation",
+        "Table 7-1"
+      ]
+    },
+    {
+      "source_title": "Agents: Creating a System of LLMs",
+      "pdf_page": 306,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "tools and selection policy",
+        "model-executor-tool boundaries",
+        "chain versus agent"
+      ]
+    },
+    {
+      "source_title": "The Driving Power Behind Agents: Step-by-step Reasoning",
+      "pdf_page": 307,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "Thought, Action, Observation",
+        "lookup then conversion",
+        "scratchpad",
+        "termination"
+      ]
+    },
+    {
+      "source_title": "ReAct in LangChain",
+      "pdf_page": 310,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "historical model choice",
+        "four template variables",
+        "search and llm-math",
+        "AgentExecutor",
+        "reliability evaluation"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 314,
+      "target": "study.md#sec-12",
+      "covered_topics": [
+        "combined components",
+        "selection criteria",
+        "connection to chapter 8"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 7-1",
+      "pdf_page": 281,
+      "explained_in": "study.md#overview"
+    },
+    {
+      "label": "Figure 7-2",
+      "pdf_page": 282,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 7-3",
+      "pdf_page": 285,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 7-4",
+      "pdf_page": 286,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 7-5",
+      "pdf_page": 286,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 7-6",
+      "pdf_page": 288,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 7-7",
+      "pdf_page": 289,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 7-8",
+      "pdf_page": 290,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 7-9",
+      "pdf_page": 294,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 7-10",
+      "pdf_page": 295,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 7-11",
+      "pdf_page": 297,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 7-12",
+      "pdf_page": 301,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 7-13",
+      "pdf_page": 304,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Table 7-1",
+      "pdf_page": 305,
+      "pdf_end": 306,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 7-14",
+      "pdf_page": 307,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 7-15",
+      "pdf_page": 309,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 7-16",
+      "pdf_page": 310,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 7-17",
+      "pdf_page": 313,
+      "explained_in": "study.md#sec-11"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true
+  },
+  "source_notes": [
+    "PDF 283: the 8-bit prose conflicts with the FP16 model path; visually confirmed and discussed.",
+    "PDF 307: reasoning cross-reference points to chapter 5; actual relevant chapter is 6."
+  ],
+  "limitations": [
+    "Historical 2024 LangChain and model examples are explained; current package compatibility and actual GGUF, GPU, API execution are not verified.",
+    "CPU lab and visualizations use deterministic rules, not actual LLM generation, summarization, or agent evaluation.",
+    "Conversation length is whitespace word count, not model tokenizer tokens or costs.",
+    "Prices and exchange rates are fictional teaching fixtures, not current market data."
+  ]
+}

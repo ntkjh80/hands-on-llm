@@ -1,0 +1,337 @@
+{
+  "chapter": 3,
+  "source": "Hands-On Large Language Models (2024), Chapter 3, PDF physical pages 116–158",
+  "sections": [
+    {
+      "source_title": "An Overview of Transformer Models",
+      "pdf_page": 117,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "decoder-only 중심 범위",
+        "순전파와 생성의 구별",
+        "2024년 Phi-3 예제 설정"
+      ]
+    },
+    {
+      "source_title": "The Inputs and Outputs of a Trained Transformer LLM",
+      "pdf_page": 117,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "자동 회귀 생성",
+        "토큰 추가 루프",
+        "생성 종료 조건",
+        "원문 이메일 예제"
+      ]
+    },
+    {
+      "source_title": "The Components of the Forward Pass",
+      "pdf_page": 121,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "Tokenizer와 임베딩의 역할",
+        "어휘와 모델 차원",
+        "Phi-3 계층 출력",
+        "logits와 확률",
+        "LM head와 다른 head"
+      ]
+    },
+    {
+      "source_title": "Choosing a Single Token from the Probability Distribution (Sampling/Decoding)",
+      "pdf_page": 124,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "greedy와 sampling",
+        "온도의 개념",
+        "안정적인 softmax",
+        "Paris 예제의 텐서 인덱싱"
+      ]
+    },
+    {
+      "source_title": "Parallel Token Processing and Context Size",
+      "pdf_page": 127,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "입력 토큰의 병렬 처리",
+        "출력의 순차 의존성",
+        "문맥 길이",
+        "마지막 위치 표현",
+        "shape 해석"
+      ]
+    },
+    {
+      "source_title": "Speeding Up Generation by Caching Keys and Values",
+      "pdf_page": 129,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "causal 불변성과 KV 재사용",
+        "prefill과 decode",
+        "use_cache 비교",
+        "원문 T4 측정 조건",
+        "스트리밍",
+        "캐시 메모리"
+      ]
+    },
+    {
+      "source_title": "Inside the Transformer Block",
+      "pdf_page": 132,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "블록 스택",
+        "FFN과 학습된 패턴",
+        "기본 모델과 instruct 모델",
+        "attention 문맥 결합",
+        "QKV 투영",
+        "관련도 점수",
+        "가중합",
+        "multi-head"
+      ]
+    },
+    {
+      "source_title": "Recent Improvements to the Transformer Architecture",
+      "pdf_page": 143,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "2024년 기준 개선 범위",
+        "데이터·학습·구조의 구별",
+        "비용 관점의 비교"
+      ]
+    },
+    {
+      "source_title": "More Efficient Attention",
+      "pdf_page": 144,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "local와 sparse attention",
+        "full/sparse 혼합",
+        "마스크 그림 해석",
+        "MHA·MQA·GQA",
+        "KV 공유 메모리",
+        "FlashAttention과 메모리 계층"
+      ]
+    },
+    {
+      "source_title": "The Transformer Block",
+      "pdf_page": 150,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "residual",
+        "post-norm과 pre-norm",
+        "LayerNorm과 RMSNorm",
+        "ReLU·SiLU·SwiGLU"
+      ]
+    },
+    {
+      "source_title": "Positional Embeddings (RoPE)",
+      "pdf_page": 153,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "절대 위치와 학습형 위치",
+        "packing",
+        "문서 경계 마스크",
+        "QK의 rotary 적용",
+        "상대 위치 내적",
+        "회전의 보존 성질"
+      ]
+    },
+    {
+      "source_title": "Other Architectural Experiments and Improvements",
+      "pdf_page": 156,
+      "target": "study.md#sec-12",
+      "covered_topics": [
+        "시각·로보틱스·시계열의 Transformer",
+        "입력·출력·위치 설계의 과제별 변화",
+        "원문 추가 읽기 범위"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 157,
+      "target": "study.md#sec-13",
+      "covered_topics": [
+        "한 토큰의 전체 경로",
+        "파라미터·캐시·대화 기록의 구별",
+        "4장 분류 연결",
+        "학습 완료 기준"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 3-1",
+      "pdf_page": 118,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 3-2",
+      "pdf_page": 119,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 3-3",
+      "pdf_page": 120,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 3-4",
+      "pdf_page": 121,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 3-5",
+      "pdf_page": 122,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 3-6",
+      "pdf_page": 123,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 3-7",
+      "pdf_page": 125,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 3-8",
+      "pdf_page": 127,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 3-9",
+      "pdf_page": 128,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 3-10",
+      "pdf_page": 130,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 3-11",
+      "pdf_page": 132,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 3-12",
+      "pdf_page": 133,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 3-13",
+      "pdf_page": 134,
+      "explained_in": "study.md#ffn"
+    },
+    {
+      "label": "Figure 3-14",
+      "pdf_page": 136,
+      "explained_in": "study.md#attention-intuition"
+    },
+    {
+      "label": "Figure 3-15",
+      "pdf_page": 137,
+      "explained_in": "study.md#attention-intuition"
+    },
+    {
+      "label": "Figure 3-16",
+      "pdf_page": 137,
+      "explained_in": "study.md#qkv"
+    },
+    {
+      "label": "Figure 3-17",
+      "pdf_page": 138,
+      "explained_in": "study.md#multihead"
+    },
+    {
+      "label": "Figure 3-18",
+      "pdf_page": 140,
+      "explained_in": "study.md#qkv"
+    },
+    {
+      "label": "Figure 3-19",
+      "pdf_page": 141,
+      "explained_in": "study.md#qkv"
+    },
+    {
+      "label": "Figure 3-20",
+      "pdf_page": 142,
+      "explained_in": "study.md#qkv"
+    },
+    {
+      "label": "Figure 3-21",
+      "pdf_page": 143,
+      "explained_in": "study.md#qkv"
+    },
+    {
+      "label": "Figure 3-22",
+      "pdf_page": 144,
+      "explained_in": "study.md#local"
+    },
+    {
+      "label": "Figure 3-23",
+      "pdf_page": 145,
+      "explained_in": "study.md#local"
+    },
+    {
+      "label": "Figure 3-24",
+      "pdf_page": 146,
+      "explained_in": "study.md#local"
+    },
+    {
+      "label": "Figure 3-25",
+      "pdf_page": 147,
+      "explained_in": "study.md#gqa"
+    },
+    {
+      "label": "Figure 3-26",
+      "pdf_page": 148,
+      "explained_in": "study.md#gqa"
+    },
+    {
+      "label": "Figure 3-27",
+      "pdf_page": 149,
+      "explained_in": "study.md#gqa"
+    },
+    {
+      "label": "Figure 3-28",
+      "pdf_page": 150,
+      "explained_in": "study.md#gqa"
+    },
+    {
+      "label": "Figure 3-29",
+      "pdf_page": 151,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 3-30",
+      "pdf_page": 152,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 3-31",
+      "pdf_page": 154,
+      "explained_in": "study.md#sec-11"
+    },
+    {
+      "label": "Figure 3-32",
+      "pdf_page": 155,
+      "explained_in": "study.md#sec-11"
+    },
+    {
+      "label": "Figure 3-33",
+      "pdf_page": 156,
+      "explained_in": "study.md#sec-11"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true,
+    "markdown_links_checked": true
+  },
+  "limitations": [
+    "원문의 Phi-3 다운로드 및 GPU 시간 측정 실습은 실행하지 않았으며 역사적 예제로 설명했다.",
+    "기본 lab.py는 무학습 무작위 가중치의 교육용 Transformer로 언어 품질을 평가하지 않는다.",
+    "시각화의 벡터는 교육용 가상 데이터이며 캐시 메모리는 K·V 텐서만의 이론 크기다.",
+    "그림은 원문의 논지를 독자적인 도식과 설명으로 연결했으며 원본 그림을 재배포하지 않는다."
+  ]
+}

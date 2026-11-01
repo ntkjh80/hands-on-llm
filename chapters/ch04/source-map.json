@@ -1,0 +1,66 @@
+{
+  "number": 4,
+  "title_en": "4. Text Classification",
+  "title_ko": "텍스트 분류",
+  "pdf_start": 160,
+  "pdf_end": 191,
+  "source": "source/ch04.txt",
+  "directory": "chapters/ch04",
+  "sections": [
+    {
+      "title": "The Sentiment of Movie Reviews",
+      "pdf_page": 161,
+      "depth": 1
+    },
+    {
+      "title": "Text Classification with Representation Models",
+      "pdf_page": 163,
+      "depth": 1
+    },
+    {
+      "title": "Model Selection",
+      "pdf_page": 164,
+      "depth": 1
+    },
+    {
+      "title": "Using a Task-Specific Model",
+      "pdf_page": 166,
+      "depth": 1
+    },
+    {
+      "title": "Classification Tasks That Leverage Embeddings",
+      "pdf_page": 171,
+      "depth": 1
+    },
+    {
+      "title": "Supervised Classification",
+      "pdf_page": 172,
+      "depth": 2
+    },
+    {
+      "title": "What If We Do Not Have Labeled Data?",
+      "pdf_page": 176,
+      "depth": 2
+    },
+    {
+      "title": "Text Classification with Generative Models",
+      "pdf_page": 180,
+      "depth": 1
+    },
+    {
+      "title": "Using the Text-to-Text Transfer Transformer",
+      "pdf_page": 181,
+      "depth": 2
+    },
+    {
+      "title": "ChatGPT for Classification",
+      "pdf_page": 186,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 190,
+      "depth": 1
+    }
+  ]
+}

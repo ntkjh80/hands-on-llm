@@ -1,0 +1,66 @@
+{
+  "number": 9,
+  "title_en": "9. Multimodal Large Language Models",
+  "title_ko": "멀티모달 언어 모델",
+  "pdf_start": 360,
+  "pdf_end": 398,
+  "source": "source/ch09.txt",
+  "directory": "chapters/ch09",
+  "sections": [
+    {
+      "title": "Transformers for Vision",
+      "pdf_page": 361,
+      "depth": 1
+    },
+    {
+      "title": "Multimodal Embedding Models",
+      "pdf_page": 364,
+      "depth": 1
+    },
+    {
+      "title": "CLIP: Connecting Text and Images",
+      "pdf_page": 366,
+      "depth": 2
+    },
+    {
+      "title": "How Can CLIP Generate Multimodal Embeddings?",
+      "pdf_page": 367,
+      "depth": 2
+    },
+    {
+      "title": "OpenCLIP",
+      "pdf_page": 370,
+      "depth": 2
+    },
+    {
+      "title": "Making Text Generation Models Multimodal",
+      "pdf_page": 377,
+      "depth": 1
+    },
+    {
+      "title": "BLIP-2: Bridging the Modality Gap",
+      "pdf_page": 378,
+      "depth": 2
+    },
+    {
+      "title": "Preprocessing Multimodal Inputs",
+      "pdf_page": 383,
+      "depth": 2
+    },
+    {
+      "title": "Use Case 1: Image Captioning",
+      "pdf_page": 387,
+      "depth": 2
+    },
+    {
+      "title": "Use Case 2: Multimodal Chat-Based Prompting",
+      "pdf_page": 391,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 395,
+      "depth": 1
+    }
+  ]
+}

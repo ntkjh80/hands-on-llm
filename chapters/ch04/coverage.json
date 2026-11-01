@@ -1,0 +1,316 @@
+{
+  "chapter": 4,
+  "source_book": "Hands-On Large Language Models (2024), Chapter 4",
+  "page_numbering": "provided PDF physical page, 1-based",
+  "sections": [
+    {
+      "source_title": "The Sentiment of Movie Reviews",
+      "pdf_page": 161,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "영화 리뷰 이진 라벨",
+        "전체 10662개와 분할 8530/1066/1066",
+        "학습·검증·시험 구분",
+        "평가 정답과 학습 라벨의 차이",
+        "TF-IDF 기준선"
+      ]
+    },
+    {
+      "source_title": "Text Classification with Representation Models",
+      "pdf_page": 163,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "작업 특화 모델과 임베딩 모델",
+        "미세 조정과 동결",
+        "출력과 후속 분류 규칙",
+        "10·11장 연결"
+      ]
+    },
+    {
+      "source_title": "Model Selection",
+      "pdf_page": 164,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "언어·도메인·크기·추론 속도",
+        "BERT류 기반 모델 선택지",
+        "트윗 RoBERTa",
+        "all-mpnet-base-v2",
+        "MTEB의 위치"
+      ]
+    },
+    {
+      "source_title": "Using a Task-Specific Model",
+      "pdf_page": 166,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "pipeline·토크나이저",
+        "하위 토큰과 미등록 단어",
+        "KeyDataset·argmax",
+        "중립 제거와 라벨 매핑",
+        "혼동 행렬",
+        "precision·recall·accuracy·F1",
+        "macro·weighted 차이",
+        "책 결과 .80"
+      ]
+    },
+    {
+      "source_title": "Classification Tasks That Leverage Embeddings",
+      "pdf_page": 171,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "특징 추출과 분류의 분리",
+        "임베딩 재사용·캐시",
+        "같은 좌표계 조건"
+      ]
+    },
+    {
+      "source_title": "Supervised Classification",
+      "pdf_page": 172,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "SentenceTransformer encode",
+        "8530×768 배열",
+        "로지스틱 회귀 fit/predict",
+        "고정 encoder와 학습 분류기",
+        "책 결과 .85",
+        "API 임베딩의 의미"
+      ]
+    },
+    {
+      "source_title": "What If We Do Not Have Labeled Data?",
+      "pdf_page": 176,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "제로샷의 의미",
+        "라벨 설명 임베딩",
+        "코사인 내적·길이·차원",
+        "argmax·동점·영벡터",
+        "설명 문구 변경",
+        "NLI 대안",
+        "책 결과 .78"
+      ]
+    },
+    {
+      "source_title": "Text Classification with Generative Models",
+      "pdf_page": 180,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "클래스 점수와 생성 문자열",
+        "프롬프트",
+        "seq2seq 작업과 구조 구분",
+        "출력 계약·허용 집합",
+        "형식 실패와 평가 분모"
+      ]
+    },
+    {
+      "source_title": "Using the Text-to-Text Transfer Transformer",
+      "pdf_page": 181,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "encoder-decoder T5",
+        "span corruption",
+        "text-to-text 다중 과제",
+        "Flan 지시 학습",
+        "text2text-generation",
+        "입력 t5 열",
+        "생성 문자열 매핑",
+        "책 결과 .84"
+      ]
+    },
+    {
+      "source_title": "ChatGPT for Classification",
+      "pdf_page": 186,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "지시 데이터와 선호 데이터",
+        "원격 API와 클라이언트",
+        "프롬프트·메시지·temperature",
+        "출력 정수 변환과 허용 라벨",
+        "비용·호출 제한·exponential backoff",
+        "책 결과 .91",
+        "학습 데이터 중복 가능성"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 190,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "다섯 경로 비교",
+        "평가 조건 차이",
+        "설계 선택·오류 분석",
+        "원문의 표현 보충",
+        "5장 군집화 연결",
+        "참고 연구 역할"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 4-1",
+      "pdf_page": 160,
+      "explained_in": "study.md#chapter-overview"
+    },
+    {
+      "label": "Figure 4-2",
+      "pdf_page": 161,
+      "explained_in": "study.md#chapter-overview"
+    },
+    {
+      "label": "Figure 4-3",
+      "pdf_page": 163,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 4-4",
+      "pdf_page": 164,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 4-5",
+      "pdf_page": 165,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 4-6",
+      "pdf_page": 167,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 4-7",
+      "pdf_page": 168,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 4-8",
+      "pdf_page": 170,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 4-9",
+      "pdf_page": 171,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 4-10",
+      "pdf_page": 172,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 4-11",
+      "pdf_page": 173,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 4-12",
+      "pdf_page": 174,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 4-13",
+      "pdf_page": 176,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 4-14",
+      "pdf_page": 177,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 4-15",
+      "pdf_page": 178,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 4-16",
+      "pdf_page": 178,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 4-17",
+      "pdf_page": 180,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 4-18",
+      "pdf_page": 181,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 4-19",
+      "pdf_page": 182,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 4-20",
+      "pdf_page": 183,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 4-21",
+      "pdf_page": 183,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 4-22",
+      "pdf_page": 186,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 4-23",
+      "pdf_page": 187,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Unnumbered classification report: task-specific model",
+      "pdf_page": 169,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Unnumbered classification report: embeddings with logistic regression",
+      "pdf_page": 175,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Unnumbered classification report: label embedding zero-shot",
+      "pdf_page": 179,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Unnumbered classification report: Flan-T5-small",
+      "pdf_page": 185,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Unnumbered classification report: GPT-3.5 API example",
+      "pdf_page": 190,
+      "explained_in": "study.md#sec-10"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "source_figures_visually_inspected": [
+      {
+        "pdf_page": 170,
+        "reason": "혼동 행렬 축과 TP/FP/FN/TN 의미 확인"
+      },
+      {
+        "pdf_page": 182,
+        "reason": "T5 12층 그림과 encoder-decoder 구조 확인"
+      }
+    ],
+    "lab_executed": true,
+    "visuals_checked": true,
+    "javascript_syntax_checked": true,
+    "browser_interaction_checked": true,
+    "responsive_viewports": [
+      1280,
+      390
+    ]
+  },
+  "limitations": [
+    "원문 실제 신경망 모델·GPU·API 실습은 실행하지 않았으며, 원문 F1은 책의 보고값이다.",
+    "실행한 lab.py는 고정 단어 특징과 직접 작성한 소규모 교육용 문장을 사용한다.",
+    "책의 2024년 API 모델·가격·인터페이스의 현재 상태는 확인하지 않았다."
+  ]
+}

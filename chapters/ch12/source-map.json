@@ -1,0 +1,151 @@
+{
+  "number": 12,
+  "title_en": "12. Fine-Tuning Generation Models",
+  "title_ko": "생성 모델 미세 조정",
+  "pdf_start": 487,
+  "pdf_end": 535,
+  "source": "source/ch12.txt",
+  "directory": "chapters/ch12",
+  "sections": [
+    {
+      "title": "The Three LLM Training Steps: Pretraining, Supervised Fine-Tuning, and Preference Tuning",
+      "pdf_page": 487,
+      "depth": 1
+    },
+    {
+      "title": "Supervised Fine-Tuning (SFT)",
+      "pdf_page": 489,
+      "depth": 1
+    },
+    {
+      "title": "Full Fine-Tuning",
+      "pdf_page": 490,
+      "depth": 2
+    },
+    {
+      "title": "Parameter-Efficient Fine-Tuning (PEFT)",
+      "pdf_page": 492,
+      "depth": 2
+    },
+    {
+      "title": "Instruction Tuning with QLoRA",
+      "pdf_page": 503,
+      "depth": 1
+    },
+    {
+      "title": "Templating Instruction Data",
+      "pdf_page": 503,
+      "depth": 2
+    },
+    {
+      "title": "Model Quantization",
+      "pdf_page": 505,
+      "depth": 2
+    },
+    {
+      "title": "LoRA Configuration",
+      "pdf_page": 506,
+      "depth": 2
+    },
+    {
+      "title": "Training Configuration",
+      "pdf_page": 508,
+      "depth": 2
+    },
+    {
+      "title": "Training",
+      "pdf_page": 509,
+      "depth": 2
+    },
+    {
+      "title": "Merge Weights",
+      "pdf_page": 510,
+      "depth": 2
+    },
+    {
+      "title": "Evaluating Generative Models",
+      "pdf_page": 511,
+      "depth": 1
+    },
+    {
+      "title": "Word-Level Metrics",
+      "pdf_page": 512,
+      "depth": 2
+    },
+    {
+      "title": "Benchmarks",
+      "pdf_page": 512,
+      "depth": 2
+    },
+    {
+      "title": "Leaderboards",
+      "pdf_page": 515,
+      "depth": 2
+    },
+    {
+      "title": "Automated Evaluation",
+      "pdf_page": 516,
+      "depth": 2
+    },
+    {
+      "title": "Human Evaluation",
+      "pdf_page": 516,
+      "depth": 2
+    },
+    {
+      "title": "Preference-Tuning / Alignment / RLHF",
+      "pdf_page": 518,
+      "depth": 1
+    },
+    {
+      "title": "Automating Preference Evaluation Using Reward Models",
+      "pdf_page": 519,
+      "depth": 1
+    },
+    {
+      "title": "The Inputs and Outputs of a Reward Model",
+      "pdf_page": 520,
+      "depth": 2
+    },
+    {
+      "title": "Training a Reward Model",
+      "pdf_page": 521,
+      "depth": 2
+    },
+    {
+      "title": "Training No Reward Model",
+      "pdf_page": 526,
+      "depth": 2
+    },
+    {
+      "title": "Preference Tuning with DPO",
+      "pdf_page": 528,
+      "depth": 1
+    },
+    {
+      "title": "Templating Alignment Data",
+      "pdf_page": 528,
+      "depth": 2
+    },
+    {
+      "title": "Model Quantization",
+      "pdf_page": 529,
+      "depth": 2
+    },
+    {
+      "title": "Training Configuration",
+      "pdf_page": 530,
+      "depth": 2
+    },
+    {
+      "title": "Training",
+      "pdf_page": 531,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 533,
+      "depth": 1
+    }
+  ]
+}

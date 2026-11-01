@@ -1,0 +1,344 @@
+{
+  "chapter": 6,
+  "source_book": "Hands-On Large Language Models (2024), Chapter 6",
+  "page_numbering": "PDF physical pages, 1-based",
+  "sections": [
+    {
+      "source_title": "Using Text Generation Models",
+      "pdf_page": 236,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "모델·입력·디코딩의 역할",
+        "생성 모델과 표현 모델"
+      ]
+    },
+    {
+      "source_title": "Choosing a Text Generation Model",
+      "pdf_page": 236,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "비공개 모델과 공개 모델",
+        "기반 모델 계열·크기",
+        "Phi-3-mini와 메모리 해석"
+      ]
+    },
+    {
+      "source_title": "Loading a Text Generation Model",
+      "pdf_page": 237,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "모델·토크나이저·pipeline",
+        "역할과 chat template",
+        "생성 길이와 반환 설정"
+      ]
+    },
+    {
+      "source_title": "Controlling Model Output",
+      "pdf_page": 240,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "greedy와 sampling",
+        "temperature softmax",
+        "top-p와 top-k",
+        "표 6-1의 설정 조합"
+      ]
+    },
+    {
+      "source_title": "Intro to Prompt Engineering",
+      "pdf_page": 244,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "반복적인 프롬프트 최적화",
+        "성공 기준과 평가"
+      ]
+    },
+    {
+      "source_title": "The Basic Ingredients of a Prompt",
+      "pdf_page": 244,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "문장 완성",
+        "instruction·data·output indicator",
+        "자료 경계"
+      ]
+    },
+    {
+      "source_title": "Instruction-Based Prompting",
+      "pdf_page": 247,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "분류·검색·요약·코드·NER",
+        "구체성",
+        "환각 대처",
+        "지시 위치"
+      ]
+    },
+    {
+      "source_title": "Advanced Prompt Engineering",
+      "pdf_page": 250,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "입력 내부 설계와 호출 간 흐름",
+        "필요에 맞는 복잡성"
+      ]
+    },
+    {
+      "source_title": "The Potential Complexity of a Prompt",
+      "pdf_page": 251,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "일곱 모듈",
+        "문자열 조립",
+        "반복 실험",
+        "감정 자극 문구의 한계"
+      ]
+    },
+    {
+      "source_title": "In-Context Learning: Providing Examples",
+      "pdf_page": 255,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "zero·one·few-shot",
+        "user와 assistant 예시",
+        "가상 단어 예제",
+        "가중치 학습과 구분"
+      ]
+    },
+    {
+      "source_title": "Chain Prompting: Breaking up the Problem",
+      "pdf_page": 257,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "제품 이름·슬로건·판매 문구",
+        "그림의 세 단계와 코드의 두 호출",
+        "중간 결과·오류 전파",
+        "검증·병렬·이야기 적용"
+      ]
+    },
+    {
+      "source_title": "Reasoning with Generative Models",
+      "pdf_page": 260,
+      "target": "study.md#sec-12",
+      "covered_topics": [
+        "system 1·2 비유",
+        "검증 가능한 문제 해결",
+        "추가 계산의 위치"
+      ]
+    },
+    {
+      "source_title": "Chain-of-Thought: Think Before Answering",
+      "pdf_page": 261,
+      "target": "study.md#sec-13",
+      "covered_topics": [
+        "풀이 예시 기반 CoT",
+        "zero-shot CoT",
+        "중간 계산과 검산",
+        "설명과 실제 내부 과정 구분"
+      ]
+    },
+    {
+      "source_title": "Self-Consistency: Sampling Outputs",
+      "pdf_page": 265,
+      "target": "study.md#sec-14",
+      "covered_topics": [
+        "다양한 응답 샘플링",
+        "최종 답 추출·정규화·투표",
+        "독립성과 상관 오류",
+        "호출 비용"
+      ]
+    },
+    {
+      "source_title": "Tree-of-Thought: Exploring Intermediate Steps",
+      "pdf_page": 266,
+      "target": "study.md#sec-15",
+      "covered_topics": [
+        "중간 상태 생성·평가·가지치기",
+        "탐색량",
+        "전문가 대화형 모방과 실제 탐색 구분"
+      ]
+    },
+    {
+      "source_title": "Output Verification",
+      "pdf_page": 270,
+      "target": "study.md#sec-16",
+      "covered_topics": [
+        "구조·허용값·윤리·정확도",
+        "예시·문법·미세 조정",
+        "파싱·스키마·내용 검증"
+      ]
+    },
+    {
+      "source_title": "Providing Examples",
+      "pdf_page": 272,
+      "target": "study.md#sec-17",
+      "covered_topics": [
+        "RPG JSON의 잘린 출력",
+        "형식 예시의 효과와 한계",
+        "길이 예산과 필드 계약"
+      ]
+    },
+    {
+      "source_title": "Grammar: Constrained Sampling",
+      "pdf_page": 274,
+      "target": "study.md#sec-18",
+      "covered_topics": [
+        "사후 모델 검사",
+        "알려진 뼈대와 값 생성",
+        "후보 마스크",
+        "서브워드 주의",
+        "GGUF와 FP16",
+        "VRAM 정리",
+        "llama-cpp-python JSON 문법과 파싱"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 278,
+      "target": "study.md#sec-19",
+      "covered_topics": [
+        "장 전체 연결",
+        "7장의 메모리·도구 활용",
+        "복습과 실험 설계"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 6-1",
+      "pdf_page": 237,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 6-2",
+      "pdf_page": 239,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 6-3",
+      "pdf_page": 240,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 6-4",
+      "pdf_page": 241,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 6-5",
+      "pdf_page": 242,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Table 6-1",
+      "pdf_page": 243,
+      "pdf_end": 244,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 6-6",
+      "pdf_page": 245,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 6-7",
+      "pdf_page": 246,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 6-8",
+      "pdf_page": 247,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 6-9",
+      "pdf_page": 248,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 6-10",
+      "pdf_page": 249,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 6-11",
+      "pdf_page": 253,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 6-12",
+      "pdf_page": 253,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 6-13",
+      "pdf_page": 255,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 6-14",
+      "pdf_page": 258,
+      "explained_in": "study.md#sec-11"
+    },
+    {
+      "label": "Figure 6-15",
+      "pdf_page": 262,
+      "explained_in": "study.md#sec-13"
+    },
+    {
+      "label": "Figure 6-16",
+      "pdf_page": 264,
+      "explained_in": "study.md#sec-13"
+    },
+    {
+      "label": "Figure 6-17",
+      "pdf_page": 266,
+      "explained_in": "study.md#sec-14"
+    },
+    {
+      "label": "Figure 6-18",
+      "pdf_page": 268,
+      "explained_in": "study.md#sec-15"
+    },
+    {
+      "label": "Figure 6-19",
+      "pdf_page": 274,
+      "explained_in": "study.md#sec-18"
+    },
+    {
+      "label": "Figure 6-20",
+      "pdf_page": 274,
+      "explained_in": "study.md#sec-18"
+    },
+    {
+      "label": "Figure 6-21",
+      "pdf_page": 275,
+      "explained_in": "study.md#sec-18"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "source_figures_visually_inspected_pages": [
+      237,
+      248,
+      249,
+      253,
+      255,
+      268,
+      274
+    ],
+    "lab_executed": true,
+    "visuals_checked": true,
+    "visuals_javascript_syntax_checked": true,
+    "visuals_calculation_and_event_logic_checked": true,
+    "static_svg_rendered_and_visually_checked": true,
+    "markdown_math_uses_github_delimiters": true,
+    "visuals_browser_sha256": "4cad73f1798489d5b89c4df60b450cabb7ab1858c1a6546376c9ceb78c47a0fa",
+    "visuals_mobile_viewport_width": 390,
+    "visuals_browser_errors": []
+  },
+  "limitations": [
+    "실제 Phi-3 모델 추론, API 및 GPU 실습은 수행하지 않았다. 원문의 2024년 예제는 역사적 학습 맥락으로 설명했다.",
+    "학습 수식과 가상 데이터 실습은 실제 모델 성능 측정이 아니다.",
+    "문자 trie는 제약 생성 원리의 축소 모형이며 서브워드 토크나이저나 전체 JSON 문법 구현이 아니다."
+  ]
+}

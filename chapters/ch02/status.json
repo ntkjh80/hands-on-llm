@@ -1,0 +1,44 @@
+{
+  "chapter": 2,
+  "status": "complete",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "coverage.json",
+    "source-map.json",
+    "status.json"
+  ],
+  "lab_command": "python3 chapters/ch02/lab.py",
+  "validation": [
+    "원문 PDF 67–115쪽 전체 추출본문을 읽고 79·97쪽을 시각 확인",
+    "원문 18개 절과 Figure 2-1~2-17 및 비번호 비교표를 coverage.json으로 연결",
+    "Markdown 상대 링크/앵커 115개 검사 통과",
+    "Python 기본 실습 실행 및 재실행 출력 동일성 확인",
+    "Python 변경 조건 window=1/epochs=1/dims=2/seed=7 실행 및 내장 검산 통과",
+    "시각화 JavaScript 구문 검사 통과",
+    "Chrome에서 문자/바이트/서브워드 입력, 양성/음성 업데이트, 초기화, 패딩 마스크 상호작용 확인",
+    "1100px 데스크톱과 390px 모바일에서 가로 넘침 없음; 모바일 그래프별 화면 확인",
+    "18개 복습 문항과 해설·채점 기준 확인"
+  ],
+  "limitations": [
+    "실제 Phi-3·DeBERTa·Sentence Transformers·GloVe 및 원문 음악 데이터 실습은 실행하지 않았다.",
+    "CPU 실습과 시각화는 명시한 교육용 데이터와 단순화된 알고리즘을 사용한다. 서비스 수준의 추천 평가가 아니다.",
+    "제공 PDF의 일부 이모지/비영어 테스트 문자는 추출 및 렌더링에서 누락되어 해당 글자 자체는 추측 복원하지 않았다.",
+    "GitHub의 Markdown 화면에서는 Mermaid 도식을 볼 수 있으며, JavaScript 시각화는 HTML 파일을 로컬 브라우저에서 열어 사용한다."
+  ],
+  "content_metrics": {
+    "study_characters": 37220,
+    "study_hangul_characters": 19323,
+    "lecture_script_hangul_characters": 6448,
+    "mermaid_diagrams": 4,
+    "interactive_experiments": 3,
+    "quiz_questions": 18
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "chapter": 3,
+  "status": "complete",
+  "files": ["README.md", "study.md", "lecture.md", "lecture-script.md", "visuals.html", "lab.py", "lab-output.txt", "lab-guide.md", "quiz.md", "coverage.json", "source-map.json", "status.json"],
+  "lab_command": "python3 chapters/ch03/lab.py",
+  "validation": [
+    "원문 추출본 116–159쪽 전체를 읽고 13개 원문 절을 모두 대응했다.",
+    "원문 Figure 3-1부터 3-33까지 33개 캡션의 쪽수와 설명 위치를 기록했다.",
+    "원문 PDF 142·152·156쪽 도식을 렌더링하여 attention·블록·RoPE 구조를 시각 확인했다.",
+    "기본 Python 실행과 --tokens 12 --temperature 1.5 --seed 11 실행이 모두 통과했다.",
+    "캐시와 전체 계산의 logits 동치, 미래 토큰에 대한 prefix 불변성, softmax 확률합, RoPE 회전·상대 위치 관계를 확인했다.",
+    "Markdown의 로컬 링크와 명시적 앵커, HTML의 로컬 링크·중복 ID, Python 및 JavaScript 구문을 확인했다.",
+    "Chrome에서 기본 attention 출력과 균등 query 결과, 8192토큰의 KV 메모리, RoPE 공통 위치 이동의 내적 불변성을 확인했다.",
+    "1280px 화면과 390px 화면의 이미지를 확인했고 좁은 화면의 축 글자 크기를 개선했다. JavaScript 오류와 모바일 가로 넘침은 없었다."
+  ],
+  "metrics": {
+    "source_sections": 13,
+    "source_figures": 33,
+    "mermaid_diagrams": 5,
+    "interactive_experiments": 3,
+    "quiz_questions": 16,
+    "study_characters": 32899,
+    "lecture_script_characters": 11092
+  },
+  "limitations": [
+    "원문의 Phi-3 GPU 실습과 속도 측정은 실행하지 않았다.",
+    "lab.py는 무학습 교육용 모델이며 언어 능력이나 실제 GPU 속도 배율을 보고하지 않는다.",
+    "GitHub에서 Markdown과 Mermaid를 읽을 수 있지만 HTML의 상호작용은 로컬 브라우저에서 열어야 한다."
+  ]
+}

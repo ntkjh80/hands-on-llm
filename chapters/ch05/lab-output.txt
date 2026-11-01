@@ -1,0 +1,54 @@
+Calculation and boundary checks: PASS
+Chapter 5 educational CPU lab: hand-designed coordinates and vectors
+No UMAP, HDBSCAN, embedding model, BERTopic, or LLM was executed.
+
+DBSCAN eps=0.45, min_points=3
+  S1: label= 0  speech audio model the
+  S2: label= 0  speech audio the
+  S3: label= 0  speech audio model
+  S4: label= 0  speech the
+  T1: label= 1  translation language model the
+  T2: label= 1  translation language the
+  T3: label= 1  translation language model
+  T4: label= 1  translation the
+  H1: label= 2  clinical patient model the
+  H2: label= 2  clinical patient the
+  H3: label= 2  clinical patient model
+  H4: label= 2  clinical the
+  X1: label=-1  niche quantum discourse
+  X2: label=-1  unusual music notation
+Topics excluding -1: 3; unique labels: 4
+Noise: 2/14 = 14.3%
+
+c-TF-IDF: noise excluded; lowercase whitespace tokenization
+Average class length A = 12.00; drop_stopwords=False
+  Topic 0: tokens=12
+    speech       f= 4 idf=1.386294 weight=0.462098
+    audio        f= 3 idf=1.609438 weight=0.402359
+    the          f= 3 idf=0.847298 weight=0.211824
+    model        f= 2 idf=1.098612 weight=0.183102
+  Topic 1: tokens=12
+    translation  f= 4 idf=1.386294 weight=0.462098
+    language     f= 3 idf=1.609438 weight=0.402359
+    the          f= 3 idf=0.847298 weight=0.211824
+    model        f= 2 idf=1.098612 weight=0.183102
+  Topic 2: tokens=12
+    clinical     f= 4 idf=1.386294 weight=0.462098
+    patient      f= 3 idf=1.609438 weight=0.402359
+    the          f= 3 idf=0.847298 weight=0.211824
+    model        f= 2 idf=1.098612 weight=0.183102
+
+MMR: separate toy keyword vectors for a summarization topic
+  diversity=0.00: summarization, summary, summaries, document
+    step=1 summarization rel=1.0000 max_sim=0.0000 score=1.0000
+    step=2 summary       rel=0.9998 max_sim=0.9998 score=0.9998
+    step=3 summaries     rel=0.9998 max_sim=0.9998 score=0.9998
+    step=4 document      rel=0.8000 max_sim=0.8120 score=0.8000
+  diversity=0.70: summarization, rouge, document, extractive
+    step=1 summarization rel=1.0000 max_sim=0.0000 score=1.0000
+    step=2 rouge         rel=0.5514 max_sim=0.5514 score=-0.2206
+    step=3 document      rel=0.8000 max_sim=0.8000 score=-0.3200
+    step=4 extractive    rel=0.7507 max_sim=0.8775 score=-0.3891
+
+Interpretation: topic membership, keyword weights, and keyword diversity
+are separate decisions. A generated topic label is NOT produced by this lab.

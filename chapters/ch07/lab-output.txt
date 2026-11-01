@@ -1,0 +1,55 @@
+CH07 | CPU-only teaching simulation | No LLM, API, live search, or real price data
+
+[1] Quantization: uniform affine example, not a GGUF implementation
+ 2 bit | ideal packed weight bytes=2.0 | MSE=0.03826806
+restored: -1.0000, -1.0000, -0.3333, -0.3333, 0.3333, 0.3333, 1.0000, 1.0000
+ 4 bit | ideal packed weight bytes=4.0 | MSE=0.00137917
+restored: -1.0000, -0.7333, -0.3333, -0.0667, 0.0667, 0.3333, 0.7333, 1.0000
+ 8 bit | ideal packed weight bytes=8.0 | MSE=0.00000162
+restored: -1.0000, -0.7333, -0.3098, -0.0510, 0.1294, 0.3804, 0.6706, 1.0000
+Storage estimate excludes scales, metadata, activations, KV cache, and runtime overhead.
+
+[2] Chain: rule-based template composition
+{"writes": "title", "available_keys": ["summary", "title"], "value": "A notebook about a missing notebook"}
+{"writes": "character", "available_keys": ["summary", "title", "character"], "value": "A student investigates the topic in \"A notebook about a missing notebook\"."}
+{"writes": "story", "available_keys": ["summary", "title", "character", "story"], "value": "A student investigates the topic in \"A notebook about a missing notebook\". The student writes observations about a missing notebook."}
+Expected boundary error: Missing fields: title
+
+[3] Memory: exact rule-based responses; counts are WORD UNITS, not tokenizer tokens
+
+MODE=full; recent window=2; history budget=35
+turn 1: history=  0 words | over_budget=False | 1 + 1 = 2.
+turn 2: history= 21 words | over_budget=False | 3 + 3 = 6.
+turn 3: history= 33 words | over_budget=False | Your name is Mina.
+turn 4: history= 43 words | over_budget=True  | Your age is 29.
+turn 5: history= 53 words | over_budget=True  | Update received.
+turn 6: history= 67 words | over_budget=True  | You live in Busan.
+cumulative history word units: 217
+
+MODE=window; recent window=2; history budget=35
+turn 1: history=  0 words | over_budget=False | 1 + 1 = 2.
+turn 2: history= 21 words | over_budget=False | 3 + 3 = 6.
+turn 3: history= 33 words | over_budget=False | Your name is Mina.
+turn 4: history= 22 words | over_budget=False | Age unknown.
+turn 5: history= 18 words | over_budget=False | Update received.
+turn 6: history= 22 words | over_budget=False | You live in Busan.
+cumulative history word units: 116
+
+MODE=summary; recent window=2; history budget=35
+turn 1: history=  0 words | over_budget=False | 1 + 1 = 2.
+turn 2: history=  9 words | over_budget=False | 3 + 3 = 6.
+turn 3: history=  9 words | over_budget=False | Your name is Mina.
+turn 4: history=  9 words | over_budget=False | Your age is 29.
+turn 5: history=  9 words | over_budget=False | Update received.
+turn 6: history= 13 words | over_budget=False | You live in Busan.
+cumulative history word units: 49
+Summary is an explicit-fact dictionary; it cannot preserve every original sentence.
+Budget flags report overflow only; this demonstration does not silently truncate text.
+
+[4] Tool execution loop: deterministic policy, fictional data
+{"step": 1, "action": "lookup_price", "input": "StudyLaptop", "observation": {"usd": "1200.00", "source": "local teaching fixture A"}}
+{"step": 2, "action": "convert", "input": {"usd": "1200.00", "eur_per_usd": "0.85"}, "observation": {"eur": "1020.00"}}
+{"step": 3, "action": "finish", "observation": {"status": "complete", "usd": "1200.00", "eur": "1020.00", "eur_per_usd": "0.85", "source": "local teaching fixture A"}}
+FINAL: {"status": "complete", "usd": "1200.00", "eur": "1020.00", "eur_per_usd": "0.85", "source": "local teaching fixture A"}
+
+Meaningful checks passed: chain fields, memory retention, and completed conversion arithmetic.

@@ -1,0 +1,29 @@
+3장 실습 | 무학습 교육용 계산, CPU, 표준 라이브러리
+
+[1] 한 attention head의 점수와 가중합
+scaled scores: [0.0, 1.414214, 0.707107]
+attention weights: [0.140029, 0.575975, 0.283995] sum= 1.0
+weighted value: [0.70802, 1.435946]
+
+[2] LM head logits -> 확률 -> 선택
+logits: [2.0, 1.0, 0.0, -1.0] temperature: 0.8
+probabilities: [0.718335, 0.205807, 0.058965, 0.016894]
+greedy id: 0 | sample ids (20 draws): [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0]
+
+[3] causal Transformer: 전체 재계산과 KV cache 비교
+generated arbitrary token IDs: [4, 3, 2, 4, 3, 2, 4, 3]
+maximum logit difference: 0
+QKV 투영 대상 위치 수 (층 수 포함): full=104, cache=20
+이는 계산 횟수 비교이며 실제 GPU 속도 배율이 아닙니다.
+future-token prefix invariance error: 0
+
+[4] KV cache의 이론 메모리 (모델 가중치/버퍼 제외)
+MHA: Hkv=32, 2.0000 GiB
+GQA: Hkv=8, 0.5000 GiB
+MQA: Hkv=1, 0.0625 GiB
+
+[5] RoPE: 회전 전후 길이와 상대 위치
+norm² before/after: 5.0 5.0
+rotated dot = -0.002152440181; relative dot = -0.002152440181; shifted dot = -0.002152440181
+
+PASS: 확률합, 캐시 동치, causal 불변성, 메모리 계산, RoPE 상대 위치를 확인했습니다.

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3장 시각 실험 — Attention, KV 캐시, RoPE</title>
+<link rel="stylesheet" href="../../assets/study.css">
+<style>
+main{max-width:1080px}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}input[type=range]{display:block;width:100%}.readout{font-variant-numeric:tabular-nums;font-size:1.05rem;padding:14px 18px;background:var(--soft);border-radius:8px}.figuregrid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:start}.plot{width:100%;display:block}.plot text{font-family:inherit;font-size:15px;fill:var(--ink)}.formula{font-size:.88rem}.legend{display:flex;gap:20px;flex-wrap:wrap}.swatch{display:inline-block;width:16px;height:5px;margin-right:6px;vertical-align:middle}.inlinecheck{display:flex;gap:10px;align-items:center}.inlinecheck input{width:20px;height:20px}.caption{font-size:.9rem;color:var(--muted)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e59a28;outline-offset:4px}@media(max-width:680px){.figuregrid{grid-template-columns:1fr}.plot text{font-size:16px}}@media(prefers-reduced-motion:no-preference){rect.mark{transition:width .15s ease}}
+</style>
+</head>
+<body><main>
+<nav aria-label="학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lecture-script.md">대본</a><a href="lab-guide.md">실습 안내</a><a href="quiz.md">복습 문제</a></nav>
+<h1>3장 시각 실험</h1>
+<p class="lead">Attention은 무엇을 섞고, 캐시는 무엇을 줄이며, 회전은 위치를 어떻게 나타낼까요?</p>
+<p>외부 연결 없이 작동하는 교육용 실험입니다. 첫째·셋째 실험의 벡터는 <strong>가상 데이터</strong>이며 실제 언어 모델에서 추출한 값이 아닙니다. 두 번째는 명시한 설정에 대한 이론 메모리 계산입니다. 슬라이더는 방향키로도 조작할 수 있습니다.</p>
+<section aria-labelledby="att-title">
+<h2 id="att-title">1. Query를 바꾸면 어떤 value가 섞일까?</h2>
+<p>세 key는 k₁=[0,1], k₂=[2,0], k₃=[1,1]입니다. Value는 v₁=[1,0], v₂=[0,2], v₃=[2,1]로 고정합니다. Query의 좌표를 바꾸고 가중치와 출력 위치를 함께 보세요.</p>
+<div class="controls"><label for="qx">Query 첫 좌표 <output id="qx-out">1.0</output><input id="qx" type="range" min="-2" max="2" step="0.1" value="1"></label><label for="qy">Query 둘째 좌표 <output id="qy-out">0.0</output><input id="qy" type="range" min="-2" max="2" step="0.1" value="0"></label></div>
+<div class="figuregrid">
+<div><svg id="weights" class="plot" viewBox="0 0 600 250" role="img" aria-labelledby="att-svg-title att-svg-desc"><title id="att-svg-title">세 위치의 attention 가중치</title><desc id="att-svg-desc">Query와 key 내적을 제곱근 2로 나누고 softmax한 가중치가 막대 길이로 나타납니다.</desc><text x="10" y="25">Attention 가중치 (%)</text><g id="weight-marks"></g><line x1="75" y1="211" x2="475" y2="211" stroke="#bdc9d0"/><text x="75" y="237">0</text><text x="270" y="237">50</text><text x="445" y="237">100</text></svg></div>
+<div><svg id="value-plane" class="plot" viewBox="0 0 360 290" role="img" aria-labelledby="val-title val-desc"><title id="val-title">Value 공간의 가중합</title><desc id="val-desc">고정된 세 value의 삼각형 안에서 가중합 출력 점이 움직입니다.</desc><path d="M60 235 L310 235 M60 235 L60 35" stroke="#bdc9d0" fill="none"/><text x="259" y="280">첫 좌표</text><text x="12" y="25">둘째 좌표</text><text x="43" y="253">0</text><text x="162" y="253">1</text><text x="273" y="253">2</text><text x="37" y="145">1</text><text x="37" y="55">2</text><polygon points="170,235 60,55 280,145" fill="#eaf4f5" stroke="#a4bfc6"/><circle cx="170" cy="235" r="5" fill="#536271"/><circle cx="60" cy="55" r="5" fill="#536271"/><circle cx="280" cy="145" r="5" fill="#536271"/><text x="172" y="223">v₁</text><text x="70" y="55">v₂</text><text x="289" y="142">v₃</text><circle id="weighted-dot" cx="138" cy="106" r="8" fill="#175e73" stroke="#fff" stroke-width="2"/></svg></div>
+</div>
+<p class="readout" id="att-result" aria-live="polite"></p>
+<p class="caption">내적 점수 → √2로 나누기 → softmax → value의 가중합. 출력 점은 가장 큰 가중치의 value에 고정되는 것이 아니라 모든 value의 영향을 받습니다. 벡터 합이므로 출력 좌표의 합이 1일 필요는 없습니다.</p>
+</section>
+<section aria-labelledby="kv-title">
+<h2 id="kv-title">2. KV head를 공유하면 캐시가 얼마나 줄어들까?</h2>
+<p>배치 1, 층 32, head 차원 128, 원소당 2바이트를 고정합니다. Query head는 32개입니다. MHA는 KV head 32개, GQA는 8개, MQA는 1개로 비교합니다.</p>
+<label for="context">문맥 토큰 수 <output id="context-out">4,096</output><input id="context" type="range" min="512" max="32768" step="512" value="4096"></label>
+<svg id="memory" class="plot" viewBox="0 0 760 285" role="img" aria-labelledby="mem-title mem-desc"><title id="mem-title">방식별 이론 KV 캐시 메모리</title><desc id="mem-desc">같은 문맥 길이에서 key와 value head 수에 따른 캐시 메모리를 GiB 단위로 비교합니다.</desc><g id="memory-marks"></g><line x1="115" y1="225" x2="635" y2="225" stroke="#bdc9d0"/><text x="115" y="251">0</text><text x="368" y="251">8</text><text x="615" y="251">16</text><text x="285" y="278">KV 캐시 메모리 (GiB)</text></svg>
+<p class="readout" id="kv-result" aria-live="polite"></p>
+<div class="formula">2 × 배치 × 층 수 × 토큰 수 × KV head 수 × head 차원 × 원소당 바이트</div>
+<p class="caption">모델 가중치·작업 버퍼·메모리 할당 여유는 제외합니다. 막대의 비율은 속도 향상 배율이 아닙니다. GQA와 MQA는 학습된 모델 구조의 선택이며, 기존 모델의 KV head를 임의로 삭제하는 조작을 뜻하지 않습니다.</p>
+</section>
+<section aria-labelledby="rope-title">
+<h2 id="rope-title">3. 함께 이동해도 유지되는 상대 위치</h2>
+<p>단위 벡터 q=[1,0], k=[cos(0.6),sin(0.6)]를 사용합니다. 위치 하나당 0.3 radian씩 회전하는 좌표 쌍 하나를 봅니다. 두 위치를 함께 이동하면 벡터의 방향은 바뀌지만 두 벡터의 내적은 유지됩니다.</p>
+<div class="controls"><label for="pos-q">Query 위치 m <output id="pos-q-out">2</output><input id="pos-q" type="range" min="0" max="16" step="1" value="2"></label><label for="pos-k">Key 위치 n <output id="pos-k-out">5</output><input id="pos-k" type="range" min="0" max="16" step="1" value="5"></label></div>
+<label class="inlinecheck" for="shift"><input id="shift" type="checkbox">두 위치에 공통으로 +10 적용</label>
+<div class="figuregrid">
+<svg id="rotation" class="plot" viewBox="0 0 400 340" role="img" aria-labelledby="rot-title rot-desc"><title id="rot-title">위치에 따른 query와 key의 회전</title><desc id="rot-desc">원 위 두 선분이 회전한 query와 key입니다. 각 벡터 길이는 1로 유지됩니다.</desc><circle cx="200" cy="165" r="115" fill="none" stroke="#d7e0e5"/><path d="M45 165H355 M200 20V310" stroke="#d7e0e5"/><text x="350" y="190">x</text><text x="213" y="28">y</text><line id="q-line" x1="200" y1="165" x2="300" y2="165" stroke="#175e73" stroke-width="4"/><line id="k-line" x1="200" y1="165" x2="250" y2="70" stroke="#a85c19" stroke-width="4" stroke-dasharray="9 5"/><circle id="q-dot" r="6" fill="#175e73"/><circle id="k-dot" r="6" fill="#a85c19"/><circle cx="200" cy="165" r="3" fill="#536271"/></svg>
+<div><div class="legend"><span><span class="swatch" style="background:#175e73"></span>Q 실선</span><span><span class="swatch" style="background:#a85c19"></span>K 점선</span></div><p class="readout" id="rope-result" aria-live="polite"></p><p id="rope-check"></p><div class="formula">(R(m)q)ᵀR(n)k<br>= qᵀR(n−m)k</div></div>
+</div>
+<p class="caption">이 실험은 위치 회전의 성질만 보여 줍니다. 실제 RoPE는 여러 좌표 쌍에 서로 다른 주파수를 사용합니다. RoPE는 문서 경계 마스크를 대신하지 않으며, 긴 문맥에서의 모델 품질을 보장하는 실험도 아닙니다.</p>
+</section>
+<footer><p>출처 범위: 원문 3장 PDF 132–156쪽. 수식과 가상 데이터는 학습을 위한 보충입니다.</p><nav aria-label="다음 학습"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lab-guide.md">실습 안내</a><a href="quiz.md">복습 문제</a></nav></footer>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const keys = [[0,1],[2,0],[1,1]], values = [[1,0],[0,2],[2,1]];
+const dot = (a,b) => a.reduce((s,x,i)=>s+x*b[i],0);
+function attention(){
+ const q=[Number($('qx').value),Number($('qy').value)];
+ $('qx-out').textContent=q[0].toFixed(1);$('qy-out').textContent=q[1].toFixed(1);
+ const scores=keys.map(k=>dot(q,k)/Math.sqrt(2)), max=Math.max(...scores), exps=scores.map(s=>Math.exp(s-max)),sum=exps.reduce((a,b)=>a+b,0), w=exps.map(e=>e/sum);
+ const out=[0,1].map(j=>w.reduce((s,a,i)=>s+a*values[i][j],0));
+ const width=Math.max(300,$('weights').getBoundingClientRect().width),barWidth=width-155;
+ $('weights').setAttribute('viewBox',`0 0 ${width} 250`);
+ $('weights').innerHTML='<title id="att-svg-title">세 위치의 attention 가중치</title><desc id="att-svg-desc"></desc><text x="10" y="25">Attention 가중치 (%)</text>'+w.map((a,i)=>`<text x="10" y="${64+i*60}">위치 ${i+1}</text><rect class="mark" x="75" y="${44+i*60}" width="${barWidth*a}" height="28" fill="#175e73"/><text x="${width-66}" y="${64+i*60}">${(a*100).toFixed(1)}%</text>`).join('')+`<line x1="75" y1="211" x2="${75+barWidth}" y2="211" stroke="#bdc9d0"/><text x="75" y="237">0</text><text x="${75+barWidth/2}" y="237" text-anchor="middle">50</text><text x="${75+barWidth}" y="237" text-anchor="end">100</text>`;
+ $('weighted-dot').setAttribute('cx',60+110*out[0]);$('weighted-dot').setAttribute('cy',235-90*out[1]);
+ $('att-result').textContent=`가중치 합 = ${w.reduce((a,b)=>a+b,0).toFixed(3)} · 출력 = [${out[0].toFixed(4)}, ${out[1].toFixed(4)}]`;
+ $('att-svg-desc').textContent='현재 가중치: '+w.map((a,i)=>`위치 ${i+1} ${(a*100).toFixed(1)}%`).join(', ');
+}
+function memory(){
+ const t=Number($('context').value);$('context-out').textContent=t.toLocaleString('ko-KR');
+ const data=[['MHA',32],['GQA',8],['MQA',1]].map(([name,h])=>({name,h,gib:2*1*32*t*h*128*2/1024**3}));
+ const width=Math.max(300,$('memory').getBoundingClientRect().width),left=95,barWidth=width-180;
+ $('memory').setAttribute('viewBox',`0 0 ${width} 285`);
+ $('memory').innerHTML='<title id="mem-title">방식별 이론 KV 캐시 메모리</title><desc id="mem-desc"></desc>'+data.map((d,i)=>`<text x="10" y="${55+i*70}">${d.name} (${d.h})</text><rect class="mark" x="${left}" y="${34+i*70}" width="${barWidth*d.gib/16}" height="30" fill="#175e73" opacity="${1-i*.2}"/><text x="${width-70}" y="${55+i*70}">${d.gib.toFixed(3)}</text>`).join('')+`<line x1="${left}" y1="225" x2="${left+barWidth}" y2="225" stroke="#bdc9d0"/><text x="${left}" y="251">0</text><text x="${left+barWidth/2}" y="251" text-anchor="middle">8</text><text x="${left+barWidth}" y="251" text-anchor="end">16</text><text x="${width/2}" y="278" text-anchor="middle">KV 캐시 메모리 (GiB)</text>`;
+ $('kv-result').textContent=`${t.toLocaleString('ko-KR')}개 토큰 · MHA ${data[0].gib.toFixed(3)} GiB · GQA ${data[1].gib.toFixed(3)} GiB · MQA ${data[2].gib.toFixed(3)} GiB`;
+ $('mem-desc').textContent=$('kv-result').textContent;
+}
+function rotate(){
+ const m=Number($('pos-q').value),n=Number($('pos-k').value),shift=$('shift').checked?10:0;
+ $('pos-q-out').textContent=m;$('pos-k-out').textContent=n;
+ const aq=(m+shift)*.3,ak=.6+(n+shift)*.3;
+ for(const [label,angle] of [['q',aq],['k',ak]]){
+  const x=200+115*Math.cos(angle),y=165-115*Math.sin(angle);
+  $(label+'-line').setAttribute('x2',x);$(label+'-line').setAttribute('y2',y);$(label+'-dot').setAttribute('cx',x);$(label+'-dot').setAttribute('cy',y);
+ }
+ const computed=Math.cos(aq)*Math.cos(ak)+Math.sin(aq)*Math.sin(ak),relative=Math.cos(.6+(n-m)*.3);
+ $('rope-result').textContent=`적용 위치 (${m+shift}, ${n+shift}) · 상대 거리 n−m = ${n-m} · 내적 = ${computed.toFixed(6)}`;
+ $('rope-check').textContent=`상대 위치식의 값: ${relative.toFixed(6)} · 두 계산의 오차: ${Math.abs(computed-relative).toExponential(1)}`;
+ $('rot-desc').textContent=$('rope-result').textContent;
+}
+for(const id of ['qx','qy'])$(id).addEventListener('input',attention);
+$('context').addEventListener('input',memory);
+for(const id of ['pos-q','pos-k'])$(id).addEventListener('input',rotate);
+$('shift').addEventListener('change',rotate);
+window.addEventListener('resize',()=>{attention();memory();});
+attention();memory();rotate();
+</script></body></html>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="470" viewBox="0 0 880 470" role="img" aria-labelledby="title desc">
+<title id="title">군집별 빈도와 전체 빈도에서 c-TF-IDF 가중치 계산</title>
+<desc id="desc">교육용 세 군집 예제. 각 군집은 12개 토큰이다. 음성 토픽의 speech 가중치는 0.4621, audio는 0.4024, the는 0.2118, model은 0.1831이다. the가 자동으로 완전히 제거되지는 않는다.</desc>
+<rect width="880" height="470" rx="16" fill="#f6f9fa"/>
+<g font-family="sans-serif" fill="#172332">
+<text x="36" y="46" font-size="23" font-weight="600">같은 군집을 설명하는 단어의 가중치</text>
+<text x="36" y="77" font-size="15" fill="#536271">교육용 예제 · 군집 3개 · 각 군집 12토큰 · 실제 모델 결과 아님</text>
+<text x="36" y="119" font-size="16">단어</text><text x="164" y="119" font-size="16">군집 빈도</text><text x="277" y="119" font-size="16">전체 빈도</text><text x="390" y="119" font-size="16">c-TF-IDF 가중치</text>
+<path d="M36 134H844" stroke="#c7d5dc"/>
+<text x="36" y="172" font-size="18">speech</text><text x="193" y="172" font-size="18">4</text><text x="304" y="172" font-size="18">4</text><rect x="390" y="152" width="277.26" height="27" rx="3" fill="#1d7589"/><text x="683" y="172" font-size="17">0.4621</text>
+<text x="36" y="224" font-size="18">audio</text><text x="193" y="224" font-size="18">3</text><text x="304" y="224" font-size="18">3</text><rect x="390" y="204" width="241.44" height="27" rx="3" fill="#1d7589"/><text x="647" y="224" font-size="17">0.4024</text>
+<text x="36" y="276" font-size="18">the</text><text x="193" y="276" font-size="18">3</text><text x="304" y="276" font-size="18">9</text><rect x="390" y="256" width="127.08" height="27" rx="3" fill="#718d98"/><text x="533" y="276" font-size="17">0.2118</text>
+<text x="36" y="328" font-size="18">model</text><text x="193" y="328" font-size="18">2</text><text x="304" y="328" font-size="18">6</text><rect x="390" y="308" width="109.86" height="27" rx="3" fill="#718d98"/><text x="516" y="328" font-size="17">0.1831</text>
+<text x="390" y="364" font-size="13" fill="#536271">막대: 0에서 시작, 가중치 0.1당 60px</text>
+<rect x="28" y="388" width="824" height="56" rx="7" fill="#e7f1f3"/>
+<text x="44" y="422" font-size="17">speech: (4 ÷ 12) × ln(1 + 12 ÷ 4) ≈ 0.4621</text>
+</g>
+</svg>

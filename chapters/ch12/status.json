@@ -1,0 +1,43 @@
+{
+  "chapter": 12,
+  "status": "complete",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "coverage.json",
+    "source-map.json",
+    ".gitignore",
+    "status.json"
+  ],
+  "lab_command": "python3 chapters/ch12/lab.py",
+  "validation": [
+    "원문 PDF 487–535 전체 추출본 독서 완료; PDF 499 및 527 시각 확인",
+    "원문 목차 28개 절 모두 명시적 앵커와 coverage 대응",
+    "원문 그림 33개 및 표 1개 설명 대응",
+    "학습 노트 한국어 음절 19644개, 대본 한국어 음절 8097개; Mermaid 6개",
+    "복습 18문제와 접는 상세 해설",
+    "CPU 기본 실습 및 rank/bits/beta 변경 실행 성공; 수학적 검산 통과",
+    "모든 Markdown 상대 링크 및 명시적 앵커 확인",
+    "HTML inline JavaScript 구문 검사 통과",
+    "실제 Chrome에서 LoRA rank, 양자화 bits, DPO 현재·기준 확률 상호작용 확인",
+    "1100px 데스크톱 및 390px 모바일 화면 확인; 수평 넘침 없음; pageerror 없음"
+  ],
+  "limitations": [
+    "실제 TinyLlama GPU SFT/DPO는 실행하지 않았으며 2024년 원문 API의 현재 호환성은 검증하지 않음.",
+    "양자화 실습은 균일 min-max 교육 예제로 NF4 구현이 아님.",
+    "DPO 경사하강은 질문 하나·응답 둘의 스칼라 정책으로 실제 언어 모델 성능을 의미하지 않음."
+  ],
+  "source_coverage": {
+    "sections": 28,
+    "figures": 33,
+    "tables": 1
+  },
+  "delivery_format": "Markdown with Mermaid; standalone HTML interactive visuals and Python CPU lab"
+}

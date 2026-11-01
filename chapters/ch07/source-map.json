@@ -1,0 +1,71 @@
+{
+  "number": 7,
+  "title_en": "7. Advanced Text Generation Techniques and Tools",
+  "title_ko": "고급 텍스트 생성과 도구",
+  "pdf_start": 280,
+  "pdf_end": 315,
+  "source": "source/ch07.txt",
+  "directory": "chapters/ch07",
+  "sections": [
+    {
+      "title": "Model I/O: Loading Quantized Models with LangChain",
+      "pdf_page": 281,
+      "depth": 1
+    },
+    {
+      "title": "Chains: Extending the Capabilities of LLMs",
+      "pdf_page": 284,
+      "depth": 1
+    },
+    {
+      "title": "A Single Link in the Chain: Prompt Template",
+      "pdf_page": 285,
+      "depth": 2
+    },
+    {
+      "title": "A Chain with Multiple Prompts",
+      "pdf_page": 289,
+      "depth": 2
+    },
+    {
+      "title": "Memory: Helping LLMs to Remember Conversations",
+      "pdf_page": 293,
+      "depth": 1
+    },
+    {
+      "title": "Conversation Buffer",
+      "pdf_page": 295,
+      "depth": 2
+    },
+    {
+      "title": "Windowed Conversation Buffer",
+      "pdf_page": 297,
+      "depth": 2
+    },
+    {
+      "title": "Conversation Summary",
+      "pdf_page": 300,
+      "depth": 2
+    },
+    {
+      "title": "Agents: Creating a System of LLMs",
+      "pdf_page": 306,
+      "depth": 1
+    },
+    {
+      "title": "The Driving Power Behind Agents: Step-by-step Reasoning",
+      "pdf_page": 307,
+      "depth": 2
+    },
+    {
+      "title": "ReAct in LangChain",
+      "pdf_page": 310,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 314,
+      "depth": 1
+    }
+  ]
+}

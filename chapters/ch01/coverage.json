@@ -1,0 +1,450 @@
+{
+  "chapter": 1,
+  "sections": [
+    {
+      "source_title": "What Is Language AI?",
+      "pdf_page": 24,
+      "target": "study.md#language-ai",
+      "covered_topics": [
+        "언어 AI와 NLP",
+        "생성과 검색의 구분",
+        "입력·출력·평가"
+      ]
+    },
+    {
+      "source_title": "A Recent History of Language AI",
+      "pdf_page": 25,
+      "target": "study.md#history",
+      "covered_topics": [
+        "기술 발전의 문제 중심 흐름",
+        "기존 기술과 새로운 기술의 결합",
+        "원문 연표"
+      ]
+    },
+    {
+      "source_title": "Representing Language as a Bag-of-Words",
+      "pdf_page": 26,
+      "target": "study.md#bow",
+      "covered_topics": [
+        "공백 토큰화",
+        "공유 어휘",
+        "단어 빈도 벡터",
+        "희소성과 순서 손실"
+      ]
+    },
+    {
+      "source_title": "Better Representations with Dense Vector Embeddings",
+      "pdf_page": 28,
+      "target": "study.md#dense",
+      "covered_topics": [
+        "word2vec",
+        "주변 단어 예측",
+        "신경망 파라미터",
+        "밀집 벡터",
+        "코사인 유사도",
+        "차원 해석의 한계"
+      ]
+    },
+    {
+      "source_title": "Types of Embeddings",
+      "pdf_page": 31,
+      "target": "study.md#embedding-types",
+      "covered_topics": [
+        "단어·토큰·문장·문서 표현",
+        "희소/밀집",
+        "정적/문맥별",
+        "출력 차원"
+      ]
+    },
+    {
+      "source_title": "Encoding and Decoding Context with Attention",
+      "pdf_page": 32,
+      "target": "study.md#rnn-attention",
+      "covered_topics": [
+        "정적 임베딩의 문맥 한계",
+        "RNN",
+        "인코더/디코더 번역",
+        "고정 문맥 병목",
+        "어텐션 가중합",
+        "자기회귀"
+      ]
+    },
+    {
+      "source_title": "Attention Is All You Need",
+      "pdf_page": 37,
+      "target": "study.md#transformer",
+      "covered_topics": [
+        "셀프 어텐션",
+        "피드포워드",
+        "교차 어텐션",
+        "인과 마스크",
+        "병렬 학습과 순차 생성"
+      ]
+    },
+    {
+      "source_title": "Representation Models: Encoder-Only Models",
+      "pdf_page": 42,
+      "target": "study.md#encoder",
+      "covered_topics": [
+        "BERT-base",
+        "마스크 언어 모델링",
+        "CLS",
+        "전이 학습",
+        "분류와 특징 추출"
+      ]
+    },
+    {
+      "source_title": "Generative Models: Decoder-Only Models",
+      "pdf_page": 45,
+      "target": "study.md#decoder",
+      "covered_topics": [
+        "GPT",
+        "디코더 전용 구조",
+        "다음 토큰 예측",
+        "규모 변화",
+        "기반/지시 모델",
+        "문맥 창",
+        "GPT-1 원문 교정"
+      ]
+    },
+    {
+      "source_title": "The Year of Generative AI",
+      "pdf_page": 49,
+      "target": "study.md#generative-year",
+      "covered_topics": [
+        "제품과 모델",
+        "2023년 공개/비공개 모델 사례",
+        "기반 모델",
+        "Mamba",
+        "RWKV"
+      ]
+    },
+    {
+      "source_title": "The Moving Definition of a “Large Language Model”",
+      "pdf_page": 50,
+      "target": "study.md#large-definition",
+      "covered_topics": [
+        "대규모의 상대성",
+        "비생성·소형 모델 포함",
+        "기능과 평가 중심 선택"
+      ]
+    },
+    {
+      "source_title": "The Training Paradigm of Large Language Models",
+      "pdf_page": 51,
+      "target": "study.md#training",
+      "covered_topics": [
+        "전통적 과제 학습",
+        "사전 학습",
+        "미세 조정",
+        "추가 선호 학습",
+        "추론과 파라미터 갱신"
+      ]
+    },
+    {
+      "source_title": "Large Language Model Applications: What Makes Them So Useful?",
+      "pdf_page": 53,
+      "target": "study.md#applications",
+      "covered_topics": [
+        "감성 분류",
+        "군집화·주제 발견",
+        "검색",
+        "도구·문서 기반 챗봇",
+        "멀티모달",
+        "연결 장 교정"
+      ]
+    },
+    {
+      "source_title": "Responsible LLM Development and Usage",
+      "pdf_page": 55,
+      "target": "study.md#responsibility",
+      "covered_topics": [
+        "편향과 공정성",
+        "투명성과 책임",
+        "그럴듯한 오류와 유해 출력",
+        "지식재산",
+        "규제"
+      ]
+    },
+    {
+      "source_title": "Limited Resources Are All You Need",
+      "pdf_page": 56,
+      "target": "study.md#resources",
+      "covered_topics": [
+        "GPU와 VRAM",
+        "가중치 저장량",
+        "양자화",
+        "사전 학습 비용 근사",
+        "집필 당시 Colab",
+        "작은 CPU 실습"
+      ]
+    },
+    {
+      "source_title": "Interfacing with Large Language Models",
+      "pdf_page": 57,
+      "target": "study.md#interfaces",
+      "covered_topics": [
+        "인터페이스·모델·실행 엔진",
+        "API/로컬 비교",
+        "데이터 흐름과 운영 책임"
+      ]
+    },
+    {
+      "source_title": "Proprietary, Private Models",
+      "pdf_page": 57,
+      "target": "study.md#private-models",
+      "covered_topics": [
+        "비공개 가중치",
+        "API 호출",
+        "운영 장점",
+        "서비스 비용·데이터",
+        "직접 학습과 제공 기능 구분"
+      ]
+    },
+    {
+      "source_title": "Open Models",
+      "pdf_page": 59,
+      "target": "study.md#open-models",
+      "covered_topics": [
+        "공개 가중치 범위",
+        "라이선스",
+        "OSI 용어 교정",
+        "로컬 제어",
+        "투명성 한계",
+        "하드웨어"
+      ]
+    },
+    {
+      "source_title": "Open Source Frameworks",
+      "pdf_page": 60,
+      "target": "study.md#frameworks",
+      "covered_topics": [
+        "Transformers",
+        "llama.cpp",
+        "LangChain 역할",
+        "로컬 GUI 사례",
+        "프레임워크 공통 흐름"
+      ]
+    },
+    {
+      "source_title": "Generating Your First Text",
+      "pdf_page": 61,
+      "target": "study.md#first-generation",
+      "covered_topics": [
+        "Hugging Face Hub",
+        "Phi-3-mini",
+        "모델과 토크나이저",
+        "CUDA/자료형/remote code",
+        "pipeline",
+        "생성 설정",
+        "메시지 템플릿",
+        "반환값",
+        "실행 한계"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 64,
+      "target": "study.md#summary",
+      "covered_topics": [
+        "표현과 생성 전체 연결",
+        "학습과 실행 선택",
+        "2·3장 연결",
+        "그림과 참고문헌 활용",
+        "보충/교정 구분"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 1-1",
+      "pdf_page": 25,
+      "explained_in": "study.md#history"
+    },
+    {
+      "label": "Figure 1-2",
+      "pdf_page": 26,
+      "explained_in": "study.md#history"
+    },
+    {
+      "label": "Figure 1-3",
+      "pdf_page": 27,
+      "explained_in": "study.md#bow"
+    },
+    {
+      "label": "Figure 1-4",
+      "pdf_page": 27,
+      "explained_in": "study.md#bow"
+    },
+    {
+      "label": "Figure 1-5",
+      "pdf_page": 28,
+      "explained_in": "study.md#bow"
+    },
+    {
+      "label": "Figure 1-6",
+      "pdf_page": 29,
+      "explained_in": "study.md#dense"
+    },
+    {
+      "label": "Figure 1-7",
+      "pdf_page": 30,
+      "explained_in": "study.md#dense"
+    },
+    {
+      "label": "Figure 1-8",
+      "pdf_page": 30,
+      "explained_in": "study.md#dense"
+    },
+    {
+      "label": "Figure 1-9",
+      "pdf_page": 31,
+      "explained_in": "study.md#dense"
+    },
+    {
+      "label": "Figure 1-10",
+      "pdf_page": 32,
+      "explained_in": "study.md#embedding-types"
+    },
+    {
+      "label": "Figure 1-11",
+      "pdf_page": 33,
+      "explained_in": "study.md#rnn-attention"
+    },
+    {
+      "label": "Figure 1-12",
+      "pdf_page": 34,
+      "explained_in": "study.md#rnn-attention"
+    },
+    {
+      "label": "Figure 1-13",
+      "pdf_page": 35,
+      "explained_in": "study.md#rnn-attention"
+    },
+    {
+      "label": "Figure 1-14",
+      "pdf_page": 36,
+      "explained_in": "study.md#rnn-attention"
+    },
+    {
+      "label": "Figure 1-15",
+      "pdf_page": 36,
+      "explained_in": "study.md#rnn-attention"
+    },
+    {
+      "label": "Figure 1-16",
+      "pdf_page": 38,
+      "explained_in": "study.md#transformer"
+    },
+    {
+      "label": "Figure 1-17",
+      "pdf_page": 39,
+      "explained_in": "study.md#transformer"
+    },
+    {
+      "label": "Figure 1-18",
+      "pdf_page": 40,
+      "explained_in": "study.md#transformer"
+    },
+    {
+      "label": "Figure 1-19",
+      "pdf_page": 41,
+      "explained_in": "study.md#transformer"
+    },
+    {
+      "label": "Figure 1-20",
+      "pdf_page": 41,
+      "explained_in": "study.md#transformer"
+    },
+    {
+      "label": "Figure 1-21",
+      "pdf_page": 43,
+      "explained_in": "study.md#encoder"
+    },
+    {
+      "label": "Figure 1-22",
+      "pdf_page": 44,
+      "explained_in": "study.md#encoder"
+    },
+    {
+      "label": "Figure 1-23",
+      "pdf_page": 44,
+      "explained_in": "study.md#encoder"
+    },
+    {
+      "label": "Figure 1-24",
+      "pdf_page": 46,
+      "explained_in": "study.md#decoder"
+    },
+    {
+      "label": "Figure 1-25",
+      "pdf_page": 47,
+      "explained_in": "study.md#decoder"
+    },
+    {
+      "label": "Figure 1-26",
+      "pdf_page": 48,
+      "explained_in": "study.md#decoder"
+    },
+    {
+      "label": "Figure 1-27",
+      "pdf_page": 49,
+      "explained_in": "study.md#decoder"
+    },
+    {
+      "label": "Figure 1-28",
+      "pdf_page": 50,
+      "explained_in": "study.md#generative-year"
+    },
+    {
+      "label": "Figure 1-29",
+      "pdf_page": 52,
+      "explained_in": "study.md#training"
+    },
+    {
+      "label": "Figure 1-30",
+      "pdf_page": 53,
+      "explained_in": "study.md#training"
+    },
+    {
+      "label": "Figure 1-31",
+      "pdf_page": 58,
+      "explained_in": "study.md#private-models"
+    },
+    {
+      "label": "Figure 1-32",
+      "pdf_page": 59,
+      "explained_in": "study.md#open-models"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true,
+    "visuals_script_syntax_checked": true,
+    "visuals_non_browser_interactions_checked": true,
+    "visuals_browser_layout_checked": true,
+    "visuals_root_report_hash_matched": true
+  },
+  "limitations": [
+    "실제 Phi-3/GPU 예제는 실행하지 않았으며 lab.py는 작은 개념 모형이다."
+  ],
+  "visual_verification": {
+    "verified_by": "루트 챗 통합 Chrome 검증 및 이 챗의 기존 스크린샷 검토",
+    "html_sha256": "1621cd3b9eecaed73c6715e0f95a358e513e558f89d24e74fea5a83e6f37c6d4",
+    "report": "../../output/qa/visual-checks.json",
+    "screenshots": [
+      "../../output/qa/ch01-desktop.png",
+      "../../output/qa/ch01-mobile.png"
+    ],
+    "browser_errors": [],
+    "interaction_ids": [
+      "attention-score",
+      "prompt",
+      "budget"
+    ],
+    "mobile_viewport_width": 390,
+    "mobile_document_width": 390,
+    "scope": "데스크톱·모바일 화면 배치, 어텐션 슬라이더·시작 토큰·새 토큰 상한 변경에 따른 텍스트와 도형 갱신 확인"
+  }
+}

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6장 프롬프트 엔지니어링 시각 실험</title>
+<link rel="stylesheet" href="../../assets/study.css">
+<style>
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}.controls label{margin:0}.controls input[type=range]{width:100%}.key{display:inline-block;width:14px;height:14px;margin-right:5px;vertical-align:middle}.before{background:#7795a4}.after{background:#176177}.prob-row{display:grid;grid-template-columns:35px 1fr 74px;gap:12px;align-items:center;margin:15px 0}.tracks{display:grid;gap:5px}.track{height:15px;background:#edf1f3;border-radius:2px;overflow:hidden}.bar{height:100%;transition:width .12s linear}.values{font-variant-numeric:tabular-nums;line-height:1.5;font-size:.86rem;text-align:right}.percent-scale{display:flex;justify-content:space-between;margin-left:47px;margin-right:86px;color:#536271;font-size:.8rem}.metric{font-size:1.05rem;font-variant-numeric:tabular-nums}.vote-line{display:grid;grid-template-columns:110px 1fr 70px;gap:12px;align-items:center;margin:20px 0}.vote-line .track{height:24px}.grammar-words{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}.word{font-family:ui-monospace,monospace;padding:9px 13px;border:1px solid #d7e0e5;border-radius:6px}.word.inactive{opacity:.45}.word mark{background:#c5e4e8;color:#123b47}.choices{display:flex;flex-wrap:wrap;gap:9px}.state{min-height:3.5em}.source-note{border-left:3px solid #175e73;padding-left:16px}.back{font-size:.85rem}.legend{display:flex;gap:18px;flex-wrap:wrap}.section-links{display:flex;gap:15px;flex-wrap:wrap}input[type=text]{width:min(100%,420px);padding:9px 12px;border:1px solid #95aab7;border-radius:5px}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #267a94;outline-offset:3px}@media(max-width:500px){.vote-line{grid-template-columns:95px 1fr 58px;gap:7px}.prob-row{gap:8px;grid-template-columns:24px 1fr 64px}.percent-scale{margin-left:32px;margin-right:72px}.word{font-size:.9rem}}@media(prefers-reduced-motion:reduce){.bar{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<nav aria-label="학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lecture-script.md">강의 대본</a><a href="visuals.html">시각화</a><a href="lab-guide.md">실습 안내</a><a href="quiz.md">복습 문제</a></nav>
+<header><p class="badge">CHAPTER 06 · PROMPT ENGINEERING</p><h1>선택·투표·문법을 눈으로 보기</h1><p class="lead">확률을 바꾸는 것, 답을 여러 번 비교하는 것, 허용된 문자열만 생성하는 것은 서로 다른 제어입니다.</p><p class="source-note">모든 값은 교육용 가상 데이터와 수학적 가정에서 계산합니다. 실제 LLM을 호출하거나 성능을 측정하지 않습니다. 인터넷 연결 없이 동작합니다.</p></header>
+<div class="section-links"><a href="#sampling">1. 토큰 선택</a><a href="#voting">2. 다수결의 가정</a><a href="#grammar">3. 접두사 문법</a></div>
+<section id="sampling" aria-labelledby="sampling-title">
+<h2 id="sampling-title">1. 온도와 후보 제한</h2>
+<p>로짓은 A=2, B=1, C=0, D=−1입니다. 온도로 확률을 계산한 뒤 top-k, 재정규화, top-p, 재정규화를 차례로 적용합니다. 회색 막대는 온도만 적용한 확률, 청록 막대는 모든 제한을 적용한 최종 확률입니다.</p>
+<div class="controls">
+<label for="temperature">온도 T <output id="temperature-value" for="temperature">1.00</output><input id="temperature" type="range" min="0.1" max="2.5" value="1" step="0.05"></label>
+<label for="top-p">Top-p <output id="p-value" for="top-p">0.80</output><input id="top-p" type="range" min="0.05" max="1" value="0.8" step="0.05"></label>
+<label for="top-k">Top-k 후보 수<select id="top-k"><option value="0">제한 없음</option><option value="1">1개</option><option value="2">2개</option><option value="3">3개</option><option value="4">4개</option></select></label>
+</div>
+<p class="legend"><span><span class="key before"></span>온도 적용</span><span><span class="key after"></span>최종 선택 분포</span></p>
+<div id="probability-chart" role="img" aria-label="토큰 A부터 D까지의 온도 적용 및 최종 선택 확률"></div>
+<div class="percent-scale" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
+<p id="sampling-summary" class="metric" aria-live="polite"></p>
+<details><summary>관찰할 질문과 해설</summary><p>Top-k를 1로 바꾸면 온도가 올라가도 최종 선택은 어떻게 될까요? 가장 높은 점수의 A만 남으므로 최종 확률은 A가 100%입니다. 온도만 적용한 회색 분포는 계속 바뀝니다.</p><p>기본 설정에서 A의 확률 약 64.4%만으로는 top-p 80%를 채울 수 없습니다. B를 포함한 누적 약 88.1%가 임계값을 넘으므로 A와 B를 남깁니다. 재정규화 후 A는 약 73.1%, B는 약 26.9%입니다.</p></details>
+<p class="back"><a href="study.md#sec-04">학습 노트의 출력 제어 설명</a></p>
+</section>
+<section id="voting" aria-labelledby="vote-title">
+<h2 id="vote-title">2. 여러 답을 투표하면 항상 좋아질까</h2>
+<p>정답과 오답 두 경우만 있고, 한 번의 정답 확률이 q라고 가정합니다. 독립 표본에서는 이항분포로 과반수 정답 확률을 계산합니다. 완전 상관은 모든 답이 늘 같이 맞고 같이 틀리는 극단입니다. 두 모형 모두 실제 모델의 측정값이 아닙니다.</p>
+<div class="controls">
+<label for="accuracy">한 번의 정답 확률 q <output id="accuracy-value" for="accuracy">70%</output><input id="accuracy" type="range" min="0.05" max="0.95" step="0.05" value="0.7"></label>
+<label for="samples">홀수 응답 수 n <output id="samples-value" for="samples">5</output><input id="samples" type="range" min="1" max="21" step="2" value="5"></label>
+<label for="correlation">오류의 관계<select id="correlation"><option value="independent">서로 독립이라고 가정</option><option value="correlated">모든 오류가 완전히 상관</option></select></label>
+</div>
+<div class="vote-line"><span>한 번 응답</span><div class="track"><div id="single-bar" class="bar before"></div></div><output id="single-value"></output></div>
+<div class="vote-line"><span>과반수 투표</span><div class="track"><div id="majority-bar" class="bar after"></div></div><output id="majority-value"></output></div>
+<p id="voting-summary" class="metric" aria-live="polite"></p>
+<details><summary>관찰할 질문과 해설</summary><p>q를 0.4로 낮추고 독립 응답 수를 늘려 보세요. 자주 틀리는 이진 판단을 모으면 오답이 강화됩니다. q=0.7에서도 완전 상관을 선택하면 반복 수를 늘려도 확률은 70% 그대로입니다. 응답 수 증가와 독립적인 정보 증가를 구별해야 합니다.</p></details>
+<p class="back"><a href="study.md#sec-14">학습 노트의 self-consistency 설명</a></p>
+</section>
+<section id="grammar" aria-labelledby="grammar-title">
+<h2 id="grammar-title">3. 허용된 문자열로 이어지는 길만 남기기</h2>
+<p>완성 라벨은 positive, neutral, negative입니다. 접두사를 입력하거나 허용 문자 버튼을 눌러 보세요. 이 실험은 문자 단위 trie이며 실제 모델의 서브워드 토크나이저를 구현한 것은 아닙니다.</p>
+<label for="prefix">현재 출력 접두사<input id="prefix" type="text" value="ne" spellcheck="false" autocomplete="off" aria-describedby="prefix-help"></label>
+<p id="prefix-help" class="meta">소문자만 입력하세요. 예: 빈 문자열, n, ne, neg, negative, banana.</p>
+<div class="grammar-words" id="grammar-words" aria-label="각 완성 라벨과 접두사의 일치"></div>
+<p>다음에 허용되는 문자</p><div class="choices" id="next-choices"></div>
+<p class="state" id="grammar-state" aria-live="polite"></p>
+<div class="choices"><button id="erase" type="button">한 글자 지우기</button><button id="reset-prefix" type="button">처음으로</button></div>
+<details><summary>관찰할 질문과 해설</summary><p>ne는 negative와 neutral로 이어질 수 있으므로 g와 u가 허용됩니다. banana는 어느 라벨의 접두사도 아니므로 허용 문자가 없고 종료도 불가능합니다. negative가 완성되면 종료가 허용되지만, 이 라벨이 입력 리뷰의 올바른 감정인지는 문법이 판단하지 않습니다.</p></details>
+<p class="back"><a href="study.md#sec-18">학습 노트의 제약 샘플링 설명</a></p>
+</section>
+<footer><p class="source">원리 출처: Hands-On Large Language Models, Chapter 6, PDF 240–244, 265–266, 274–278. 수치와 조작 실험은 별도 교육용 예제입니다.</p><nav aria-label="하단 학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="visuals.html">시각화</a><a href="lab-guide.md">실습 안내</a><a href="quiz.md">복습 문제</a></nav></footer>
+</main>
+<script>
+'use strict';
+const byId = id => document.getElementById(id);
+const normalize = values => {const total=values.reduce((a,b)=>a+b,0); return values.map(x=>x/total);};
+const entropy = values => -values.reduce((s,p)=>s+(p>0?p*Math.log2(p):0),0);
+function sampling(){
+ const t=Number(byId('temperature').value),p=Number(byId('top-p').value),k=Number(byId('top-k').value);
+ byId('temperature-value').textContent=t.toFixed(2);byId('p-value').textContent=p.toFixed(2);
+ const initial=normalize([2,1,0,-1].map(z=>Math.exp((z-2)/t)));
+ const afterK=normalize(initial.map((x,i)=>k===0||i<k?x:0));
+ let mass=0; const chosen=[];
+ for(let i=0;i<afterK.length;i++){if(afterK[i]===0)continue;chosen.push(i);mass+=afterK[i];if(mass>=p-1e-12)break;}
+ const final=normalize(afterK.map((x,i)=>chosen.includes(i)?x:0));
+ const chart=byId('probability-chart');chart.replaceChildren();
+ initial.forEach((value,i)=>{
+  const row=document.createElement('div');row.className='prob-row';
+  const label=document.createElement('strong');label.textContent='ABCD'[i];
+  const tracks=document.createElement('div');tracks.className='tracks';
+  [value,final[i]].forEach((v,j)=>{const track=document.createElement('div');track.className='track';const bar=document.createElement('div');bar.className='bar '+(j?'after':'before');bar.style.width=(100*v)+'%';track.append(bar);tracks.append(track);});
+  const values=document.createElement('div');values.className='values';values.textContent=(value*100).toFixed(1)+'% / '+(final[i]*100).toFixed(1)+'%';
+  row.append(label,tracks,values);chart.append(row);
+ });
+ chart.setAttribute('aria-label',initial.map((x,i)=>'ABCD'[i]+': 온도 적용 '+(x*100).toFixed(1)+'%, 최종 '+(final[i]*100).toFixed(1)+'%').join('; '));
+ byId('sampling-summary').textContent='최종 후보 '+chosen.map(i=>'ABCD'[i]).join(', ')+' · 엔트로피 '+entropy(initial).toFixed(3)+' → '+entropy(final).toFixed(3)+' bits';
+}
+function combination(n,k){let r=1;for(let i=1;i<=k;i++)r=r*(n-i+1)/i;return r;}
+function voting(){
+ const q=Number(byId('accuracy').value),n=Number(byId('samples').value),independent=byId('correlation').value==='independent';
+ let result=q;if(independent){result=0;for(let k=(n+1)/2;k<=n;k++)result+=combination(n,k)*q**k*(1-q)**(n-k);}
+ byId('accuracy-value').textContent=(q*100).toFixed(0)+'%';byId('samples-value').textContent=n;
+ byId('single-bar').style.width=(100*q)+'%';byId('majority-bar').style.width=(100*result)+'%';
+ byId('single-value').textContent=(100*q).toFixed(1)+'%';byId('majority-value').textContent=(100*result).toFixed(1)+'%';
+ byId('voting-summary').textContent=(independent?'독립 이진 판단 가정':'완전 상관 가정')+' · '+n+'회 응답 · 차이 '+((result-q)*100).toFixed(1)+'%p';
+}
+const labels=['positive','neutral','negative'];
+function grammar(){
+ const prefix=byId('prefix').value,matching=labels.filter(label=>label.startsWith(prefix));
+ const allowed=[...new Set(matching.filter(w=>w.length>prefix.length).map(w=>w[prefix.length]))].sort();
+ const complete=labels.includes(prefix);const words=byId('grammar-words');words.replaceChildren();
+ labels.forEach(word=>{const item=document.createElement('span');item.className='word'+(word.startsWith(prefix)?'':' inactive');if(word.startsWith(prefix)){const mark=document.createElement('mark');mark.textContent=prefix;item.append(mark,document.createTextNode(word.slice(prefix.length)));}else item.textContent=word;words.append(item);});
+ const choices=byId('next-choices');choices.replaceChildren();
+ allowed.forEach(char=>{const button=document.createElement('button');button.type='button';button.textContent=char;button.setAttribute('aria-label','다음 문자 '+char+' 추가');button.addEventListener('click',()=>{byId('prefix').value+=char;grammar();});choices.append(button);});
+ if(!allowed.length){const note=document.createElement('span');note.textContent='추가 문자 없음';choices.append(note);}
+ byId('grammar-state').textContent=complete?'완성된 허용 라벨입니다. 종료할 수 있습니다. 내용의 정답 여부는 별도 검증합니다.':matching.length?'가능한 완성 라벨 '+matching.length+'개 · 아직 종료할 수 없습니다.':'허용된 라벨로 이어질 수 없는 접두사입니다. 생성 오류로 처리하거나 이전 상태로 돌아가야 합니다.';
+}
+['temperature','top-p','top-k'].forEach(id=>byId(id).addEventListener('input',sampling));
+['accuracy','samples','correlation'].forEach(id=>byId(id).addEventListener('input',voting));
+byId('prefix').addEventListener('input',grammar);
+byId('erase').addEventListener('click',()=>{byId('prefix').value=byId('prefix').value.slice(0,-1);grammar();});
+byId('reset-prefix').addEventListener('click',()=>{byId('prefix').value='';grammar();});
+sampling();voting();grammar();
+</script>
+</body>
+</html>

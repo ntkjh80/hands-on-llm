@@ -1,0 +1,1044 @@
+[
+  {
+    "number": 1,
+    "title_en": "1. An Introduction to Large Language Models",
+    "title_ko": "언어 모델 입문",
+    "pdf_start": 23,
+    "pdf_end": 66,
+    "source": "source/ch01.txt",
+    "directory": "chapters/ch01",
+    "sections": [
+      {
+        "title": "What Is Language AI?",
+        "pdf_page": 24,
+        "depth": 1
+      },
+      {
+        "title": "A Recent History of Language AI",
+        "pdf_page": 25,
+        "depth": 1
+      },
+      {
+        "title": "Representing Language as a Bag-of-Words",
+        "pdf_page": 26,
+        "depth": 2
+      },
+      {
+        "title": "Better Representations with Dense Vector Embeddings",
+        "pdf_page": 28,
+        "depth": 2
+      },
+      {
+        "title": "Types of Embeddings",
+        "pdf_page": 31,
+        "depth": 2
+      },
+      {
+        "title": "Encoding and Decoding Context with Attention",
+        "pdf_page": 32,
+        "depth": 2
+      },
+      {
+        "title": "Attention Is All You Need",
+        "pdf_page": 37,
+        "depth": 2
+      },
+      {
+        "title": "Representation Models: Encoder-Only Models",
+        "pdf_page": 42,
+        "depth": 2
+      },
+      {
+        "title": "Generative Models: Decoder-Only Models",
+        "pdf_page": 45,
+        "depth": 2
+      },
+      {
+        "title": "The Year of Generative AI",
+        "pdf_page": 49,
+        "depth": 2
+      },
+      {
+        "title": "The Moving Definition of a “Large Language Model”",
+        "pdf_page": 50,
+        "depth": 1
+      },
+      {
+        "title": "The Training Paradigm of Large Language Models",
+        "pdf_page": 51,
+        "depth": 1
+      },
+      {
+        "title": "Large Language Model Applications: What Makes Them So Useful?",
+        "pdf_page": 53,
+        "depth": 1
+      },
+      {
+        "title": "Responsible LLM Development and Usage",
+        "pdf_page": 55,
+        "depth": 1
+      },
+      {
+        "title": "Limited Resources Are All You Need",
+        "pdf_page": 56,
+        "depth": 1
+      },
+      {
+        "title": "Interfacing with Large Language Models",
+        "pdf_page": 57,
+        "depth": 1
+      },
+      {
+        "title": "Proprietary, Private Models",
+        "pdf_page": 57,
+        "depth": 2
+      },
+      {
+        "title": "Open Models",
+        "pdf_page": 59,
+        "depth": 2
+      },
+      {
+        "title": "Open Source Frameworks",
+        "pdf_page": 60,
+        "depth": 2
+      },
+      {
+        "title": "Generating Your First Text",
+        "pdf_page": 61,
+        "depth": 1
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 64,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 2,
+    "title_en": "2. Tokens and Embeddings",
+    "title_ko": "토큰과 임베딩",
+    "pdf_start": 67,
+    "pdf_end": 115,
+    "source": "source/ch02.txt",
+    "directory": "chapters/ch02",
+    "sections": [
+      {
+        "title": "LLM Tokenization",
+        "pdf_page": 68,
+        "depth": 1
+      },
+      {
+        "title": "How Tokenizers Prepare the Inputs to the Language Model",
+        "pdf_page": 68,
+        "depth": 2
+      },
+      {
+        "title": "Downloading and Running an LLM",
+        "pdf_page": 69,
+        "depth": 2
+      },
+      {
+        "title": "How Does the Tokenizer Break Down Text?",
+        "pdf_page": 74,
+        "depth": 2
+      },
+      {
+        "title": "Word Versus Subword Versus Character Versus Byte Tokens",
+        "pdf_page": 75,
+        "depth": 2
+      },
+      {
+        "title": "Comparing Trained LLM Tokenizers",
+        "pdf_page": 78,
+        "depth": 2
+      },
+      {
+        "title": "Tokenizer Properties",
+        "pdf_page": 91,
+        "depth": 2
+      },
+      {
+        "title": "Token Embeddings",
+        "pdf_page": 94,
+        "depth": 1
+      },
+      {
+        "title": "A Language Model Holds Embeddings for the Vocabulary of Its Tokenizer",
+        "pdf_page": 95,
+        "depth": 2
+      },
+      {
+        "title": "Creating Contextualized Word Embeddings with Language Models",
+        "pdf_page": 96,
+        "depth": 2
+      },
+      {
+        "title": "Text Embeddings (for Sentences and Whole Documents)",
+        "pdf_page": 100,
+        "depth": 1
+      },
+      {
+        "title": "Word Embeddings Beyond LLMs",
+        "pdf_page": 102,
+        "depth": 1
+      },
+      {
+        "title": "Using pretrained Word Embeddings",
+        "pdf_page": 103,
+        "depth": 2
+      },
+      {
+        "title": "The Word2vec Algorithm and Contrastive Training",
+        "pdf_page": 103,
+        "depth": 2
+      },
+      {
+        "title": "Embeddings for Recommendation Systems",
+        "pdf_page": 108,
+        "depth": 1
+      },
+      {
+        "title": "Recommending Songs by Embeddings",
+        "pdf_page": 108,
+        "depth": 2
+      },
+      {
+        "title": "Training a Song Embedding Model",
+        "pdf_page": 110,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 113,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 3,
+    "title_en": "3. Looking Inside Large Language Models",
+    "title_ko": "트랜스포머 내부 구조",
+    "pdf_start": 116,
+    "pdf_end": 159,
+    "source": "source/ch03.txt",
+    "directory": "chapters/ch03",
+    "sections": [
+      {
+        "title": "An Overview of Transformer Models",
+        "pdf_page": 117,
+        "depth": 1
+      },
+      {
+        "title": "The Inputs and Outputs of a Trained Transformer LLM",
+        "pdf_page": 117,
+        "depth": 2
+      },
+      {
+        "title": "The Components of the Forward Pass",
+        "pdf_page": 121,
+        "depth": 2
+      },
+      {
+        "title": "Choosing a Single Token from the Probability Distribution (Sampling/Decoding)",
+        "pdf_page": 124,
+        "depth": 2
+      },
+      {
+        "title": "Parallel Token Processing and Context Size",
+        "pdf_page": 127,
+        "depth": 2
+      },
+      {
+        "title": "Speeding Up Generation by Caching Keys and Values",
+        "pdf_page": 129,
+        "depth": 2
+      },
+      {
+        "title": "Inside the Transformer Block",
+        "pdf_page": 132,
+        "depth": 2
+      },
+      {
+        "title": "Recent Improvements to the Transformer Architecture",
+        "pdf_page": 143,
+        "depth": 1
+      },
+      {
+        "title": "More Efficient Attention",
+        "pdf_page": 144,
+        "depth": 2
+      },
+      {
+        "title": "The Transformer Block",
+        "pdf_page": 150,
+        "depth": 2
+      },
+      {
+        "title": "Positional Embeddings (RoPE)",
+        "pdf_page": 153,
+        "depth": 2
+      },
+      {
+        "title": "Other Architectural Experiments and Improvements",
+        "pdf_page": 156,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 157,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 4,
+    "title_en": "4. Text Classification",
+    "title_ko": "텍스트 분류",
+    "pdf_start": 160,
+    "pdf_end": 191,
+    "source": "source/ch04.txt",
+    "directory": "chapters/ch04",
+    "sections": [
+      {
+        "title": "The Sentiment of Movie Reviews",
+        "pdf_page": 161,
+        "depth": 1
+      },
+      {
+        "title": "Text Classification with Representation Models",
+        "pdf_page": 163,
+        "depth": 1
+      },
+      {
+        "title": "Model Selection",
+        "pdf_page": 164,
+        "depth": 1
+      },
+      {
+        "title": "Using a Task-Specific Model",
+        "pdf_page": 166,
+        "depth": 1
+      },
+      {
+        "title": "Classification Tasks That Leverage Embeddings",
+        "pdf_page": 171,
+        "depth": 1
+      },
+      {
+        "title": "Supervised Classification",
+        "pdf_page": 172,
+        "depth": 2
+      },
+      {
+        "title": "What If We Do Not Have Labeled Data?",
+        "pdf_page": 176,
+        "depth": 2
+      },
+      {
+        "title": "Text Classification with Generative Models",
+        "pdf_page": 180,
+        "depth": 1
+      },
+      {
+        "title": "Using the Text-to-Text Transfer Transformer",
+        "pdf_page": 181,
+        "depth": 2
+      },
+      {
+        "title": "ChatGPT for Classification",
+        "pdf_page": 186,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 190,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 5,
+    "title_en": "5. Text Clustering and Topic Modeling",
+    "title_ko": "텍스트 군집화와 토픽 모델링",
+    "pdf_start": 192,
+    "pdf_end": 235,
+    "source": "source/ch05.txt",
+    "directory": "chapters/ch05",
+    "sections": [
+      {
+        "title": "ArXiv’s Articles: Computation and Language",
+        "pdf_page": 193,
+        "depth": 1
+      },
+      {
+        "title": "A Common Pipeline for Text Clustering",
+        "pdf_page": 194,
+        "depth": 1
+      },
+      {
+        "title": "Embedding Documents",
+        "pdf_page": 195,
+        "depth": 2
+      },
+      {
+        "title": "Reducing the Dimensionality of Embeddings",
+        "pdf_page": 196,
+        "depth": 2
+      },
+      {
+        "title": "Cluster the Reduced Embeddings",
+        "pdf_page": 199,
+        "depth": 2
+      },
+      {
+        "title": "Inspecting the Clusters",
+        "pdf_page": 201,
+        "depth": 2
+      },
+      {
+        "title": "From Text Clustering to Topic Modeling",
+        "pdf_page": 204,
+        "depth": 1
+      },
+      {
+        "title": "BERTopic: A Modular Topic Modeling Framework",
+        "pdf_page": 206,
+        "depth": 2
+      },
+      {
+        "title": "Adding a Special Lego Block",
+        "pdf_page": 220,
+        "depth": 2
+      },
+      {
+        "title": "The Text Generation Lego Block",
+        "pdf_page": 228,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 233,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 6,
+    "title_en": "6. Prompt Engineering",
+    "title_ko": "프롬프트 엔지니어링",
+    "pdf_start": 236,
+    "pdf_end": 279,
+    "source": "source/ch06.txt",
+    "directory": "chapters/ch06",
+    "sections": [
+      {
+        "title": "Using Text Generation Models",
+        "pdf_page": 236,
+        "depth": 1
+      },
+      {
+        "title": "Choosing a Text Generation Model",
+        "pdf_page": 236,
+        "depth": 2
+      },
+      {
+        "title": "Loading a Text Generation Model",
+        "pdf_page": 237,
+        "depth": 2
+      },
+      {
+        "title": "Controlling Model Output",
+        "pdf_page": 240,
+        "depth": 2
+      },
+      {
+        "title": "Intro to Prompt Engineering",
+        "pdf_page": 244,
+        "depth": 1
+      },
+      {
+        "title": "The Basic Ingredients of a Prompt",
+        "pdf_page": 244,
+        "depth": 2
+      },
+      {
+        "title": "Instruction-Based Prompting",
+        "pdf_page": 247,
+        "depth": 2
+      },
+      {
+        "title": "Advanced Prompt Engineering",
+        "pdf_page": 250,
+        "depth": 1
+      },
+      {
+        "title": "The Potential Complexity of a Prompt",
+        "pdf_page": 251,
+        "depth": 2
+      },
+      {
+        "title": "In-Context Learning: Providing Examples",
+        "pdf_page": 255,
+        "depth": 2
+      },
+      {
+        "title": "Chain Prompting: Breaking up the Problem",
+        "pdf_page": 257,
+        "depth": 2
+      },
+      {
+        "title": "Reasoning with Generative Models",
+        "pdf_page": 260,
+        "depth": 1
+      },
+      {
+        "title": "Chain-of-Thought: Think Before Answering",
+        "pdf_page": 261,
+        "depth": 2
+      },
+      {
+        "title": "Self-Consistency: Sampling Outputs",
+        "pdf_page": 265,
+        "depth": 2
+      },
+      {
+        "title": "Tree-of-Thought: Exploring Intermediate Steps",
+        "pdf_page": 266,
+        "depth": 2
+      },
+      {
+        "title": "Output Verification",
+        "pdf_page": 270,
+        "depth": 1
+      },
+      {
+        "title": "Providing Examples",
+        "pdf_page": 272,
+        "depth": 2
+      },
+      {
+        "title": "Grammar: Constrained Sampling",
+        "pdf_page": 274,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 278,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 7,
+    "title_en": "7. Advanced Text Generation Techniques and Tools",
+    "title_ko": "고급 텍스트 생성과 도구",
+    "pdf_start": 280,
+    "pdf_end": 315,
+    "source": "source/ch07.txt",
+    "directory": "chapters/ch07",
+    "sections": [
+      {
+        "title": "Model I/O: Loading Quantized Models with LangChain",
+        "pdf_page": 281,
+        "depth": 1
+      },
+      {
+        "title": "Chains: Extending the Capabilities of LLMs",
+        "pdf_page": 284,
+        "depth": 1
+      },
+      {
+        "title": "A Single Link in the Chain: Prompt Template",
+        "pdf_page": 285,
+        "depth": 2
+      },
+      {
+        "title": "A Chain with Multiple Prompts",
+        "pdf_page": 289,
+        "depth": 2
+      },
+      {
+        "title": "Memory: Helping LLMs to Remember Conversations",
+        "pdf_page": 293,
+        "depth": 1
+      },
+      {
+        "title": "Conversation Buffer",
+        "pdf_page": 295,
+        "depth": 2
+      },
+      {
+        "title": "Windowed Conversation Buffer",
+        "pdf_page": 297,
+        "depth": 2
+      },
+      {
+        "title": "Conversation Summary",
+        "pdf_page": 300,
+        "depth": 2
+      },
+      {
+        "title": "Agents: Creating a System of LLMs",
+        "pdf_page": 306,
+        "depth": 1
+      },
+      {
+        "title": "The Driving Power Behind Agents: Step-by-step Reasoning",
+        "pdf_page": 307,
+        "depth": 2
+      },
+      {
+        "title": "ReAct in LangChain",
+        "pdf_page": 310,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 314,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 8,
+    "title_en": "8. Semantic Search and Retrieval-Augmented Generation",
+    "title_ko": "시맨틱 검색과 RAG",
+    "pdf_start": 316,
+    "pdf_end": 359,
+    "source": "source/ch08.txt",
+    "directory": "chapters/ch08",
+    "sections": [
+      {
+        "title": "Overview of Semantic Search and RAG",
+        "pdf_page": 317,
+        "depth": 1
+      },
+      {
+        "title": "Semantic Search with Language Models",
+        "pdf_page": 319,
+        "depth": 1
+      },
+      {
+        "title": "Dense Retrieval",
+        "pdf_page": 319,
+        "depth": 2
+      },
+      {
+        "title": "Reranking",
+        "pdf_page": 336,
+        "depth": 2
+      },
+      {
+        "title": "Retrieval Evaluation Metrics",
+        "pdf_page": 341,
+        "depth": 2
+      },
+      {
+        "title": "Retrieval-Augmented Generation (RAG)",
+        "pdf_page": 349,
+        "depth": 1
+      },
+      {
+        "title": "From Search to RAG",
+        "pdf_page": 349,
+        "depth": 2
+      },
+      {
+        "title": "Example: Grounded Generation with an LLM API",
+        "pdf_page": 351,
+        "depth": 2
+      },
+      {
+        "title": "Example: RAG with Local Models",
+        "pdf_page": 352,
+        "depth": 2
+      },
+      {
+        "title": "Advanced RAG Techniques",
+        "pdf_page": 355,
+        "depth": 2
+      },
+      {
+        "title": "RAG Evaluation",
+        "pdf_page": 357,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 358,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 9,
+    "title_en": "9. Multimodal Large Language Models",
+    "title_ko": "멀티모달 언어 모델",
+    "pdf_start": 360,
+    "pdf_end": 398,
+    "source": "source/ch09.txt",
+    "directory": "chapters/ch09",
+    "sections": [
+      {
+        "title": "Transformers for Vision",
+        "pdf_page": 361,
+        "depth": 1
+      },
+      {
+        "title": "Multimodal Embedding Models",
+        "pdf_page": 364,
+        "depth": 1
+      },
+      {
+        "title": "CLIP: Connecting Text and Images",
+        "pdf_page": 366,
+        "depth": 2
+      },
+      {
+        "title": "How Can CLIP Generate Multimodal Embeddings?",
+        "pdf_page": 367,
+        "depth": 2
+      },
+      {
+        "title": "OpenCLIP",
+        "pdf_page": 370,
+        "depth": 2
+      },
+      {
+        "title": "Making Text Generation Models Multimodal",
+        "pdf_page": 377,
+        "depth": 1
+      },
+      {
+        "title": "BLIP-2: Bridging the Modality Gap",
+        "pdf_page": 378,
+        "depth": 2
+      },
+      {
+        "title": "Preprocessing Multimodal Inputs",
+        "pdf_page": 383,
+        "depth": 2
+      },
+      {
+        "title": "Use Case 1: Image Captioning",
+        "pdf_page": 387,
+        "depth": 2
+      },
+      {
+        "title": "Use Case 2: Multimodal Chat-Based Prompting",
+        "pdf_page": 391,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 395,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 10,
+    "title_en": "10. Creating Text Embedding Models",
+    "title_ko": "텍스트 임베딩 모델 만들기",
+    "pdf_start": 399,
+    "pdf_end": 445,
+    "source": "source/ch10.txt",
+    "directory": "chapters/ch10",
+    "sections": [
+      {
+        "title": "Embedding Models",
+        "pdf_page": 399,
+        "depth": 1
+      },
+      {
+        "title": "What Is Contrastive Learning?",
+        "pdf_page": 402,
+        "depth": 1
+      },
+      {
+        "title": "SBERT",
+        "pdf_page": 404,
+        "depth": 1
+      },
+      {
+        "title": "Creating an Embedding Model",
+        "pdf_page": 408,
+        "depth": 1
+      },
+      {
+        "title": "Generating Contrastive Examples",
+        "pdf_page": 408,
+        "depth": 2
+      },
+      {
+        "title": "Train Model",
+        "pdf_page": 410,
+        "depth": 2
+      },
+      {
+        "title": "In-Depth Evaluation",
+        "pdf_page": 414,
+        "depth": 2
+      },
+      {
+        "title": "Loss Functions",
+        "pdf_page": 416,
+        "depth": 2
+      },
+      {
+        "title": "Fine-Tuning an Embedding Model",
+        "pdf_page": 426,
+        "depth": 1
+      },
+      {
+        "title": "Supervised",
+        "pdf_page": 426,
+        "depth": 2
+      },
+      {
+        "title": "Augmented SBERT",
+        "pdf_page": 429,
+        "depth": 2
+      },
+      {
+        "title": "Unsupervised Learning",
+        "pdf_page": 435,
+        "depth": 1
+      },
+      {
+        "title": "Transformer-Based Sequential Denoising Auto-Encoder",
+        "pdf_page": 435,
+        "depth": 2
+      },
+      {
+        "title": "Using TSDAE for Domain Adaptation",
+        "pdf_page": 441,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 443,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 11,
+    "title_en": "11. Fine-Tuning Representation Models for Classification",
+    "title_ko": "표현 모델 미세 조정",
+    "pdf_start": 446,
+    "pdf_end": 486,
+    "source": "source/ch11.txt",
+    "directory": "chapters/ch11",
+    "sections": [
+      {
+        "title": "Supervised Classification",
+        "pdf_page": 446,
+        "depth": 1
+      },
+      {
+        "title": "Fine-Tuning a Pretrained BERT Model",
+        "pdf_page": 449,
+        "depth": 2
+      },
+      {
+        "title": "Freezing Layers",
+        "pdf_page": 452,
+        "depth": 2
+      },
+      {
+        "title": "Few-Shot Classification",
+        "pdf_page": 459,
+        "depth": 1
+      },
+      {
+        "title": "SetFit: Efficient Fine-Tuning with Few Training Examples",
+        "pdf_page": 460,
+        "depth": 2
+      },
+      {
+        "title": "Fine-Tuning for Few-Shot Classification",
+        "pdf_page": 464,
+        "depth": 2
+      },
+      {
+        "title": "Continued Pretraining with Masked Language Modeling",
+        "pdf_page": 468,
+        "depth": 1
+      },
+      {
+        "title": "Named-Entity Recognition",
+        "pdf_page": 475,
+        "depth": 1
+      },
+      {
+        "title": "Preparing Data for Named-Entity Recognition",
+        "pdf_page": 476,
+        "depth": 2
+      },
+      {
+        "title": "Fine-Tuning for Named-Entity Recognition",
+        "pdf_page": 483,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 485,
+        "depth": 1
+      }
+    ]
+  },
+  {
+    "number": 12,
+    "title_en": "12. Fine-Tuning Generation Models",
+    "title_ko": "생성 모델 미세 조정",
+    "pdf_start": 487,
+    "pdf_end": 535,
+    "source": "source/ch12.txt",
+    "directory": "chapters/ch12",
+    "sections": [
+      {
+        "title": "The Three LLM Training Steps: Pretraining, Supervised Fine-Tuning, and Preference Tuning",
+        "pdf_page": 487,
+        "depth": 1
+      },
+      {
+        "title": "Supervised Fine-Tuning (SFT)",
+        "pdf_page": 489,
+        "depth": 1
+      },
+      {
+        "title": "Full Fine-Tuning",
+        "pdf_page": 490,
+        "depth": 2
+      },
+      {
+        "title": "Parameter-Efficient Fine-Tuning (PEFT)",
+        "pdf_page": 492,
+        "depth": 2
+      },
+      {
+        "title": "Instruction Tuning with QLoRA",
+        "pdf_page": 503,
+        "depth": 1
+      },
+      {
+        "title": "Templating Instruction Data",
+        "pdf_page": 503,
+        "depth": 2
+      },
+      {
+        "title": "Model Quantization",
+        "pdf_page": 505,
+        "depth": 2
+      },
+      {
+        "title": "LoRA Configuration",
+        "pdf_page": 506,
+        "depth": 2
+      },
+      {
+        "title": "Training Configuration",
+        "pdf_page": 508,
+        "depth": 2
+      },
+      {
+        "title": "Training",
+        "pdf_page": 509,
+        "depth": 2
+      },
+      {
+        "title": "Merge Weights",
+        "pdf_page": 510,
+        "depth": 2
+      },
+      {
+        "title": "Evaluating Generative Models",
+        "pdf_page": 511,
+        "depth": 1
+      },
+      {
+        "title": "Word-Level Metrics",
+        "pdf_page": 512,
+        "depth": 2
+      },
+      {
+        "title": "Benchmarks",
+        "pdf_page": 512,
+        "depth": 2
+      },
+      {
+        "title": "Leaderboards",
+        "pdf_page": 515,
+        "depth": 2
+      },
+      {
+        "title": "Automated Evaluation",
+        "pdf_page": 516,
+        "depth": 2
+      },
+      {
+        "title": "Human Evaluation",
+        "pdf_page": 516,
+        "depth": 2
+      },
+      {
+        "title": "Preference-Tuning / Alignment / RLHF",
+        "pdf_page": 518,
+        "depth": 1
+      },
+      {
+        "title": "Automating Preference Evaluation Using Reward Models",
+        "pdf_page": 519,
+        "depth": 1
+      },
+      {
+        "title": "The Inputs and Outputs of a Reward Model",
+        "pdf_page": 520,
+        "depth": 2
+      },
+      {
+        "title": "Training a Reward Model",
+        "pdf_page": 521,
+        "depth": 2
+      },
+      {
+        "title": "Training No Reward Model",
+        "pdf_page": 526,
+        "depth": 2
+      },
+      {
+        "title": "Preference Tuning with DPO",
+        "pdf_page": 528,
+        "depth": 1
+      },
+      {
+        "title": "Templating Alignment Data",
+        "pdf_page": 528,
+        "depth": 2
+      },
+      {
+        "title": "Model Quantization",
+        "pdf_page": 529,
+        "depth": 2
+      },
+      {
+        "title": "Training Configuration",
+        "pdf_page": 530,
+        "depth": 2
+      },
+      {
+        "title": "Training",
+        "pdf_page": 531,
+        "depth": 2
+      },
+      {
+        "title": "Summary",
+        "pdf_page": 533,
+        "depth": 1
+      }
+    ]
+  }
+]

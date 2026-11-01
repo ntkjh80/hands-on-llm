@@ -1,0 +1,52 @@
+{
+  "chapter": 10,
+  "status": "complete",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "coverage.json",
+    "source-map.json",
+    ".gitignore",
+    "status.json"
+  ],
+  "lab_command": "python3 chapters/ch10/lab.py",
+  "validation": [
+    "원문 PDF 399–445쪽의 전체 추출본을 읽고 주요 구조 그림 407·437·443쪽을 렌더링하여 확인",
+    "source-map 원문 15개 절과 coverage.json 일치 확인",
+    "15개 원문 그림 번호와 실제 캡션 페이지 일치 확인",
+    "Markdown 내부 링크 및 명시적 앵커 오류 0건",
+    "기본 Python 실습 실행 성공 및 lab-output.txt 저장",
+    "MNR 역전파의 수치 미분 검산 오차 약 7.38e-11",
+    "CLI --steps 0 및 --help 실행 성공",
+    "HTML inline JavaScript 구문 검사 통과",
+    "로컬 Chrome headless에서 각도·negative 유형·배치 크기·temperature·삭제율 상호작용 확인",
+    "브라우저 JavaScript 오류 0건",
+    "1280px 데스크톱 및 390px 모바일 화면 캡처 확인, 모바일 가로 넘침 없음"
+  ],
+  "statistics": {
+    "source_sections": 15,
+    "source_figures": 15,
+    "quiz_questions": 16,
+    "interactive_experiments": 3,
+    "mermaid_diagrams": 5,
+    "study_characters": 37473,
+    "lecture_script_characters": 10134
+  },
+  "limitations": [
+    "원문 BERT·MiniLM·MTEB·TSDAE GPU 학습은 실행하지 않았으며 책의 수치를 재현 결과로 표시하지 않음.",
+    "CPU 실습은 작은 단어 lookup 평균 인코더의 훈련 적합을 보여주며 새로운 문장에 대한 일반화 성능은 측정하지 않음.",
+    "Mermaid의 GitHub 실제 렌더러 화면 검증은 수행하지 않았음."
+  ],
+  "git_notes": [
+    "학습 문서 기본 형식은 Markdown이며 자료 간 링크는 상대경로.",
+    "시각화 HTML은 외부 네트워크 없이 동작하며 공용 로컬 CSS를 사용.",
+    "원문 PDF 렌더링과 QA 화면은 챕터 .gitignore의 .qa/로 제외."
+  ]
+}

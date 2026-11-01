@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4장 텍스트 분류 시각 실험</title>
+<link rel="stylesheet" href="../../assets/study.css">
+<style>
+main{max-width:1080px}.eyebrow{color:#175e73;font-size:.85rem;letter-spacing:.06em}.experiment{margin:40px 0 60px}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 28px}.controls label{margin:0}.controls input{display:block;width:100%}.panel-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,1fr);gap:28px;align-items:start}.plot{width:100%;background:#f7fafb;border-radius:10px}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.metric{background:#eaf4f5;padding:12px 16px;border-radius:8px}.metric strong{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums}.metric span{font-size:.82rem}.matrix{border-collapse:separate;border-spacing:5px;table-layout:fixed}.matrix td{text-align:center;border:0;background:#edf1f4;font-variant-numeric:tabular-nums}.matrix th{font-size:.78rem;padding:6px;background:none;border:0}.matrix td b{display:block;font-size:1.5rem}.matrix .right{background:#dcefeb}.matrix .wrong{background:#fff0dc}.detail{padding:12px 16px;background:#f2f5f7;border-radius:8px}.legend{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.85rem;margin:10px 0}.swatch{display:inline-block;width:12px;height:12px;margin-right:5px}.axis{font-size:12px;fill:#536271}.label{font-size:13px;fill:#172332}.scorebar{height:14px;background:#dce5e9;border-radius:3px;overflow:hidden}.scorebar>div{height:100%;background:#175e73;transition:width .15s}.label-result{font-size:1.15rem;font-weight:600}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}select{width:100%;padding:7px;border:1px solid #d7e0e5;border-radius:6px;background:white}output{font-variant-numeric:tabular-nums}section h2{margin-top:2rem}.table-scroll{overflow:auto}svg text{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif}@media(max-width:720px){.plot .axis{font-size:18px}.plot .label{font-size:19px}.panel-grid{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.matrix{display:table}.matrix td{padding:6px}.matrix th{font-size:.72rem}}@media(prefers-reduced-motion:reduce){.scorebar>div{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<nav aria-label="학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lecture-script.md">강의 대본</a><a href="lab-guide.md">실습 안내</a><a href="quiz.md">복습 문제</a></nav>
+<p class="eyebrow">CHAPTER 04 · TEXT CLASSIFICATION</p>
+<h1>숫자를 움직이며 이해하는 텍스트 분류</h1>
+<p class="lead">임계값은 오류의 종류를 바꾸고, 라벨 벡터는 제로샷 분류의 기준점을 정합니다.</p>
+<p class="note">모든 점수·벡터는 원리를 보여주기 위해 만든 교육용 가상 데이터입니다. 실제 LLM 출력이나 영화 리뷰 벤치마크 결과가 아닙니다. 외부 연결 없이 동작합니다.</p>
+<section class="experiment" aria-labelledby="threshold-title">
+<h2 id="threshold-title">1. 임계값과 혼동 행렬</h2>
+<p>리뷰 10개의 점수는 고정되어 있습니다. 임계값 이상을 긍정으로 분류할 때 어떤 문서가 넘어가는지 관찰하세요.</p>
+<div class="controls"><label for="threshold">긍정 결정 임계값 <output id="threshold-value">0.50</output><input id="threshold" type="range" min="0" max="1" step="0.05" value="0.5"></label></div>
+<div class="legend"><span><i class="swatch" style="background:#175e73"></i>원형: 실제 긍정</span><span><i class="swatch" style="background:#b47026"></i>사각형: 실제 부정</span><span>점선 오른쪽: 긍정 예측</span></div>
+<div class="panel-grid">
+<div>
+<svg id="threshold-plot" class="plot" viewBox="0 0 540 360" role="img" aria-labelledby="plot-title plot-desc"><title id="plot-title">리뷰별 점수와 움직이는 결정 임계값</title><desc id="plot-desc">가로축은 교육용 긍정 점수, 세로축은 리뷰 번호입니다. 실제 긍정은 원, 실제 부정은 사각형입니다.</desc></svg>
+<div id="threshold-note" class="detail" aria-live="polite"></div>
+</div>
+<div>
+<table class="matrix" aria-label="행은 실제, 열은 예측인 혼동 행렬"><thead><tr><th>실제 ↓ / 예측 →</th><th>부정</th><th>긍정</th></tr></thead><tbody><tr><th>부정</th><td class="right">TN<b id="tn">3</b></td><td class="wrong">FP<b id="fp">2</b></td></tr><tr><th>긍정</th><td class="wrong">FN<b id="fn">2</b></td><td class="right">TP<b id="tp">3</b></td></tr></tbody></table>
+<div class="metrics"><div class="metric"><span>긍정 precision</span><strong id="precision">0.600</strong></div><div class="metric"><span>긍정 recall</span><strong id="recall">0.600</strong></div><div class="metric"><span>긍정 F1</span><strong id="f1">0.600</strong></div><div class="metric"><span>accuracy</span><strong id="accuracy">0.600</strong></div></div>
+<p class="meta">분모가 0인 precision·recall·F1은 이 실험에서 0으로 표시합니다. 임계값 선택은 실제 과제에서는 validation으로 해야 합니다.</p>
+</div>
+</div>
+<details><summary>확인할 질문</summary><p>임계값을 0.50에서 0.80으로 올렸을 때 FP와 FN이 어떻게 변하나요? 임계값 0에서는 recall이 1인데 왜 정확도도 1이 되지는 않나요? 0.95에서 1.00으로 올리면 긍정 예측이 사라지며 precision은 수학적으로 정의되지 않습니다. 이 실험의 표시 정책과 구별해 설명하세요.</p></details>
+</section>
+<section class="experiment" aria-labelledby="cosine-title">
+<h2 id="cosine-title">2. 문서와 라벨 벡터의 방향</h2>
+<p>문서의 방향과 길이를 바꾸고 두 라벨과의 코사인 유사도를 비교합니다. 라벨 좌표 선택은 설명 문구가 달라졌을 때 기준점이 바뀔 수 있다는 원리를 나타냅니다.</p>
+<div class="controls">
+<label for="angle">문서 방향 <output id="angle-value">37°</output><input id="angle" type="range" min="-180" max="180" step="1" value="37"></label>
+<label for="length">문서 길이 <output id="length-value">1.00</output><input id="length" type="range" min="0.25" max="2" step="0.05" value="1"></label>
+<label for="labels">가상 라벨 좌표<select id="labels"><option value="basic">설명 A: 긍정 0°, 부정 90°</option><option value="changed">설명 B: 긍정 30°, 부정 145°</option></select></label>
+</div>
+<div class="panel-grid">
+<svg id="cosine-plot" class="plot" viewBox="0 0 540 410" role="img" aria-labelledby="cos-title cos-desc"><title id="cos-title">문서와 두 라벨의 2차원 벡터</title><desc id="cos-desc">문서는 청색 실선, 긍정 라벨은 녹색 점선, 부정 라벨은 황갈색 점선입니다. 좌표는 실제 모델 임베딩이 아닙니다.</desc></svg>
+<div>
+<div class="detail"><span>문서 좌표</span><p id="vector-value"></p><span>최대 유사도 라벨</span><p class="label-result" id="winner" aria-live="polite"></p></div>
+<label>긍정 라벨과의 코사인 <output id="positive-sim"></output></label><div class="scorebar" aria-hidden="true"><div id="positive-bar"></div></div>
+<label>부정 라벨과의 코사인 <output id="negative-sim"></output></label><div class="scorebar" aria-hidden="true"><div id="negative-bar" style="background:#b47026"></div></div>
+<p class="meta">막대는 −1부터 1까지의 값을 0~100% 길이에 대응시킵니다. 유사도는 확률이 아닙니다.</p>
+<p id="cosine-note" class="detail"></p>
+</div>
+</div>
+<details><summary>확인할 질문</summary><p>방향을 고정하고 길이만 바꾸면 어떤 값이 유지되나요? 설명 A에서 문서 방향이 45°일 때는 두 유사도가 같습니다. 이 실험은 동점을 표시하며 임의로 정답을 확정하지 않습니다. 원문처럼 argmax를 사용한다면 후보 순서가 동점 결과에 영향을 줄 수 있습니다.</p></details>
+</section>
+<section class="experiment" aria-labelledby="parsing-title">
+<h2 id="parsing-title">3. 생성 문자열을 라벨로 읽기</h2>
+<p>문자열을 선택해 허용 집합 검사와 무조건적인 <code>else → 긍정</code>의 차이를 확인하세요. 이 문자열은 사람이 만든 테스트 입력입니다.</p>
+<label for="raw">생성 출력 역할의 가상 문자열<select id="raw"><option value="positive">positive</option><option value="negative">negative</option><option value=" Positive ">␠Positive␠</option><option value="0">0</option><option value="mixed" selected>mixed</option><option value="negative.">negative.</option><option value="2">2</option></select></label>
+<div class="metrics"><div class="metric"><span>정규화 후 허용 집합 검사</span><strong id="strict-result">보류</strong></div><div class="metric"><span>negative가 아니면 모두 긍정</span><strong id="naive-result">긍정</strong></div></div>
+<p id="parse-note" class="detail" aria-live="polite"></p>
+</section>
+<footer><p class="source">학습 근거: 제공된 책 4장 PDF 166–190쪽. 도표·수치 실험은 직접 만든 보충 자료입니다.</p><nav aria-label="다음 학습"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="visuals.html">시각화</a><a href="lab-guide.md">실습 안내</a><a href="quiz.md">복습 문제</a></nav></footer>
+</main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const svgNS='http://www.w3.org/2000/svg';
+function el(tag,attrs={},text=''){const e=document.createElementNS(svgNS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,String(v));if(text)e.textContent=text;return e;}
+function add(svg,tag,attrs,text){const e=el(tag,attrs,text);svg.appendChild(e);return e;}
+function clearPlot(svg){for(const e of [...svg.children])if(!['title','desc'].includes(e.tagName))e.remove();}
+const reviews=[{p:.95,y:1},{p:.80,y:1},{p:.75,y:0},{p:.65,y:1},{p:.55,y:0},{p:.45,y:1},{p:.35,y:0},{p:.25,y:0},{p:.20,y:1},{p:.10,y:0}];
+function ratio(a,b){return b?a/b:0;}
+function threshold(){
+const t=+$('threshold').value; $('threshold-value').textContent=t.toFixed(2);
+let tp=0,fp=0,fn=0,tn=0;
+for(const r of reviews){const pred=r.p>=t;if(r.y&&pred)tp++;else if(!r.y&&pred)fp++;else if(r.y)fn++;else tn++;}
+for(const [id,value] of Object.entries({tp,fp,fn,tn}))$(id).textContent=value;
+const p=ratio(tp,tp+fp),r=ratio(tp,tp+fn);
+for(const [id,value] of Object.entries({precision:p,recall:r,f1:ratio(2*p*r,p+r),accuracy:(tp+tn)/10}))$(id).textContent=value.toFixed(3);
+$('threshold-note').textContent=`긍정 예측 ${tp+fp}개 중 정답 ${tp}개 · 실제 긍정 5개 중 발견 ${tp}개`;
+const svg=$('threshold-plot'); clearPlot(svg);
+const left=74,right=492,top=32,bottom=292,x=v=>left+v*(right-left);
+add(svg,'rect',{x:x(t),y:top-14,width:right-x(t),height:bottom-top+30,fill:'#eaf4f5'});
+for(let i=0;i<=4;i++){const v=i/4;add(svg,'line',{x1:x(v),y1:top-15,x2:x(v),y2:bottom+16,stroke:'#d7e0e5'});add(svg,'text',{x:x(v),y:bottom+40,'text-anchor':'middle',class:'axis'},v.toFixed(2));}
+reviews.forEach((r,i)=>{const y=top+i*(bottom-top)/9;add(svg,'text',{x:56,y:y+5,'text-anchor':'end',class:'label'},`R${i+1}`);const color=r.y?'#175e73':'#b47026';if(r.y)add(svg,'circle',{cx:x(r.p),cy:y,r:7,fill:color});else add(svg,'rect',{x:x(r.p)-7,y:y-7,width:14,height:14,fill:color});add(svg,'text',{x:x(r.p)+12,y:y+4,class:'axis'},r.p.toFixed(2));});
+add(svg,'line',{x1:x(t),y1:top-18,x2:x(t),y2:bottom+18,stroke:'#172332','stroke-width':2,'stroke-dasharray':'6 4'});
+add(svg,'text',{x:(left+right)/2,y:350,'text-anchor':'middle',class:'label'},'교육용 긍정 점수');
+}
+function cosine(){
+const a=+$('angle').value,len=+$('length').value,changed=$('labels').value==='changed';
+const pos=changed?30:0,neg=changed?145:90,rad=d=>d*Math.PI/180;
+const xp=len*Math.cos(rad(a)),yp=len*Math.sin(rad(a));
+const ps=Math.cos(rad(a-pos)),ns=Math.cos(rad(a-neg));
+$('angle-value').textContent=`${a}°`;$('length-value').textContent=len.toFixed(2);
+$('vector-value').textContent=`(${xp.toFixed(3)}, ${yp.toFixed(3)})`;
+$('positive-sim').textContent=ps.toFixed(3);$('negative-sim').textContent=ns.toFixed(3);
+$('positive-bar').style.width=`${(ps+1)*50}%`;$('negative-bar').style.width=`${(ns+1)*50}%`;
+$('winner').textContent=Math.abs(ps-ns)<1e-9?'동점':ps>ns?'긍정':'부정';
+$('cosine-note').textContent=`현재 길이 ${len.toFixed(2)}: 길이를 양수 배로 바꿔도 두 코사인 유사도는 유지됩니다.`;
+const svg=$('cosine-plot');clearPlot(svg);const cx=270,cy=212,s=77;
+add(svg,'line',{x1:60,y1:20,x2:82,y2:20,stroke:'#175e73','stroke-width':3});add(svg,'text',{x:88,y:25,class:'label'},'문서');
+add(svg,'circle',{cx:174,cy:20,r:5,fill:'#367660'});add(svg,'text',{x:186,y:25,class:'label'},'긍정');
+add(svg,'rect',{x:267,y:15,width:10,height:10,fill:'#b47026'});add(svg,'text',{x:285,y:25,class:'label'},'부정');
+add(svg,'line',{x1:82,y1:cy,x2:460,y2:cy,stroke:'#bdcbd3'});add(svg,'line',{x1:cx,y1:30,x2:cx,y2:394,stroke:'#bdcbd3'});
+for(const v of [-2,-1,1,2]){add(svg,'text',{x:cx+v*s,y:cy+18,'text-anchor':'middle',class:'axis'},String(v));add(svg,'text',{x:cx-12,y:cy-v*s+4,'text-anchor':'end',class:'axis'},String(v));}
+add(svg,'circle',{cx,cy,r:s,fill:'none',stroke:'#d7e0e5','stroke-dasharray':'3 4'});
+add(svg,'text',{x:468,y:cy+5,class:'axis'},'x₁');add(svg,'text',{x:cx+10,y:48,class:'axis'},'x₂');
+function arrow(angle,length,color,label,dashed){const x=cx+s*length*Math.cos(rad(angle)),y=cy-s*length*Math.sin(rad(angle));add(svg,'line',{x1:cx,y1:cy,x2:x,y2:y,stroke:color,'stroke-width':3,'stroke-dasharray':dashed?'7 5':'none'});if(label==='부정')add(svg,'rect',{x:x-5,y:y-5,width:10,height:10,fill:color});else add(svg,'circle',{cx:x,cy:y,r:5,fill:color});}
+arrow(pos,1,'#367660','긍정',true);arrow(neg,1,'#b47026','부정',true);arrow(a,len,'#175e73','문서',false);add(svg,'circle',{cx,cy,r:4,fill:'#172332'});
+}
+function parsing(){const raw=$('raw').value;const normalized=raw.trim().toLowerCase();const map={positive:1,negative:0,'0':0,'1':1};const valid=Object.prototype.hasOwnProperty.call(map,normalized);const strict=valid?map[normalized]:null;const naive=raw==='negative'?0:1;
+$('strict-result').textContent=strict===null?'보류':strict?'긍정':'부정';$('naive-result').textContent=naive?'긍정':'부정';$('parse-note').textContent=valid?`정규화된 ${JSON.stringify(normalized)}는 허용 집합에 있습니다. 원본 문자열도 보관합니다.`:`정규화된 ${JSON.stringify(normalized)}는 허용 집합에 없습니다. 이 실험에서는 정답을 추측하지 않고 형식 실패로 기록합니다.`;}
+$('threshold').addEventListener('input',threshold);for(const id of ['angle','length'])$(id).addEventListener('input',cosine);$('labels').addEventListener('change',cosine);$('raw').addEventListener('change',parsing);threshold();cosine();parsing();
+})();
+</script>
+</body>
+</html>

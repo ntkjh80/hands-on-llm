@@ -1,0 +1,337 @@
+{
+  "chapter": 2,
+  "source_pdf_pages": [
+    67,
+    115
+  ],
+  "sections": [
+    {
+      "source_title": "LLM Tokenization",
+      "pdf_page": 68,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "토큰의 정의",
+        "입력과 순차 생성의 단위",
+        "토큰화와 임베딩 구별"
+      ]
+    },
+    {
+      "source_title": "How Tokenizers Prepare the Inputs to the Language Model",
+      "pdf_page": 68,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "문자열 분할",
+        "ID 매핑",
+        "ID와 의미 좌표 구별",
+        "마스크와 부가 입력"
+      ]
+    },
+    {
+      "source_title": "Downloading and Running an LLM",
+      "pdf_page": 69,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "Phi-3 원문 실행 흐름",
+        "input_ids와 장치",
+        "max_new_tokens",
+        "특수 토큰과 디코딩",
+        "생성 부분 구분"
+      ]
+    },
+    {
+      "source_title": "How Does the Tokenizer Break Down Text?",
+      "pdf_page": 74,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "알고리즘·설정·학습 데이터",
+        "토크나이저 학습과 모델 학습",
+        "BPE 병합 보충",
+        "출력 디코딩"
+      ]
+    },
+    {
+      "source_title": "Word Versus Subword Versus Character Versus Byte Tokens",
+      "pdf_page": 75,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "단어·서브워드·문자·바이트",
+        "어휘 밖 표현",
+        "컨텍스트 길이",
+        "UTF-8와 Unicode",
+        "바이트 fallback과 byte-level 구별"
+      ]
+    },
+    {
+      "source_title": "Comparing Trained LLM Tokenizers",
+      "pdf_page": 78,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "BERT uncased/cased",
+        "GPT-2",
+        "Flan-T5와 SentencePiece",
+        "GPT-4",
+        "StarCoder2",
+        "Galactica",
+        "Phi-3/Llama 2",
+        "어휘 크기",
+        "특수 토큰",
+        "코드·대소문자·공백·숫자·다국어"
+      ]
+    },
+    {
+      "source_title": "Tokenizer Properties",
+      "pdf_page": 91,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "알고리즘",
+        "어휘 크기",
+        "특수 토큰",
+        "대소문자 정책",
+        "대상 데이터 영역",
+        "들여쓰기 표현"
+      ]
+    },
+    {
+      "source_title": "Token Embeddings",
+      "pdf_page": 94,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "숫자 ID에서 학습 벡터로",
+        "분산 표현",
+        "언어 패턴과 사실성 구별",
+        "RAG 연결"
+      ]
+    },
+    {
+      "source_title": "A Language Model Holds Embeddings for the Vocabulary of Its Tokenizer",
+      "pdf_page": 95,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "어휘와 임베딩 행렬",
+        "lookup",
+        "무작위 초기화와 학습",
+        "모델/토크나이저 호환",
+        "메모리 손계산"
+      ]
+    },
+    {
+      "source_title": "Creating Contextualized Word Embeddings with Language Models",
+      "pdf_page": 96,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "정적/문맥 벡터",
+        "DeBERTa 예제",
+        "[B,T,d] 모양",
+        "특수 토큰",
+        "NER·추출 요약·멀티모달 연결",
+        "원문 체크포인트 불일치 점검"
+      ]
+    },
+    {
+      "source_title": "Text Embeddings (for Sentences and Whole Documents)",
+      "pdf_page": 100,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "텍스트 전체의 벡터",
+        "평균 풀링",
+        "마스크",
+        "목적에 맞는 학습",
+        "all-mpnet-base-v2의 원문 768차원",
+        "코사인 보충",
+        "입력 길이와 정보 희석"
+      ]
+    },
+    {
+      "source_title": "Word Embeddings Beyond LLMs",
+      "pdf_page": 102,
+      "target": "study.md#sec-12",
+      "covered_topics": [
+        "LLM 이전의 임베딩",
+        "Word2vec/GloVe/fastText",
+        "표현 대상 단위",
+        "추천 등 다른 영역"
+      ]
+    },
+    {
+      "source_title": "Using pretrained Word Embeddings",
+      "pdf_page": 103,
+      "target": "study.md#sec-13",
+      "covered_topics": [
+        "Gensim 사전 학습 GloVe",
+        "50차원",
+        "최근접 단어와 관계",
+        "자기 유사도",
+        "미지어·다의어 한계"
+      ]
+    },
+    {
+      "source_title": "The Word2vec Algorithm and Contrastive Training",
+      "pdf_page": 103,
+      "target": "study.md#sec-14",
+      "covered_topics": [
+        "슬라이딩 윈도우",
+        "양성 쌍",
+        "음성 샘플링",
+        "대조 학습 직관",
+        "false negative",
+        "두 임베딩 행렬",
+        "이진 손실과 경사 손계산",
+        "CBOW와 skip-gram",
+        "모달리티 확장"
+      ]
+    },
+    {
+      "source_title": "Embeddings for Recommendation Systems",
+      "pdf_page": 108,
+      "target": "study.md#sec-15",
+      "covered_topics": [
+        "추천의 관계 표현",
+        "곡 ID와 오디오 구별",
+        "공동 소비 데이터의 의미"
+      ]
+    },
+    {
+      "source_title": "Recommending Songs by Embeddings",
+      "pdf_page": 108,
+      "target": "study.md#sec-16",
+      "covered_topics": [
+        "곡=단어/재생목록=문장",
+        "라디오 재생목록 데이터",
+        "팝과 랩 원문 추천 사례",
+        "정성 관찰과 평가",
+        "개인화 구별"
+      ]
+    },
+    {
+      "source_title": "Training a Song Embedding Model",
+      "pdf_page": 110,
+      "target": "study.md#sec-17",
+      "covered_topics": [
+        "재생목록·메타데이터 전처리",
+        "Word2Vec 매개변수",
+        "sg 기본값 점검",
+        "Metallica 원문 예시",
+        "유사도와 확률 구별",
+        "loc/iloc·ID 타입",
+        "cold start",
+        "누출·인기도 평가"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 113,
+      "target": "study.md#sec-18",
+      "covered_topics": [
+        "핵심 개념 통합",
+        "원문 그림 17개와 비교표 연결",
+        "실습과 자기 점검",
+        "3·4·5·8·9·10장 연결"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 2-1",
+      "pdf_page": 67,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 2-2",
+      "pdf_page": 68,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 2-3",
+      "pdf_page": 69,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 2-4",
+      "pdf_page": 71,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 2-5",
+      "pdf_page": 75,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 2-6",
+      "pdf_page": 77,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 2-7",
+      "pdf_page": 96,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 2-8",
+      "pdf_page": 97,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 2-9",
+      "pdf_page": 100,
+      "explained_in": "study.md#sec-10"
+    },
+    {
+      "label": "Figure 2-10",
+      "pdf_page": 101,
+      "explained_in": "study.md#sec-11"
+    },
+    {
+      "label": "Figure 2-11",
+      "pdf_page": 104,
+      "explained_in": "study.md#sec-14"
+    },
+    {
+      "label": "Figure 2-12",
+      "pdf_page": 105,
+      "explained_in": "study.md#sec-14"
+    },
+    {
+      "label": "Figure 2-13",
+      "pdf_page": 105,
+      "explained_in": "study.md#sec-14"
+    },
+    {
+      "label": "Figure 2-14",
+      "pdf_page": 106,
+      "explained_in": "study.md#sec-14"
+    },
+    {
+      "label": "Figure 2-15",
+      "pdf_page": 107,
+      "explained_in": "study.md#sec-14"
+    },
+    {
+      "label": "Figure 2-16",
+      "pdf_page": 107,
+      "explained_in": "study.md#sec-14"
+    },
+    {
+      "label": "Figure 2-17",
+      "pdf_page": 109,
+      "explained_in": "study.md#sec-16"
+    },
+    {
+      "label": "Unnumbered tokenizer comparison table",
+      "pdf_page": 90,
+      "explained_in": "study.md#sec-06"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true,
+    "markdown_links_checked": true,
+    "source_figure_pages_checked": true
+  },
+  "limitations": [
+    "실제 Phi-3·DeBERTa·Sentence Transformers·GloVe 및 원문 음악 데이터 실습은 실행하지 않았다.",
+    "CPU 실습과 시각화는 명시한 교육용 데이터와 단순화된 알고리즘을 사용한다. 서비스 수준의 추천 평가가 아니다.",
+    "제공 PDF의 일부 이모지/비영어 테스트 문자는 추출 및 렌더링에서 누락되어 해당 글자 자체는 추측 복원하지 않았다.",
+    "GitHub의 Markdown 화면에서는 Mermaid 도식을 볼 수 있으며, JavaScript 시각화는 HTML 파일을 로컬 브라우저에서 열어 사용한다."
+  ]
+}

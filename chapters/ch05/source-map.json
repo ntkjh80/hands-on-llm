@@ -1,0 +1,66 @@
+{
+  "number": 5,
+  "title_en": "5. Text Clustering and Topic Modeling",
+  "title_ko": "텍스트 군집화와 토픽 모델링",
+  "pdf_start": 192,
+  "pdf_end": 235,
+  "source": "source/ch05.txt",
+  "directory": "chapters/ch05",
+  "sections": [
+    {
+      "title": "ArXiv’s Articles: Computation and Language",
+      "pdf_page": 193,
+      "depth": 1
+    },
+    {
+      "title": "A Common Pipeline for Text Clustering",
+      "pdf_page": 194,
+      "depth": 1
+    },
+    {
+      "title": "Embedding Documents",
+      "pdf_page": 195,
+      "depth": 2
+    },
+    {
+      "title": "Reducing the Dimensionality of Embeddings",
+      "pdf_page": 196,
+      "depth": 2
+    },
+    {
+      "title": "Cluster the Reduced Embeddings",
+      "pdf_page": 199,
+      "depth": 2
+    },
+    {
+      "title": "Inspecting the Clusters",
+      "pdf_page": 201,
+      "depth": 2
+    },
+    {
+      "title": "From Text Clustering to Topic Modeling",
+      "pdf_page": 204,
+      "depth": 1
+    },
+    {
+      "title": "BERTopic: A Modular Topic Modeling Framework",
+      "pdf_page": 206,
+      "depth": 2
+    },
+    {
+      "title": "Adding a Special Lego Block",
+      "pdf_page": 220,
+      "depth": 2
+    },
+    {
+      "title": "The Text Generation Lego Block",
+      "pdf_page": 228,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 233,
+      "depth": 1
+    }
+  ]
+}

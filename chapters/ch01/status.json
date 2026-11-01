@@ -1,0 +1,58 @@
+{
+  "chapter": 1,
+  "status": "complete",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "lab.py",
+    "lab-guide.md",
+    "quiz.md",
+    "lab-output.txt",
+    "lab-variant-output.txt",
+    "lab-length-output.txt",
+    "coverage.json",
+    "source-map.json",
+    "qa/material-check.json",
+    "qa/interaction-check.json",
+    "qa/check-interactions.cjs",
+    "qa/validate_materials.py"
+  ],
+  "lab_command": "python3 chapters/ch01/lab.py",
+  "validation": [
+    "원문 PDF 물리 페이지 23–66 전체 추출본 읽음; 핵심 어텐션/연표 그림 렌더 확인",
+    "원문 절 21개와 그림 32개를 coverage.json 및 study.md 앵커에 대응",
+    "study.md 37,220자; 한글 음절 21,960자; 직접 만든 Mermaid 도식 4개",
+    "lecture-script.md 한글 음절 7,707자; 80분 활동 포함 강의안",
+    "Python 기본 실행 및 어텐션·표본 선택·길이 상한 변경 실행 성공; 실제 출력 저장",
+    "Python 문법·Markdown 링크/앵커·코드 펜스·16개 문제 총점 검사 통과",
+    "시각화 JavaScript 구문 검사 통과",
+    "비브라우저 DOM 모형에서 원본 스크립트의 입력 이벤트, 빈도 막대, 어텐션 좌표 이동, 종료·길이 제한·초기화 검증",
+    "루트 통합 Chrome 검사와 현재 visuals.html SHA256 일치 확인; 데스크톱·390px 모바일 화면 및 입력 조작 검증 완료; 브라우저 오류와 화면 가로 넘침 없음"
+  ],
+  "limitations": [
+    "실제 Phi-3/GPU 예제는 실행하지 않음. lab.py는 BoW·어텐션 가중합·빈도 기반 bigram 개념 실습."
+  ],
+  "format": "Markdown primary; interactive HTML and Python supplementary",
+  "source": "Hands-On Large Language Models, 2024, Chapter 1, PDF physical pages 23–66",
+  "visual_verification": {
+    "verified_by": "루트 챗 통합 Chrome 검증 및 이 챗의 기존 스크린샷 검토",
+    "html_sha256": "1621cd3b9eecaed73c6715e0f95a358e513e558f89d24e74fea5a83e6f37c6d4",
+    "report": "../../output/qa/visual-checks.json",
+    "screenshots": [
+      "../../output/qa/ch01-desktop.png",
+      "../../output/qa/ch01-mobile.png"
+    ],
+    "browser_errors": [],
+    "interaction_ids": [
+      "attention-score",
+      "prompt",
+      "budget"
+    ],
+    "mobile_viewport_width": 390,
+    "mobile_document_width": 390,
+    "scope": "데스크톱·모바일 화면 배치, 어텐션 슬라이더·시작 토큰·새 토큰 상한 변경에 따른 텍스트와 도형 갱신 확인"
+  }
+}

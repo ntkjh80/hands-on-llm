@@ -1,0 +1,66 @@
+{
+  "number": 11,
+  "title_en": "11. Fine-Tuning Representation Models for Classification",
+  "title_ko": "표현 모델 미세 조정",
+  "pdf_start": 446,
+  "pdf_end": 486,
+  "source": "source/ch11.txt",
+  "directory": "chapters/ch11",
+  "sections": [
+    {
+      "title": "Supervised Classification",
+      "pdf_page": 446,
+      "depth": 1
+    },
+    {
+      "title": "Fine-Tuning a Pretrained BERT Model",
+      "pdf_page": 449,
+      "depth": 2
+    },
+    {
+      "title": "Freezing Layers",
+      "pdf_page": 452,
+      "depth": 2
+    },
+    {
+      "title": "Few-Shot Classification",
+      "pdf_page": 459,
+      "depth": 1
+    },
+    {
+      "title": "SetFit: Efficient Fine-Tuning with Few Training Examples",
+      "pdf_page": 460,
+      "depth": 2
+    },
+    {
+      "title": "Fine-Tuning for Few-Shot Classification",
+      "pdf_page": 464,
+      "depth": 2
+    },
+    {
+      "title": "Continued Pretraining with Masked Language Modeling",
+      "pdf_page": 468,
+      "depth": 1
+    },
+    {
+      "title": "Named-Entity Recognition",
+      "pdf_page": 475,
+      "depth": 1
+    },
+    {
+      "title": "Preparing Data for Named-Entity Recognition",
+      "pdf_page": 476,
+      "depth": 2
+    },
+    {
+      "title": "Fine-Tuning for Named-Entity Recognition",
+      "pdf_page": 483,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 485,
+      "depth": 1
+    }
+  ]
+}

@@ -1,0 +1,289 @@
+{
+  "chapter": 11,
+  "source_book": "Hands-On Large Language Models (2024)",
+  "source_pdf_pages": [
+    446,
+    486
+  ],
+  "sections": [
+    {
+      "source_title": "Supervised Classification",
+      "pdf_page": 446,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "동결 특징 추출과 전체 미세 조정",
+        "분류 헤드와 역전파",
+        "로짓·softmax·교차 엔트로피",
+        "출력 차원"
+      ]
+    },
+    {
+      "source_title": "Fine-Tuning a Pretrained BERT Model",
+      "pdf_page": 449,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "Rotten Tomatoes 데이터",
+        "bert-base-cased",
+        "토큰화·절단·동적 패딩",
+        "F1 및 학습 설정",
+        "원문 F1과 재현 조건"
+      ]
+    },
+    {
+      "source_title": "Freezing Layers",
+      "pdf_page": 452,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "requires_grad와 eval 모드의 차이",
+        "헤드만 학습",
+        "앞 10개 블록 동결",
+        "파라미터 나열 인덱스의 한계",
+        "그림 11-7의 범위 표기"
+      ]
+    },
+    {
+      "source_title": "Few-Shot Classification",
+      "pdf_page": 459,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "few-shot training과 prompting 구별",
+        "클래스당 예제 수",
+        "작은 데이터의 라벨 품질"
+      ]
+    },
+    {
+      "source_title": "SetFit: Efficient Fine-Tuning with Few Training Examples",
+      "pdf_page": 460,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "같은·다른 클래스 쌍 생성",
+        "고유 양성·음성 쌍 수",
+        "대조학습으로 임베딩 조정",
+        "원래 문장 라벨로 분류기 학습"
+      ]
+    },
+    {
+      "source_title": "Fine-Tuning for Few-Shot Classification",
+      "pdf_page": 464,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "클래스당 16개",
+        "all-mpnet-base-v2",
+        "3 epoch·num_iterations 20",
+        "1280 샘플링과 496 고유 쌍",
+        "F1 반올림 교정",
+        "미분 가능한 헤드",
+        "합성 예문 zero-shot 팁"
+      ]
+    },
+    {
+      "source_title": "Continued Pretraining with Masked Language Modeling",
+      "pdf_page": 468,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "일반→도메인→과제의 세 단계",
+        "MLM 자기지도 목표",
+        "token masking과 whole-word masking",
+        "label 열 제거",
+        "토크나이저 고정·저장",
+        "10/20 epoch 불일치",
+        "fill-mask 관찰과 후속 분류 평가"
+      ]
+    },
+    {
+      "source_title": "Named-Entity Recognition",
+      "pdf_page": 475,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "문장 분류와 토큰 분류",
+        "B×T×C 출력",
+        "문맥 기반 개체 인식",
+        "비식별화 적용의 평가 단위"
+      ]
+    },
+    {
+      "source_title": "Preparing Data for Named-Entity Recognition",
+      "pdf_page": 476,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "CoNLL-2003 구조",
+        "BIO 라벨 매핑",
+        "대체 데이터셋 팁",
+        "word_ids 정렬",
+        "B→I 변환",
+        "-100 제외",
+        "모든 조각과 첫 조각 학습",
+        "문장 경계 유지",
+        "strict span 평가"
+      ]
+    },
+    {
+      "source_title": "Fine-Tuning for Named-Entity Recognition",
+      "pdf_page": 483,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "AutoModelForTokenClassification",
+        "DataCollatorForTokenClassification",
+        "학습·저장·추론",
+        "서브토큰과 문자 오프셋",
+        "원문 NER 숫자 미제시"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 485,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "방법 선택표",
+        "데이터·목표·파라미터·평가의 연결",
+        "통합 설계",
+        "12장 생성 모델 미세 조정과 연결"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 11-1",
+      "pdf_page": 447,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 11-2",
+      "pdf_page": 448,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 11-3",
+      "pdf_page": 448,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 11-4",
+      "pdf_page": 453,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 11-5",
+      "pdf_page": 455,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 11-6",
+      "pdf_page": 457,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 11-7",
+      "pdf_page": 459,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 11-8",
+      "pdf_page": 460,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 11-9",
+      "pdf_page": 461,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 11-10",
+      "pdf_page": 461,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 11-11",
+      "pdf_page": 462,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 11-12",
+      "pdf_page": 463,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 11-13",
+      "pdf_page": 464,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 11-14",
+      "pdf_page": 468,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 11-15",
+      "pdf_page": 469,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 11-16",
+      "pdf_page": 470,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 11-17",
+      "pdf_page": 471,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 11-18",
+      "pdf_page": 475,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 11-19",
+      "pdf_page": 476,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 11-20",
+      "pdf_page": 478,
+      "explained_in": "study.md#sec-09"
+    },
+    {
+      "label": "Figure 11-21",
+      "pdf_page": 480,
+      "explained_in": "study.md#sec-09"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true,
+    "visuals_js_syntax_checked": true,
+    "visuals_source_behavior_checked": true,
+    "markdown_links_and_anchors_checked": true,
+    "github_math_delimiters_checked": true,
+    "visuals_exact_revision_browser_checked": true,
+    "visuals_browser_screenshots_reviewed": true
+  },
+  "limitations": [
+    "실제 BERT·SetFit·MLM·NER 모델/GPU 학습은 수행하지 않았으며 원문 보고값과 CPU 가상 실습 결과를 구분했습니다.",
+    "외부 링크 문서는 2026-10-20에 확인한 보충 근거이며 원문의 2024년 API가 현재 환경에서 그대로 실행된다는 주장은 하지 않습니다."
+  ],
+  "visual_validation": {
+    "reviewer": "root integrated browser verification",
+    "browser_tested_sha256": "85ad44df858b932d4e510c2efad7c8b69ace7587aea1edd890668f88bc92cc44",
+    "current_sha256": "85ad44df858b932d4e510c2efad7c8b69ace7587aea1edd890668f88bc92cc44",
+    "exact_revision_browser_checked": true,
+    "browser_evidence": "../../output/qa/visual-checks.json",
+    "screenshots": [
+      "../../output/qa/ch11-desktop.png",
+      "../../output/qa/ch11-mobile.png"
+    ],
+    "browser_results": {
+      "runtime_errors": 0,
+      "document_width": 390,
+      "viewport_width": 390,
+      "verified_controls": [
+        "steps",
+        "count-a",
+        "count-b",
+        "ner-case"
+      ]
+    },
+    "result": "현재 HTML과 통합 브라우저 검증 기록의 SHA256이 일치합니다. 수치·도형 갱신, 런타임 오류 0, 390px 문서 가로 넘침 없음을 확인했습니다. 시각화 파일은 수정하지 않았습니다."
+  }
+}

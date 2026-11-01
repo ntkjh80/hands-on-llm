@@ -1,0 +1,44 @@
+{
+  "chapter": 6,
+  "status": "complete",
+  "title": "프롬프트 엔지니어링",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.md",
+    "visuals.html",
+    "assets/token-selection.svg",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "coverage.json",
+    "source-map.json",
+    "validation.json"
+  ],
+  "lab_command": "python3 chapters/ch06/lab.py",
+  "validation": [
+    "원문 PDF 236–279쪽 전체 추출문과 원문 주요 도식 확인",
+    "19개 원문 절, 21개 그림, 1개 표의 대응 앵커 확인",
+    "Markdown 내부 링크 198개 확인",
+    "Python 기본 실행과 저장 출력의 동일 재실행 확인",
+    "설정 변경 실행과 --help 확인",
+    "시각화 JavaScript 구문 및 계산·이벤트 로직 확인",
+    "HTML SHA256 일치 통합 브라우저 기록·데스크톱 및 390px 화면 확인",
+    "SVG 렌더링 이미지 확인",
+    "GitHub Markdown 수식 구분자와 코드 펜스 확인"
+  ],
+  "counts": {
+    "study_hangul_characters": 18703,
+    "lecture_script_hangul_characters": 7688,
+    "quiz_questions": 18,
+    "interactive_experiments": 3
+  },
+  "limitations": [
+    "실제 Phi-3 모델 추론, API 및 GPU 실습은 수행하지 않았다. 원문의 2024년 예제는 역사적 학습 맥락으로 설명했다.",
+    "학습 수식과 가상 데이터 실습은 실제 모델 성능 측정이 아니다.",
+    "문자 trie는 제약 생성 원리의 축소 모형이며 서브워드 토크나이저나 전체 JSON 문법 구현이 아니다."
+  ]
+}

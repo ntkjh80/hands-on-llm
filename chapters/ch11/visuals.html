@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11장 표현 모델 미세 조정 시각 실험</title>
+<link rel="stylesheet" href="../../assets/study.css">
+<style>
+main{max-width:1040px}h1{margin-top:12px}.controls{display:flex;gap:22px;flex-wrap:wrap;align-items:center}.controls label{flex:1;min-width:200px}.controls input[type=range]{display:block;width:100%}.output{font-variant-numeric:tabular-nums;background:#eaf4f5;padding:14px 18px;margin:16px 0;border-radius:8px}.figure-wrap{max-width:700px;margin:24px auto}svg{display:block;width:100%}.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:.9rem}.swatch{display:inline-block;width:13px;height:13px;margin-right:6px;border-radius:3px}.muted{color:#536271}.token-row{display:grid;grid-template-columns:repeat(6,minmax(72px,1fr));gap:8px;min-width:520px}.token-cell{text-align:center;border:1px solid #d7e0e5;border-radius:6px;padding:8px 4px}.token-name{font-weight:600}.token-tag{font-size:.85rem}.tokens-scroll{overflow-x:auto;padding:8px 0}.bar-row{display:grid;grid-template-columns:120px 1fr 56px;gap:12px;align-items:center;margin:15px 0}.bar-track{height:20px;background:#e8edf1;border-radius:3px;overflow:hidden}.bar{height:100%;background:#175e73;transition:width .15s}.metric-val{font-variant-numeric:tabular-nums}.model-note{font-size:.9rem}.pair-key{font-size:.88rem}.anchor-nav{border-bottom:1px solid #d7e0e5;padding-bottom:20px}.source-note{font-size:.86rem;color:#536271}@media(max-width:600px){.bar-row{grid-template-columns:95px 1fr 45px;gap:8px}.controls label{min-width:100%}h2{font-size:1.35rem}}@media(prefers-reduced-motion:reduce){.bar{transition:none}}
+</style>
+</head>
+<body><main>
+<nav aria-label="학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lecture-script.md">대본</a><a href="lab-guide.md">실습</a><a href="quiz.md">복습 문제</a></nav>
+<h1>11장 표현 모델 미세 조정 시각 실험</h1>
+<p class="lead">가중치 업데이트, 문장 쌍, 개체 경계를 직접 바꾸어 결과를 비교합니다.</p>
+<p class="source-note">세 실험은 교육용 가상 데이터와 작은 계산입니다. 실제 BERT·SetFit 학습 성능이 아닙니다. 원문 근거: PDF 452–467, 475–485쪽.</p>
+<nav class="anchor-nav" aria-label="실험 선택"><a href="#freeze">표현 동결</a><a href="#pairs">문장 쌍</a><a href="#ner">개체 경계</a></nav>
+<section id="freeze">
+<h2>1. 표현을 바꿀 수 있을 때 결정 경계는 어떻게 달라질까</h2>
+<p>동그라미는 양성, 네모는 음성입니다. 정답은 세로 좌표 x₂의 부호로 정했지만, 초기 표현은 가로 좌표 x₁만 봅니다.</p>
+<div class="controls">
+<label for="steps">학습 단계 <output id="steps-value">0</output><input id="steps" type="range" min="0" max="300" step="10" value="0"></label>
+<label for="freeze-choice"><input id="freeze-choice" type="checkbox"> 표현 a를 동결하고 헤드만 학습</label>
+</div>
+<div class="legend"><span><i class="swatch" style="background:#cfe4e9"></i>배경: 양성 예측 영역</span><span><i class="swatch" style="background:#f4dfc9"></i>배경: 음성 예측 영역</span></div>
+<div class="figure-wrap"><svg id="model-plot" role="img" aria-label="학습 단계에 따른 가상 좌표 분류의 결정 영역"></svg></div>
+<div class="output" id="model-output" aria-live="polite"></div>
+<p class="model-note">실제 계산: h = tanh(a₁x₁ + a₂x₂), p = sigmoid(wh + b). 8개 좌표로 경사하강법을 수행하고 별도 16개 좌표로 평가합니다. 학습률은 0.15입니다. 동결은 순전파를 없애지 않고 a의 업데이트만 막습니다.</p>
+</section>
+<section id="pairs">
+<h2>2. 문장은 적어도 관계 쌍은 여러 개</h2>
+<p>각 칸은 서로 다른 두 문장의 한 쌍입니다. 대각선과 아래쪽은 자기 자신 또는 중복 방향이므로 제외합니다.</p>
+<div class="controls">
+<label for="count-a">클래스 A의 문장 수 <output id="count-a-value">16</output><input id="count-a" type="range" min="1" max="24" value="16"></label>
+<label for="count-b">클래스 B의 문장 수 <output id="count-b-value">16</output><input id="count-b" type="range" min="1" max="24" value="16"></label>
+</div>
+<div class="legend"><span><i class="swatch" style="background:#175e73"></i>양성 쌍: 같은 클래스</span><span><i class="swatch" style="background:#bd6a27"></i>음성 쌍: 다른 클래스</span></div>
+<div class="figure-wrap"><svg id="pair-plot" role="img" aria-label="클래스별 문장 수에 따른 고유 문장 쌍 행렬"></svg></div>
+<div class="output" id="pair-output" aria-live="polite"></div>
+<p class="pair-key">양성 = A(A−1)/2 + B(B−1)/2, 음성 = AB. 여러 쌍이 같은 문장을 공유하므로 쌍 수만큼 독립 데이터가 생기는 것은 아닙니다. 반복 샘플링 항목 수와 고유 무순서 쌍 수도 다릅니다.</p>
+</section>
+<section id="ner">
+<h2>3. 토큰이 맞아도 개체 전체는 틀릴 수 있다</h2>
+<p>가상 서브토큰 문장에는 사람 한 명과 조직 하나가 있습니다. 정답의 개체 범위와 유형을 모두 맞혀야 개체 정답으로 셉니다.</p>
+<label for="ner-case">예측 결과 선택
+<select id="ner-case"><option value="perfect">모두 정확</option><option value="partial" selected>사람 이름의 뒷부분 누락</option><option value="type">사람을 조직으로 오분류</option><option value="split">이름 조각마다 새 사람으로 분리</option><option value="none">모두 O로 예측</option></select></label>
+<p class="muted">위: 정답 태그 · 아래: 예측 태그. 색과 함께 문자 태그로 종류를 표시합니다.</p>
+<div class="tokens-scroll"><div id="ner-tokens" class="token-row"></div></div>
+<div class="bar-row"><span>토큰 정확도</span><div class="bar-track"><div id="token-bar" class="bar"></div></div><span id="token-val" class="metric-val"></span></div>
+<div class="bar-row"><span>개체 F1</span><div class="bar-track"><div id="entity-bar" class="bar"></div></div><span id="entity-val" class="metric-val"></span></div>
+<div class="output" id="ner-output" aria-live="polite"></div>
+<p class="model-note">평가는 길이 6의 한 시퀀스를 유지합니다. 각 토큰을 길이 1 목록으로 분리하면 BIO의 연결 정보를 잃습니다. 실제 CoNLL 단어 단위 점수와 비교하려면 서브토큰을 원래 단어로 복원하는 기준까지 맞춰야 합니다.</p>
+</section>
+<footer><nav aria-label="다음 학습"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lab-guide.md">실습 안내</a><a href="quiz.md">복습 문제</a></nav></footer>
+</main>
+<script>
+(function(){
+'use strict';
+const byId=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+function el(name,attrs,text){const x=document.createElementNS(NS,name);for(const [k,v]of Object.entries(attrs||{}))x.setAttribute(k,String(v));if(text!==undefined)x.textContent=text;return x;}
+function add(svg,name,attrs,text){const x=el(name,attrs,text);svg.appendChild(x);return x;}
+function sigmoid(z){return z>=0?1/(1+Math.exp(-z)):Math.exp(z)/(1+Math.exp(z));}
+function forward(p,x){const h=Math.tanh(p[0]*x[0]+p[1]*x[1]),z=p[2]*h+p[3];return {h,z,prob:sigmoid(z)};}
+const train=[];for(const x1 of[-1,1])for(const x2 of[-1,-.7,.7,1])train.push({x:[x1,x2],y:Number(x2>0)});
+const test=[];for(const x1 of[-1.5,-.4,.4,1.5])for(const x2 of[-1.2,-.8,.8,1.2])test.push({x:[x1,x2],y:Number(x2>0)});
+function calculate(steps,frozen){let p=[1,0,.5,0];for(let k=0;k<steps;k++){let g=[0,0,0,0];for(const row of train){const f=forward(p,row.x),dz=f.prob-row.y,dh=dz*p[2]*(1-f.h*f.h);g[0]+=dh*row.x[0];g[1]+=dh*row.x[1];g[2]+=dz*f.h;g[3]+=dz;}p=p.map((v,i)=>v-.15*(frozen&&i<2?0:g[i]/train.length));}let loss=0;for(const row of train){const z=forward(p,row.x).z;loss+=Math.max(z,0)-row.y*z+Math.log1p(Math.exp(-Math.abs(z)));}const acc=test.filter(row=>Number(forward(p,row.x).prob>=.5)===row.y).length/test.length;return {p,loss:loss/train.length,acc};}
+function drawModel(){const steps=Number(byId('steps').value),frozen=byId('freeze-choice').checked,r=calculate(steps,frozen);byId('steps-value').value=steps;const svg=byId('model-plot');svg.replaceChildren();const w=Math.max(280,Math.floor(svg.getBoundingClientRect().width)),h=Math.min(w,440),m={l:48,r:20,t:22,b:42},pw=w-m.l-m.r,ph=h-m.t-m.b;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);const X=x=>m.l+(x+2)/4*pw,Y=y=>m.t+(2-y)/4*ph;
+for(let i=0;i<20;i++)for(let j=0;j<20;j++){const x=-2+(i+.5)*.2,y=-2+(j+.5)*.2,pos=forward(r.p,[x,y]).prob>=.5;add(svg,'rect',{x:m.l+i*pw/20,y:m.t+(19-j)*ph/20,width:pw/20+.2,height:ph/20+.2,fill:pos?'#cfe4e9':'#f4dfc9'});}
+add(svg,'line',{x1:X(0),x2:X(0),y1:Y(-2),y2:Y(2),stroke:'#7c8b97'});add(svg,'line',{x1:X(-2),x2:X(2),y1:Y(0),y2:Y(0),stroke:'#7c8b97'});
+for(const v of[-2,-1,0,1,2]){add(svg,'text',{x:X(v),y:h-18,'text-anchor':'middle','font-size':12,fill:'#172332'},v);add(svg,'text',{x:37,y:Y(v)+4,'text-anchor':'end','font-size':12,fill:'#172332'},v);}
+for(const row of train){const attrs={fill:row.y?'#175e73':'#bd6a27',stroke:'#fff','stroke-width':1.5};if(row.y)add(svg,'circle',{cx:X(row.x[0]),cy:Y(row.x[1]),r:6,...attrs});else add(svg,'rect',{x:X(row.x[0])-6,y:Y(row.x[1])-6,width:12,height:12,...attrs});}
+add(svg,'text',{x:w/2,y:h-1,'text-anchor':'middle','font-size':12,fill:'#172332'},'가로 특징 x₁');add(svg,'text',{x:6,y:13,'font-size':12,fill:'#172332'},'세로 특징 x₂');
+byId('model-output').textContent=`${steps}단계 · ${frozen?'표현 동결':'공동 학습'} | a=(${r.p[0].toFixed(3)}, ${r.p[1].toFixed(3)}) | 학습 손실 ${r.loss.toFixed(4)} | 가상 평가 정확도 ${(r.acc*100).toFixed(1)}%`;}
+function drawPairs(){const a=Number(byId('count-a').value),b=Number(byId('count-b').value),n=a+b,pos=a*(a-1)/2+b*(b-1)/2,neg=a*b;byId('count-a-value').value=a;byId('count-b-value').value=b;const svg=byId('pair-plot');svg.replaceChildren();const w=Math.max(280,Math.floor(svg.getBoundingClientRect().width)),side=Math.min(w-62,430),left=(w-side)/2,top=25,h=side+66,cell=side/n;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){const same=(i<a)===(j<a);const r=add(svg,'rect',{x:left+j*cell+.5,y:top+i*cell+.5,width:Math.max(1,cell-1),height:Math.max(1,cell-1),fill:same?'#175e73':'#bd6a27'});r.appendChild(el('title',{},`문장 ${i+1}, ${j+1}: ${same?'같은':'다른'} 클래스`));}
+add(svg,'line',{x1:left+a*cell,x2:left+a*cell,y1:top,y2:top+side,stroke:'#a7b3bd','stroke-dasharray':'3 3'});add(svg,'line',{x1:left,x2:left+side,y1:top+a*cell,y2:top+a*cell,stroke:'#a7b3bd','stroke-dasharray':'3 3'});
+add(svg,'text',{x:left+a*cell/2,y:15,'text-anchor':'middle','font-size':12,fill:'#172332'},`A: ${a}개`);add(svg,'text',{x:left+a*cell+b*cell/2,y:15,'text-anchor':'middle','font-size':12,fill:'#172332'},`B: ${b}개`);add(svg,'text',{x:w/2,y:h-10,'text-anchor':'middle','font-size':12,fill:'#172332'},`총 ${n}개 문장 → 고유 쌍 ${pos+neg}개`);
+byId('pair-output').textContent=`양성 ${pos}개 + 음성 ${neg}개 = 고유 무순서 쌍 ${pos+neg}개. ${a<2||b<2?'문장이 1개인 클래스에는 자기 자신을 제외한 양성 쌍이 없어, 양성20+음성20 샘플링을 그대로 적용할 수 없습니다.':`문장당 양성20+음성20을 반복 샘플링하면 ${n*40}항목입니다.`}`;}
+const gold=['B-PER','I-PER','O','O','B-ORG','I-ORG'],tokens=['Min','##su','works','at','Nova','Labs'];
+const cases={perfect:gold.slice(),partial:['B-PER','O','O','O','B-ORG','I-ORG'],type:['B-ORG','I-ORG','O','O','B-ORG','I-ORG'],split:['B-PER','B-PER','O','O','B-ORG','I-ORG'],none:Array(6).fill('O')};
+function spans(tags){let out=[],start=null,kind=null;[...tags,'O'].forEach((tag,i)=>{if(tag==='O'||tag.startsWith('B-')){if(start!==null)out.push(`${start}:${i}:${kind}`);if(tag.startsWith('B-')){start=i;kind=tag.slice(2);}else{start=null;kind=null;}}else if(!tag.startsWith('I-')||start===null||tag.slice(2)!==kind)throw Error('Invalid BIO');});return out;}
+function drawNER(){const pred=cases[byId('ner-case').value],gs=spans(gold),ps=spans(pred),tp=ps.filter(p=>gs.includes(p)).length,fp=ps.length-tp,fn=gs.length-tp,acc=pred.filter((p,i)=>p===gold[i]).length/6,f1=2*tp/(2*tp+fp+fn)||0;const container=byId('ner-tokens');container.replaceChildren();tokens.forEach((token,i)=>{const cell=document.createElement('div');cell.className='token-cell';for(const [text,cls]of[[token,'token-name'],[gold[i],'token-tag'],[pred[i],'token-tag']]){const d=document.createElement('div');d.className=cls;d.textContent=text;cell.appendChild(d);}cell.style.background=pred[i]===gold[i]?'#eaf4f5':'#fff1e1';container.appendChild(cell);});byId('token-bar').style.width=(100*acc)+'%';byId('entity-bar').style.width=(100*f1)+'%';byId('token-val').textContent=acc.toFixed(3);byId('entity-val').textContent=f1.toFixed(3);
+byId('ner-output').textContent=`정답 개체 ${gs.length}개 · 예측 개체 ${ps.length}개 · 정확한 개체 TP=${tp}, 잘못된 개체 FP=${fp}, 놓친 개체 FN=${fn}. 구간 [시작, 끝)과 유형을 함께 비교합니다.`;}
+byId('steps').addEventListener('input',drawModel);byId('freeze-choice').addEventListener('change',drawModel);for(const id of['count-a','count-b'])byId(id).addEventListener('input',drawPairs);byId('ner-case').addEventListener('change',drawNER);window.addEventListener('resize',()=>{drawModel();drawPairs();});drawModel();drawPairs();drawNER();
+window.chapter11Lab={calculate,spans};
+})();
+</script>
+</body></html>

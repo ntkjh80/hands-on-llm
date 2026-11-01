@@ -1,0 +1,38 @@
+{
+  "chapter": 9,
+  "status": "complete",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "source-map.json",
+    "coverage.json",
+    "status.json"
+  ],
+  "lab_command": "python3 chapters/ch09/lab.py",
+  "validation": [
+    "PDF 물리 페이지 360~398 추출본 전체 읽기; Figures 9-5·9-20 원문 페이지 시각 확인",
+    "원문 목차 11개 절과 학습 노트 앵커 대응 확인",
+    "원문 그림 21개 캡션 페이지·설명 대응 확인",
+    "기본 Python 실습 실행과 저장된 lab-output.txt 일치",
+    "패치4·온도1 변형 및 query-scale0 변형 실행",
+    "값 보존·평균 투영·코사인 크기 불변성·대조 대응·확률 합·균등 attention·투영 형상 검산",
+    "모든 Markdown 상대 링크 및 명시적 앵커 검사 통과",
+    "HTML inline JavaScript 구문 검사 통과",
+    "별도 임시 Chrome에서 패치 선택·벡터 회전·온도·query 슬라이더 상호작용 검사 통과",
+    "브라우저 JavaScript runtime 오류 없음",
+    "1280px 화면과 390px 모바일 구간 화면 시각 검토, 모바일 가로 넘침 없음",
+    "학습 노트 한글 19300자; 강의 대본 한글 7640자; 복습 문제 16개; Mermaid 도식 5개"
+  ],
+  "limitations": [
+    "CLIP·BLIP-2 가중치를 다운로드하거나 실제 모델 추론을 실행하지 않았다.",
+    "Python 및 브라우저 실험은 교육용 합성 데이터와 단순화한 연산이며 Q-Former 전체 또는 모델 학습을 구현하지 않는다.",
+    "2024년 원문 코드 설명은 현재 API 호환성을 보장하지 않는다."
+  ]
+}

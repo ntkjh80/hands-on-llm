@@ -1,0 +1,287 @@
+{
+  "chapter": 10,
+  "source": {
+    "book": "Hands-On Large Language Models",
+    "edition_year": 2024,
+    "chapter": "Creating Text Embedding Models",
+    "pdf_pages": [
+      399,
+      445
+    ],
+    "page_numbering": "physical PDF page"
+  },
+  "sections": [
+    {
+      "source_title": "Embedding Models",
+      "pdf_page": 399,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "작업별 유사성",
+        "고정 차원 임베딩",
+        "코사인",
+        "주제와 감정"
+      ]
+    },
+    {
+      "source_title": "What Is Contrastive Learning?",
+      "pdf_page": 402,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "대조 관계",
+        "positive와 negative",
+        "word2vec 연결"
+      ]
+    },
+    {
+      "source_title": "SBERT",
+      "pdf_page": 404,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "cross-encoder",
+        "bi-encoder",
+        "계산량",
+        "가중치 공유",
+        "pooling",
+        "softmax 특징 결합"
+      ]
+    },
+    {
+      "source_title": "Creating an Embedding Model",
+      "pdf_page": 408,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "데이터·모델·손실·평가 파이프라인",
+        "from scratch 의미"
+      ]
+    },
+    {
+      "source_title": "Generating Contrastive Examples",
+      "pdf_page": 408,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "MNLI와 NLI 라벨",
+        "관계 매핑",
+        "함의 비대칭성",
+        "데이터 분할"
+      ]
+    },
+    {
+      "source_title": "Train Model",
+      "pdf_page": 410,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "BERT 시작점",
+        "SoftmaxLoss",
+        "STS-B",
+        "Pearson과 Spearman",
+        "학습 설정"
+      ]
+    },
+    {
+      "source_title": "In-Depth Evaluation",
+      "pdf_page": 414,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "MTEB",
+        "Banking77",
+        "지연 시간",
+        "독립 평가",
+        "거리와 평가 통계 구별"
+      ]
+    },
+    {
+      "source_title": "Loss Functions",
+      "pdf_page": 416,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "cosine 회귀",
+        "MNR 수식",
+        "temperature",
+        "in-batch negative",
+        "hard negative",
+        "false negative",
+        "MarginMSE 언급"
+      ]
+    },
+    {
+      "source_title": "Fine-Tuning an Embedding Model",
+      "pdf_page": 426,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "기존 임베딩 모델 재사용",
+        "기본 모델 비교"
+      ]
+    },
+    {
+      "source_title": "Supervised",
+      "pdf_page": 426,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "MiniLM",
+        "MNR 데이터 전제",
+        "기학습 데이터",
+        "MLM 적응"
+      ]
+    },
+    {
+      "source_title": "Augmented SBERT",
+      "pdf_page": 429,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "gold와 silver",
+        "cross-encoder 교사",
+        "후보 쌍 생성",
+        "argmax",
+        "중복 제거",
+        "독립 gold 평가"
+      ]
+    },
+    {
+      "source_title": "Unsupervised Learning",
+      "pdf_page": 435,
+      "target": "study.md#sec-12",
+      "covered_topics": [
+        "비지도 학습 신호",
+        "SimCSE·CT·TSDAE·GPL 언급"
+      ]
+    },
+    {
+      "source_title": "Transformer-Based Sequential Denoising Auto-Encoder",
+      "pdf_page": 435,
+      "target": "study.md#sec-13",
+      "covered_topics": [
+        "단어 삭제",
+        "복원 병목",
+        "CLS pooling",
+        "가중치 공유",
+        "TSDAE 학습 설정",
+        "학습과 배포 분리"
+      ]
+    },
+    {
+      "source_title": "Using TSDAE for Domain Adaptation",
+      "pdf_page": 441,
+      "target": "study.md#sec-14",
+      "covered_topics": [
+        "도메인 차이",
+        "adaptive pretraining",
+        "목표 문장 적응",
+        "관계 학습",
+        "비교군 설계"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 443,
+      "target": "study.md#sec-15",
+      "covered_topics": [
+        "학습 방법 선택",
+        "다음 장 연결",
+        "각주 연구 흐름"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 10-1",
+      "pdf_page": 400,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 10-2",
+      "pdf_page": 401,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 10-3",
+      "pdf_page": 402,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 10-4",
+      "pdf_page": 403,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 10-5",
+      "pdf_page": 404,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 10-6",
+      "pdf_page": 405,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 10-7",
+      "pdf_page": 407,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 10-8",
+      "pdf_page": 409,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 10-9",
+      "pdf_page": 417,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 10-10",
+      "pdf_page": 421,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 10-11",
+      "pdf_page": 425,
+      "explained_in": "study.md#sec-08"
+    },
+    {
+      "label": "Figure 10-12",
+      "pdf_page": 430,
+      "explained_in": "study.md#sec-11"
+    },
+    {
+      "label": "Figure 10-13",
+      "pdf_page": 437,
+      "explained_in": "study.md#sec-13"
+    },
+    {
+      "label": "Figure 10-14",
+      "pdf_page": 442,
+      "explained_in": "study.md#sec-14"
+    },
+    {
+      "label": "Figure 10-15",
+      "pdf_page": 443,
+      "explained_in": "study.md#sec-14"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true,
+    "original_numbered_figures_covered": 15,
+    "source_sections_covered": 15
+  },
+  "limitations": [
+    "원문 BERT·MiniLM·MTEB·TSDAE GPU 학습은 실행하지 않았음.",
+    "lab.py는 단어 lookup과 평균 pooling으로 구성된 교육용 인코더이며 일반화 성능을 측정하지 않음.",
+    "Mermaid 도식의 GitHub 실제 렌더러 검증은 수행하지 않았음."
+  ],
+  "supplemental_sources": [
+    {
+      "url": "https://www.sbert.net/docs/sentence_transformer/loss_overview.html",
+      "use": "MNR 입력 형식 확인"
+    },
+    {
+      "url": "https://www.sbert.net/docs/sentence_transformer/training_overview.html",
+      "use": "학습 설정 구성 확인"
+    },
+    {
+      "url": "https://alt.qcri.org/semeval2017/task1/index.php",
+      "use": "STS 0–5 척도 확인"
+    }
+  ]
+}

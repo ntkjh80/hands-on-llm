@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7장 메모리와 도구 실행 시각화</title>
+<link rel="stylesheet" href="../../assets/study.css">
+<style>
+#ch7vis .controls{display:flex;gap:18px;flex-wrap:wrap;align-items:end}#ch7vis .controls label{flex:1;min-width:170px}#ch7vis select,#ch7vis input[type=number]{width:100%;padding:8px;border:1px solid var(--line);border-radius:5px;background:white;color:var(--ink)}#ch7vis .metric{font-size:1.2rem;font-weight:600}#ch7vis .turn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin-top:20px}#ch7vis .turn{padding:15px;background:#edf4f4;border-top:4px solid #18758a}#ch7vis .turn.omitted{background:#f2f2f2;border-top-color:#b7b7b7;color:#56616b}#ch7vis .turn p{font-size:.86rem;margin:8px 0}#ch7vis .turn h3{font-size:1rem;margin:0}#ch7vis .bartrack{height:24px;background:#e6ebef;position:relative;border-radius:3px;margin:14px 0}#ch7vis .bar{height:100%;background:#18758a;border-radius:3px}#ch7vis .budgetline{position:absolute;width:2px;height:34px;top:-5px;background:#992e40;left:50%}#ch7vis .out{padding:18px;background:#eaf4f5;border-left:4px solid #18758a}#ch7vis .timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:10px;margin:22px 0}#ch7vis .stage{padding:12px;background:#eceff2;color:#536271}#ch7vis .stage.done{background:#dceff1;color:#17333c}#ch7vis .stage.current{outline:3px solid #175e73;outline-offset:2px}#ch7vis .stage small{display:block}#ch7vis .trace{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.86rem;color:var(--ink);background:#edf1f4}#ch7vis .dots{display:flex;flex-wrap:wrap;gap:8px}#ch7vis .dot{background:#e5eff4;border-radius:4px;padding:8px 12px;font-family:monospace}#ch7vis .small{font-size:.85rem;color:var(--muted)}#ch7vis .qplot{width:100%;min-height:210px}#ch7vis svg text{font-family:inherit;font-size:13px;fill:#253b4b}#ch7vis button:focus-visible,#ch7vis input:focus-visible,#ch7vis select:focus-visible{outline:3px solid #175e73;outline-offset:3px}#ch7vis .barlabel{display:flex;justify-content:space-between;font-size:.83rem}#ch7vis .legend{display:flex;gap:22px;flex-wrap:wrap;font-size:.85rem}#ch7vis .legend span:before{content:'';display:inline-block;width:12px;height:12px;background:#18758a;margin-right:6px}#ch7vis .legend span:last-child:before{background:#cc8a29}#ch7vis .warningtext{color:#992e40;font-weight:600}@media(max-width:500px){#ch7vis .controls{display:block}#ch7vis .metric{font-size:1.1rem}}
+</style>
+</head>
+<body>
+<main id="ch7vis">
+<nav aria-label="학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lab-guide.md">실습</a><a href="quiz.md">복습 문제</a></nav>
+<h1>기억과 행동은 어떻게 이어질까</h1>
+<p class="lead">기록을 선택하는 방식과 도구의 관찰 결과가 다음 입력을 어떻게 바꾸는지 직접 확인합니다.</p>
+<p class="source">교육용 가상 대화·가격·환율을 사용합니다. 실제 LLM, 검색 API, 토크나이저를 실행하지 않습니다. 원문: 7장 PDF 280–315쪽.</p>
+<section aria-labelledby="memory-title">
+<h2 id="memory-title">1. 다음 호출에 무엇을 보여 줄까</h2>
+<p>호출 직전의 기록을 비교합니다. 최근 창은 완료된 대화 쌍을 선택하며, 요약은 명시된 이름·나이·도시만 남기는 규칙형 압축입니다.</p>
+<div class="controls">
+<label>메모리 전략<select id="memory-mode"><option value="window">최근 대화 창</option><option value="full">전체 버퍼</option><option value="summary">사실 요약</option></select></label>
+<label>현재 호출 <strong id="turn-value">4</strong> / 6<input id="memory-turn" type="range" min="1" max="6" value="4"></label>
+<label>창 크기 <strong id="window-value">2</strong> 대화 쌍<input id="memory-window" type="range" min="1" max="5" value="2"></label>
+</div>
+<div class="out" aria-live="polite"><div id="current-question"></div><div id="current-answer" class="metric"></div></div>
+<div id="memory-cards" class="turn-grid"></div>
+<p id="summary-note" class="note" hidden></p>
+<p class="metric" id="memory-count"></p>
+<div class="bartrack" role="img" aria-label="기록 길이와 35단어 예산 비교"><div id="memory-bar" class="bar"></div><span class="budgetline"></span></div>
+<div class="barlabel"><span>0단어</span><span>예산 35단어</span><span>70단어</span></div>
+<p id="memory-budget" aria-live="polite"></p>
+<p class="small">길이는 공백으로 구분한 단어 수이며 모델 토큰 수가 아닙니다. 예산선은 교육용 35단어이고, 초과해도 이 화면은 기록을 임의로 자르지 않습니다. 사실 요약 생성의 추가 모델 비용은 이 모형에 포함되지 않습니다.</p>
+<details><summary>실제로 다음 호출에 제공하는 기록 보기</summary><pre id="memory-context" class="trace"></pre></details>
+</section>
+<section aria-labelledby="agent-title">
+<h2 id="agent-title">2. 도구 결과를 보고 다음 행동 결정하기</h2>
+<p>행동 선택은 정해진 규칙으로 구현했습니다. 선택자가 요청하고, 실행기가 도구를 호출하며, 결과가 기록된 뒤 다음 행동이 진행됩니다.</p>
+<div class="controls">
+<label>교육용 환율 EUR / USD<input id="agent-rate" type="number" min="0.01" max="2" step="0.01" value="0.85"></label>
+<label>첫 가격 조회<select id="agent-failure"><option value="no">성공</option><option value="yes">실패 후 재조회</option></select></label>
+</div>
+<div class="controls"><button id="agent-next" type="button">다음 단계</button><button id="agent-reset" type="button">처음으로</button><span id="agent-progress" aria-live="polite"></span></div>
+<div id="agent-timeline" class="timeline"></div>
+<div id="agent-result" class="out" aria-live="polite"></div>
+<pre id="agent-log" class="trace" aria-label="실제 모의 도구 실행 기록"></pre>
+<p class="small">상품은 가상의 StudyLaptop, 가격은 1200 USD입니다. 데이터 출처는 이 문서의 로컬 예제입니다. 현재 시세나 현재 환율을 나타내지 않습니다. ‘종료’ 단계까지 진행해야 완료 상태가 됩니다.</p>
+</section>
+<section aria-labelledby="quant-title">
+<h2 id="quant-title">3. 적은 비트로 같은 숫자들을 표현하기</h2>
+<p>8개의 작은 수를 동일 간격의 값으로 근사합니다. 실제 GGUF 양자화 구현과 다릅니다.</p>
+<label>표현 비트 <strong id="bits-value">4</strong><input id="quant-bits" type="range" min="2" max="8" value="4"></label>
+<div class="legend"><span>원래 값</span><span>복원한 값</span></div>
+<svg id="quant-plot" class="qplot" viewBox="0 0 800 245" role="img" aria-label="양자화 전후 값 비교"></svg>
+<div id="quant-values" class="dots"></div>
+<p class="metric" id="quant-metrics" aria-live="polite"></p>
+<p class="small">저장량은 8개 가중치의 이상적인 압축 데이터만 계산합니다. 스케일·메타데이터·실행 메모리는 제외합니다.</p>
+</section>
+<nav aria-label="학습 계속하기"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lab-guide.md">실습</a><a href="quiz.md">복습 문제</a></nav>
+</main>
+<script>
+'use strict';
+const el=id=>document.getElementById(id);
+const questions=['My name is Mina. I am 29 years old. What is 1 + 1?','What is 3 + 3?','What is my name?','What is my age?','Correction: I am 30 years old. I live in Busan.','Where do I live?'];
+const koQuestions=['내 이름은 민아, 나이는 29세. 1 + 1은?','3 + 3은?','내 이름은?','내 나이는?','나이를 30세로 정정할게. 부산에 살아.','내가 사는 도시는?'];
+function facts(text){const r={};const ps={name:/(?:My name is|Your name is) ([A-Za-z]+)/g,age:/(?:I am|Your age is) (\d+)/g,city:/(?:I live in|You live in) ([A-Za-z]+)/g};for(const [k,re] of Object.entries(ps)){const matches=[...text.matchAll(re)];if(matches.length)r[k]=matches[matches.length-1][1];}return r;}
+function factText(f){return [f.name?'My name is '+f.name+'.':'',f.age?'I am '+f.age+' years old.':'',f.city?'I live in '+f.city+'.':''].filter(Boolean).join(' ');}
+function reply(q,c){const f=facts(c+'\n'+q);if(q.includes('What is my name'))return f.name?'Your name is '+f.name+'.':'Name unknown.';if(q.includes('What is my age'))return f.age?'Your age is '+f.age+'.':'Age unknown.';if(q.includes('Where do I live'))return f.city?'You live in '+f.city+'.':'City unknown.';if(q.includes('1 + 1'))return '1 + 1 = 2.';if(q.includes('3 + 3'))return '3 + 3 = 6.';return 'Update received.';}
+function memoryRows(mode,k){let h=[],f={},rows=[];questions.forEach((q,i)=>{const selected=mode==='full'?h:mode==='window'?h.slice(-k):[];const c=mode==='summary'?factText(f):selected.map(x=>'Human: '+x.q+'\nAssistant: '+x.a).join('\n');const a=reply(q,c);rows.push({q,a,context:c,history:[...h],visible:selected.map(x=>x.i),words:c.trim()?c.trim().split(/\s+/).length:0,facts:{...f}});h.push({q,a,i});f={...f,...facts(q)};});return rows;}
+function renderMemory(){const mode=el('memory-mode').value,k=Number(el('memory-window').value),turn=Number(el('memory-turn').value);const row=memoryRows(mode,k)[turn-1];el('turn-value').textContent=turn;el('window-value').textContent=k;el('memory-window').disabled=mode!=='window';el('current-question').textContent='현재 질문: '+koQuestions[turn-1];el('current-answer').textContent='규칙형 응답: '+row.a;el('memory-cards').replaceChildren();row.history.forEach(h=>{const shown=row.visible.includes(h.i);const card=document.createElement('div');card.className='turn'+(shown?'':' omitted');const heading=document.createElement('h3');heading.textContent=(h.i+1)+'번 대화 · '+(shown?'원문 포함':mode==='summary'?'사실만 압축':'창 밖');const p=document.createElement('p');p.textContent=koQuestions[h.i];const a=document.createElement('p');a.textContent=h.a;card.append(heading,p,a);el('memory-cards').append(card);});if(!row.history.length)el('memory-cards').textContent='아직 이전 대화가 없습니다.';el('summary-note').hidden=mode!=='summary';el('summary-note').textContent='요약에 남은 명시적 사실: '+(Object.entries(row.facts).map(([k,v])=>k+'='+v).join(', ')||'없음')+'. 원래 문장 전체는 보존하지 않습니다.';el('memory-count').textContent='현재 입력에 붙는 기록: '+row.words+' 단어';el('memory-bar').style.width=Math.min(100,row.words/70*100)+'%';el('memory-budget').textContent=row.words>35?'예산 초과: '+(row.words-35)+'단어만큼 초과합니다.':'예산 내: '+(35-row.words)+'단어의 여유가 있습니다.';el('memory-budget').className=row.words>35?'warningtext':'';el('memory-context').textContent=row.context||'(빈 기록)';}
+let agentStep=0;
+function agentSteps(){const raw=Number(el('agent-rate').value);const valid=Number.isFinite(raw)&&raw>=0.01&&raw<=2;const rate=valid?raw:0.85;const steps=[];if(el('agent-failure').value==='yes')steps.push({name:'가격 조회 실패',action:'lookup_price',observation:'모의 오류: 첫 조회 실패',note:'오류 관찰 뒤 다른 조회를 선택'});steps.push({name:'가격 조회 성공',action:'lookup_price',observation:'1200 USD · 로컬 교육 자료',note:'가격과 통화를 확보'});steps.push({name:'환산 계산',action:'convert',observation:'1200 × '+rate.toFixed(2)+' = '+(1200*rate).toFixed(2)+' EUR',note:'계산 결과와 단위를 관찰'});steps.push({name:'종료',action:'finish',observation:'완료 · '+(1200*rate).toFixed(2)+' EUR · 교육용 환율 '+rate.toFixed(2),note:'근거와 조건을 포함한 결과'});return {steps,valid};}
+function renderAgent(){const {steps,valid}=agentSteps();agentStep=Math.min(agentStep,steps.length);el('agent-timeline').replaceChildren();steps.forEach((s,i)=>{const d=document.createElement('div');d.className='stage'+(i<agentStep?' done':'')+(i===agentStep-1?' current':'');d.textContent=(i+1)+'. '+s.name;const sm=document.createElement('small');sm.textContent=i<agentStep?'실행됨':'대기';d.append(sm);el('agent-timeline').append(d);});el('agent-progress').textContent=agentStep+' / '+steps.length+' 단계';el('agent-next').disabled=!valid||agentStep===steps.length;el('agent-result').textContent=!valid?'환율은 0.01~2.00 범위의 숫자로 입력하세요.':agentStep===steps.length?steps[steps.length-1].observation:agentStep?steps[agentStep-1].observation+' · 아직 전체 과제는 미완료':'현재 상태: 가격 조회가 필요합니다.';el('agent-log').textContent=steps.slice(0,agentStep).map((s,i)=>(i+1)+'. Action: '+s.action+'\nObservation: '+s.observation+'\n다음 상태: '+s.note).join('\n\n')||'아직 도구를 실행하지 않았습니다.';}
+const original=[-1,-.73,-.31,-.05,.13,.38,.67,1];
+function renderQuant(){const b=Number(el('quant-bits').value),levels=2**b-1,scale=2/levels;const restored=original.map(x=>-1+Math.round((x+1)/scale)*scale);const mse=original.reduce((s,x,i)=>s+(x-restored[i])**2,0)/original.length;el('bits-value').textContent=b;el('quant-metrics').textContent='이상적 저장량 '+(8*b/8).toFixed(0)+' bytes · 평균제곱오차 '+mse.toFixed(8);const svg=el('quant-plot');const width=Math.max(300,Math.round(svg.getBoundingClientRect().width||800));svg.setAttribute('viewBox','0 0 '+width+' 245');const left=46,right=width-22,top=25,bottom=200;const y=v=>bottom-(v+1)/2*(bottom-top);let markup='<title>양자화 전후 8개 값</title><desc>비트를 바꾸면 복원 값과 오차가 변합니다.</desc>';[-1,0,1].forEach(v=>{markup+='<line x1="'+left+'" y1="'+y(v)+'" x2="'+right+'" y2="'+y(v)+'" stroke="#d7e0e5"/><text x="'+(left-10)+'" y="'+(y(v)+4)+'" text-anchor="end">'+v+'</text>';});original.forEach((v,i)=>{const x=left+12+i*(right-left-24)/7;markup+='<line x1="'+x+'" y1="'+y(v)+'" x2="'+x+'" y2="'+y(restored[i])+'" stroke="#7b8f9a"/><circle cx="'+x+'" cy="'+y(v)+'" r="5" fill="#18758a"/><rect x="'+(x-4)+'" y="'+(y(restored[i])-4)+'" width="8" height="8" fill="#cc8a29"/><text x="'+x+'" y="225" text-anchor="middle">'+(i+1)+'</text>';});markup+='<text x="'+left+'" y="15">값</text><text x="'+right+'" y="242" text-anchor="end">가중치 번호</text>';svg.innerHTML=markup;el('quant-values').replaceChildren();restored.forEach((v,i)=>{const d=document.createElement('span');d.className='dot';d.textContent=(i+1)+': '+v.toFixed(3);el('quant-values').append(d);});}
+['memory-mode','memory-turn','memory-window'].forEach(id=>el(id).addEventListener('input',renderMemory));el('agent-next').addEventListener('click',()=>{agentStep++;renderAgent();});el('agent-reset').addEventListener('click',()=>{agentStep=0;renderAgent();});['agent-rate','agent-failure'].forEach(id=>el(id).addEventListener('input',()=>{agentStep=0;renderAgent();}));el('quant-bits').addEventListener('input',renderQuant);window.addEventListener('resize',renderQuant);renderMemory();renderAgent();renderQuant();
+</script>
+</body>
+</html>

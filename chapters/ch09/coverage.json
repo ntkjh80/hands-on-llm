@@ -1,0 +1,286 @@
+{
+  "chapter": 9,
+  "source": {
+    "title": "Hands-On Large Language Models",
+    "authors": [
+      "Jay Alammar",
+      "Maarten Grootendorst"
+    ],
+    "edition": "2024 first edition",
+    "pagination": "PDF physical pages",
+    "chapter_text_pages": [
+      360,
+      396
+    ],
+    "references_pages": [
+      396,
+      397
+    ],
+    "following_part_title_page": 398
+  },
+  "sections": [
+    {
+      "source_title": "Transformers for Vision",
+      "pdf_page": 361,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "이미지 패치",
+        "패치 개수와 원시 벡터 길이",
+        "선형 투영",
+        "위치 정보와 클래스 토큰",
+        "attention 점수 행렬 크기"
+      ]
+    },
+    {
+      "source_title": "Multimodal Embedding Models",
+      "pdf_page": 364,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "공동 임베딩 공간",
+        "차원 일치와 의미 정렬의 차이",
+        "모달리티 간 검색",
+        "평가 목적과 데이터"
+      ]
+    },
+    {
+      "source_title": "CLIP: Connecting Text and Images",
+      "pdf_page": 366,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "제로샷 분류",
+        "군집화",
+        "텍스트·이미지 검색",
+        "이미지 생성 시스템에서의 표현 역할"
+      ]
+    },
+    {
+      "source_title": "How Can CLIP Generate Multimodal Embeddings?",
+      "pdf_page": 367,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "이미지·캡션 쌍",
+        "두 인코더",
+        "코사인 유사도",
+        "양성과 경쟁 후보",
+        "대칭 대조 손실과 온도 보충",
+        "모호한 부정 예제"
+      ]
+    },
+    {
+      "source_title": "OpenCLIP",
+      "pdf_page": 370,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "OpenCLIP 절과 실제 Transformers 체크포인트 구분",
+        "토큰화",
+        "텍스트 특징 형상",
+        "이미지 전처리",
+        "정규화와 유사도 행렬",
+        "0.3315 점수 해석",
+        "Sentence-Transformers 대안"
+      ]
+    },
+    {
+      "source_title": "Making Text Generation Models Multimodal",
+      "pdf_page": 377,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "시각 이해와 자유로운 텍스트 생성",
+        "모달리티 간 간격",
+        "사전학습 모델 연결",
+        "시각 정보와 외부 지식"
+      ]
+    },
+    {
+      "source_title": "BLIP-2: Bridging the Modality Gap",
+      "pdf_page": 378,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "시각 인코더와 LLM 동결",
+        "Q-Former의 학습 가능한 query",
+        "첫 단계 세 목적",
+        "두 번째 단계 생성 연결",
+        "투영 차원",
+        "soft visual prompt",
+        "LLaVA와 Idefics 2의 공통점·차이"
+      ]
+    },
+    {
+      "source_title": "Preprocessing Multimodal Inputs",
+      "pdf_page": 383,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "processor와 모델",
+        "RGB·배치·공간 차원",
+        "resize·crop·padding",
+        "장치와 dtype",
+        "GPT2TokenizerFast 표기",
+        "공백 Ġ 표시",
+        "tokenizer max length 해석",
+        "전처리 디버깅"
+      ]
+    },
+    {
+      "source_title": "Use Case 1: Image Captioning",
+      "pdf_page": 387,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "캡셔닝 흐름",
+        "generate의 텍스트 토큰 ID",
+        "batch_decode",
+        "자동차 예제",
+        "도메인 밖 이미지",
+        "Rorschach 모호성",
+        "캡션 평가 기준"
+      ]
+    },
+    {
+      "source_title": "Use Case 2: Multimodal Chat-Based Prompting",
+      "pdf_page": 391,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "이미지와 질문 동시 입력",
+        "프롬프트 형식",
+        "이력 재전달",
+        "가격 답변의 근거 부족",
+        "ipywidgets 이벤트 흐름",
+        "문자열 후처리의 한계",
+        "이미지 전환과 토큰 길이"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 395,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "ViT·CLIP·BLIP-2 역할 비교",
+        "입출력과 자료형 정리",
+        "10장 대조 학습 연결",
+        "복습 확인"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 9-1",
+      "pdf_page": 360,
+      "explained_in": "study.md#sec-00"
+    },
+    {
+      "label": "Figure 9-2",
+      "pdf_page": 362,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 9-3",
+      "pdf_page": 362,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 9-4",
+      "pdf_page": 363,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 9-5",
+      "pdf_page": 364,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 9-6",
+      "pdf_page": 365,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 9-7",
+      "pdf_page": 366,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 9-8",
+      "pdf_page": 367,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 9-9",
+      "pdf_page": 368,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 9-10",
+      "pdf_page": 369,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 9-11",
+      "pdf_page": 369,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 9-12",
+      "pdf_page": 371,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 9-13",
+      "pdf_page": 374,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 9-14",
+      "pdf_page": 376,
+      "explained_in": "study.md#sec-05"
+    },
+    {
+      "label": "Figure 9-15",
+      "pdf_page": 378,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 9-16",
+      "pdf_page": 379,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 9-17",
+      "pdf_page": 380,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 9-18",
+      "pdf_page": 381,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 9-19",
+      "pdf_page": 381,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 9-20",
+      "pdf_page": 382,
+      "explained_in": "study.md#sec-07"
+    },
+    {
+      "label": "Figure 9-21",
+      "pdf_page": 390,
+      "explained_in": "study.md#sec-09"
+    }
+  ],
+  "source_tables": [],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true,
+    "markdown_links_checked": true,
+    "source_section_count": 11,
+    "covered_section_count": 11,
+    "source_figure_count": 21,
+    "covered_figure_count": 21
+  },
+  "limitations": [
+    "CLIP·BLIP-2 가중치를 다운로드하거나 실제 모델 추론을 실행하지 않았다.",
+    "Python 및 브라우저 실험은 교육용 합성 데이터와 단순화한 연산이며 Q-Former 전체 또는 모델 학습을 구현하지 않는다.",
+    "2024년 원문 코드 설명은 현재 API 호환성을 보장하지 않는다."
+  ]
+}

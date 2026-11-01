@@ -1,0 +1,508 @@
+{
+  "chapter": 12,
+  "source_book": "Hands-On Large Language Models (2024), Chapter 12",
+  "page_numbering": "PDF physical pages, one-based",
+  "source_pdf_pages": [
+    487,
+    535
+  ],
+  "sections": [
+    {
+      "source_title": "The Three LLM Training Steps: Pretraining, Supervised Fine-Tuning, and Preference Tuning",
+      "pdf_page": 487,
+      "target": "study.md#sec-01",
+      "covered_topics": [
+        "자기지도 다음 토큰 예측",
+        "기반 모델",
+        "SFT와 선호 학습의 데이터 차이"
+      ]
+    },
+    {
+      "source_title": "Supervised Fine-Tuning (SFT)",
+      "pdf_page": 489,
+      "target": "study.md#sec-02",
+      "covered_topics": [
+        "지시 준수",
+        "다음 토큰 NLL",
+        "응답 마스킹",
+        "teacher forcing"
+      ]
+    },
+    {
+      "source_title": "Full Fine-Tuning",
+      "pdf_page": 490,
+      "target": "study.md#sec-03",
+      "covered_topics": [
+        "전체 가중치 업데이트",
+        "훈련 메모리 구성",
+        "작업별 저장 비용"
+      ]
+    },
+    {
+      "source_title": "Parameter-Efficient Fine-Tuning (PEFT)",
+      "pdf_page": 492,
+      "target": "study.md#sec-04",
+      "covered_topics": [
+        "어댑터 구조와 교환",
+        "LoRA 차원과 변화량",
+        "rank와 alpha",
+        "양자화",
+        "NF4",
+        "double quantization",
+        "paged optimizer"
+      ]
+    },
+    {
+      "source_title": "Instruction Tuning with QLoRA",
+      "pdf_page": 503,
+      "target": "study.md#sec-05",
+      "covered_topics": [
+        "TinyLlama QLoRA 실습 전체 흐름"
+      ]
+    },
+    {
+      "source_title": "Templating Instruction Data",
+      "pdf_page": 503,
+      "target": "study.md#sec-06",
+      "covered_topics": [
+        "채팅 템플릿",
+        "UltraChat 3000개",
+        "역할 및 종료 토큰",
+        "분할 사용 의미"
+      ]
+    },
+    {
+      "source_title": "Model Quantization",
+      "pdf_page": 505,
+      "target": "study.md#sec-07",
+      "covered_topics": [
+        "BitsAndBytesConfig",
+        "4비트 저장과 계산 dtype",
+        "캐시",
+        "패딩",
+        "훈련 메모리"
+      ]
+    },
+    {
+      "source_title": "LoRA Configuration",
+      "pdf_page": 506,
+      "target": "study.md#sec-08",
+      "covered_topics": [
+        "rank 64와 alpha 32",
+        "dropout",
+        "대상 투영층",
+        "학습 파라미터 확인"
+      ]
+    },
+    {
+      "source_title": "Training Configuration",
+      "pdf_page": 508,
+      "target": "study.md#sec-09",
+      "covered_topics": [
+        "배치 누적",
+        "학습률",
+        "cosine과 warmup 구분",
+        "gradient checkpointing"
+      ]
+    },
+    {
+      "source_title": "Training",
+      "pdf_page": 509,
+      "target": "study.md#sec-10",
+      "covered_topics": [
+        "SFTTrainer 역할",
+        "토큰 길이 제한",
+        "어댑터 저장",
+        "실행 범위"
+      ]
+    },
+    {
+      "source_title": "Merge Weights",
+      "pdf_page": 510,
+      "target": "study.md#sec-11",
+      "covered_topics": [
+        "병합 수식",
+        "분리 추론",
+        "정밀도",
+        "템플릿 일치",
+        "전후 평가"
+      ]
+    },
+    {
+      "source_title": "Evaluating Generative Models",
+      "pdf_page": 511,
+      "target": "study.md#sec-12",
+      "covered_topics": [
+        "사용 사례별 평가",
+        "학습 손실과 품질 구분"
+      ]
+    },
+    {
+      "source_title": "Word-Level Metrics",
+      "pdf_page": 512,
+      "target": "study.md#sec-13",
+      "covered_topics": [
+        "perplexity",
+        "ROUGE",
+        "BLEU",
+        "BERTScore",
+        "비교 조건"
+      ]
+    },
+    {
+      "source_title": "Benchmarks",
+      "pdf_page": 512,
+      "target": "study.md#sec-14",
+      "covered_topics": [
+        "MMLU",
+        "GLUE",
+        "TruthfulQA",
+        "GSM8K",
+        "HellaSwag",
+        "HumanEval",
+        "오염과 비용"
+      ]
+    },
+    {
+      "source_title": "Leaderboards",
+      "pdf_page": 515,
+      "target": "study.md#sec-15",
+      "covered_topics": [
+        "리더보드의 목적",
+        "평균 점수의 한계",
+        "목표 과제 차이"
+      ]
+    },
+    {
+      "source_title": "Automated Evaluation",
+      "pdf_page": 516,
+      "target": "study.md#sec-16",
+      "covered_topics": [
+        "LLM-as-a-judge",
+        "쌍별 비교",
+        "순서와 문체 편향"
+      ]
+    },
+    {
+      "source_title": "Human Evaluation",
+      "pdf_page": 516,
+      "target": "study.md#sec-17",
+      "covered_topics": [
+        "사람 평가",
+        "익명 쌍별 비교",
+        "Elo 직관",
+        "평가표",
+        "Goodhart"
+      ]
+    },
+    {
+      "source_title": "Preference-Tuning / Alignment / RLHF",
+      "pdf_page": 518,
+      "target": "study.md#sec-18",
+      "covered_topics": [
+        "선호도",
+        "정렬과 RLHF 구분",
+        "평가와 정책 변화"
+      ]
+    },
+    {
+      "source_title": "Automating Preference Evaluation Using Reward Models",
+      "pdf_page": 519,
+      "target": "study.md#sec-19",
+      "covered_topics": [
+        "보상 모델 학습의 필요",
+        "점수 헤드"
+      ]
+    },
+    {
+      "source_title": "The Inputs and Outputs of a Reward Model",
+      "pdf_page": 520,
+      "target": "study.md#sec-20",
+      "covered_topics": [
+        "질문과 응답 입력",
+        "스칼라 점수",
+        "절대 점수 해석"
+      ]
+    },
+    {
+      "source_title": "Training a Reward Model",
+      "pdf_page": 521,
+      "target": "study.md#sec-21",
+      "covered_topics": [
+        "chosen와 rejected",
+        "수집",
+        "쌍별 점수 차이 손실",
+        "PPO",
+        "다중 보상"
+      ]
+    },
+    {
+      "source_title": "Training No Reward Model",
+      "pdf_page": 526,
+      "target": "study.md#sec-22",
+      "covered_topics": [
+        "기준 모델",
+        "응답 로그확률 합",
+        "DPO 손실",
+        "beta",
+        "손계산",
+        "길이 효과"
+      ]
+    },
+    {
+      "source_title": "Preference Tuning with DPO",
+      "pdf_page": 528,
+      "target": "study.md#sec-23",
+      "covered_topics": [
+        "SFT에서 DPO로 이어지는 모델 계보"
+      ]
+    },
+    {
+      "source_title": "Templating Alignment Data",
+      "pdf_page": 528,
+      "target": "study.md#sec-24",
+      "covered_topics": [
+        "prompt chosen rejected",
+        "distilabel 데이터",
+        "필터",
+        "잘림과 중복"
+      ]
+    },
+    {
+      "source_title": "Model Quantization",
+      "pdf_page": 529,
+      "target": "study.md#sec-25",
+      "covered_topics": [
+        "SFT 모델의 양자화",
+        "DPO 어댑터 출발점",
+        "원문 모델 변수 점검"
+      ]
+    },
+    {
+      "source_title": "Training Configuration",
+      "pdf_page": 530,
+      "target": "study.md#sec-26",
+      "covered_topics": [
+        "200 step",
+        "warmup 20 step",
+        "학습률",
+        "응답 길이와 비용"
+      ]
+    },
+    {
+      "source_title": "Training",
+      "pdf_page": 531,
+      "target": "study.md#sec-27",
+      "covered_topics": [
+        "DPOTrainer",
+        "어댑터 저장",
+        "순차 병합",
+        "ORPO"
+      ]
+    },
+    {
+      "source_title": "Summary",
+      "pdf_page": 533,
+      "target": "study.md#sec-28",
+      "covered_topics": [
+        "전체 단계 연결",
+        "응용 설계",
+        "독립 평가",
+        "참고문헌"
+      ]
+    }
+  ],
+  "figures_and_tables": [
+    {
+      "label": "Figure 12-1",
+      "pdf_page": 488,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 12-2",
+      "pdf_page": 488,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 12-3",
+      "pdf_page": 489,
+      "explained_in": "study.md#sec-01"
+    },
+    {
+      "label": "Figure 12-4",
+      "pdf_page": 490,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 12-5",
+      "pdf_page": 490,
+      "explained_in": "study.md#sec-02"
+    },
+    {
+      "label": "Figure 12-6",
+      "pdf_page": 491,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 12-7",
+      "pdf_page": 492,
+      "explained_in": "study.md#sec-03"
+    },
+    {
+      "label": "Figure 12-8",
+      "pdf_page": 494,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-9",
+      "pdf_page": 495,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-10",
+      "pdf_page": 496,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-11",
+      "pdf_page": 497,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-12",
+      "pdf_page": 498,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-13",
+      "pdf_page": 498,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-14",
+      "pdf_page": 499,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-15",
+      "pdf_page": 500,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-16",
+      "pdf_page": 501,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-17",
+      "pdf_page": 501,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-18",
+      "pdf_page": 502,
+      "explained_in": "study.md#sec-04"
+    },
+    {
+      "label": "Figure 12-19",
+      "pdf_page": 503,
+      "explained_in": "study.md#sec-06"
+    },
+    {
+      "label": "Figure 12-20",
+      "pdf_page": 512,
+      "explained_in": "study.md#sec-13"
+    },
+    {
+      "label": "Figure 12-21",
+      "pdf_page": 518,
+      "explained_in": "study.md#sec-18"
+    },
+    {
+      "label": "Figure 12-22",
+      "pdf_page": 518,
+      "explained_in": "study.md#sec-18"
+    },
+    {
+      "label": "Figure 12-23",
+      "pdf_page": 519,
+      "explained_in": "study.md#sec-18"
+    },
+    {
+      "label": "Figure 12-24",
+      "pdf_page": 520,
+      "explained_in": "study.md#sec-19"
+    },
+    {
+      "label": "Figure 12-25",
+      "pdf_page": 520,
+      "explained_in": "study.md#sec-19"
+    },
+    {
+      "label": "Figure 12-26",
+      "pdf_page": 521,
+      "explained_in": "study.md#sec-20"
+    },
+    {
+      "label": "Figure 12-27",
+      "pdf_page": 522,
+      "explained_in": "study.md#sec-21"
+    },
+    {
+      "label": "Figure 12-28",
+      "pdf_page": 523,
+      "explained_in": "study.md#sec-21"
+    },
+    {
+      "label": "Figure 12-29",
+      "pdf_page": 524,
+      "explained_in": "study.md#sec-21"
+    },
+    {
+      "label": "Figure 12-30",
+      "pdf_page": 525,
+      "explained_in": "study.md#sec-21"
+    },
+    {
+      "label": "Figure 12-31",
+      "pdf_page": 525,
+      "explained_in": "study.md#sec-21"
+    },
+    {
+      "label": "Figure 12-32",
+      "pdf_page": 526,
+      "explained_in": "study.md#sec-22"
+    },
+    {
+      "label": "Figure 12-33",
+      "pdf_page": 527,
+      "explained_in": "study.md#sec-22"
+    },
+    {
+      "label": "Table 12-1",
+      "pdf_page": 514,
+      "pdf_end_page": 515,
+      "explained_in": "study.md#sec-14"
+    }
+  ],
+  "checks": {
+    "source_read_complete": true,
+    "lab_executed": true,
+    "visuals_checked": true,
+    "markdown_links_checked": true,
+    "javascript_syntax_checked": true,
+    "desktop_mobile_screenshots_reviewed": true
+  },
+  "limitations": [
+    "실제 TinyLlama SFT/DPO GPU 훈련은 실행하지 않음. 원문 2024년 API 코드의 현재 호환성을 보장하지 않음.",
+    "CPU 양자화는 교육용 균일 min-max 양자화이며 NF4 구현이 아님.",
+    "DPO CPU 실습은 질문 하나와 응답 둘로 제한한 가상 정책이며 실제 언어 모델 성능 평가가 아님."
+  ],
+  "corrections_and_clarifications": [
+    "PDF 499 rank 8의 차원은 12288×8 및 8×12288이며 196608개다.",
+    "LoRA는 고정 기반 가중치를 대체하지 않고 저랭크 변화량을 더한다.",
+    "cosine scheduler와 별도 warmup 설정을 구분한다.",
+    "DPO 출발 체크포인트와 병합된 객체 변수를 일치시켜야 한다.",
+    "ORPO를 SFT 손실과 DPO 손실의 단순 합으로 해석하지 않는다."
+  ]
+}

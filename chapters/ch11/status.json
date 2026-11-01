@@ -1,0 +1,66 @@
+{
+  "chapter": 11,
+  "status": "complete",
+  "files": [
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "coverage.json",
+    "status.json"
+  ],
+  "lab_command": "python3 chapters/ch11/lab.py",
+  "validation": [
+    "원문 PDF 446–486쪽 전체 추출본을 읽음; 459·466·482쪽 이미지 확인",
+    "원문 절 11개·그림 21개 대응 확인",
+    "기본 CPU 실습 실행 및 lab-output.txt 저장",
+    "작은 모델 기울기 유한차분 오차 1.11e-10, 동결 불변성 확인",
+    "쌍 수·whole-word 묶음·BIO 정렬·strict span F1 검산",
+    "변경 실행: seed 4, mask 1, 클래스당 4개, 학습 30단계 통과",
+    "JavaScript 구문 확인 및 최소 DOM 스텁에서 계산·이벤트 8개 상태 검증",
+    "Markdown 내부 링크·앵커·fence·GitHub $$ 수식·18개 접힌 해설 확인",
+    "루트 통합 검증 결과 확인: steps·count-a·count-b·ner-case의 수치·도형 갱신, 런타임 오류 0, 390px 문서 가로 넘침 없음",
+    "통합 검증 데스크톱·모바일 스크린샷 직접 확인",
+    "현재 HTML SHA256과 루트 통합 브라우저 검증 기록이 정확히 일치함을 확인; 시각화 최종 판본 검증 완료"
+  ],
+  "limitations": [
+    "실제 BERT·SetFit·MLM·NER 모델/GPU 학습은 수행하지 않았으며 원문 보고값과 CPU 가상 실습 결과를 구분했습니다.",
+    "외부 링크 문서는 2026-10-20에 확인한 보충 근거이며 원문의 2024년 API가 현재 환경에서 그대로 실행된다는 주장은 하지 않습니다."
+  ],
+  "counts": {
+    "source_sections": 11,
+    "source_figures": 21,
+    "quiz_questions": 18,
+    "mermaid_diagrams": 4,
+    "interactive_experiments": 3,
+    "study_characters": 31996,
+    "lecture_script_characters": 11830
+  },
+  "visual_validation": {
+    "reviewer": "root integrated browser verification",
+    "browser_tested_sha256": "85ad44df858b932d4e510c2efad7c8b69ace7587aea1edd890668f88bc92cc44",
+    "current_sha256": "85ad44df858b932d4e510c2efad7c8b69ace7587aea1edd890668f88bc92cc44",
+    "exact_revision_browser_checked": true,
+    "browser_evidence": "../../output/qa/visual-checks.json",
+    "screenshots": [
+      "../../output/qa/ch11-desktop.png",
+      "../../output/qa/ch11-mobile.png"
+    ],
+    "browser_results": {
+      "runtime_errors": 0,
+      "document_width": 390,
+      "viewport_width": 390,
+      "verified_controls": [
+        "steps",
+        "count-a",
+        "count-b",
+        "ner-case"
+      ]
+    },
+    "result": "현재 HTML과 통합 브라우저 검증 기록의 SHA256이 일치합니다. 수치·도형 갱신, 런타임 오류 0, 390px 문서 가로 넘침 없음을 확인했습니다. 시각화 파일은 수정하지 않았습니다."
+  }
+}

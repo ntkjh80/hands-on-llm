@@ -1,0 +1,86 @@
+{
+  "number": 10,
+  "title_en": "10. Creating Text Embedding Models",
+  "title_ko": "텍스트 임베딩 모델 만들기",
+  "pdf_start": 399,
+  "pdf_end": 445,
+  "source": "source/ch10.txt",
+  "directory": "chapters/ch10",
+  "sections": [
+    {
+      "title": "Embedding Models",
+      "pdf_page": 399,
+      "depth": 1
+    },
+    {
+      "title": "What Is Contrastive Learning?",
+      "pdf_page": 402,
+      "depth": 1
+    },
+    {
+      "title": "SBERT",
+      "pdf_page": 404,
+      "depth": 1
+    },
+    {
+      "title": "Creating an Embedding Model",
+      "pdf_page": 408,
+      "depth": 1
+    },
+    {
+      "title": "Generating Contrastive Examples",
+      "pdf_page": 408,
+      "depth": 2
+    },
+    {
+      "title": "Train Model",
+      "pdf_page": 410,
+      "depth": 2
+    },
+    {
+      "title": "In-Depth Evaluation",
+      "pdf_page": 414,
+      "depth": 2
+    },
+    {
+      "title": "Loss Functions",
+      "pdf_page": 416,
+      "depth": 2
+    },
+    {
+      "title": "Fine-Tuning an Embedding Model",
+      "pdf_page": 426,
+      "depth": 1
+    },
+    {
+      "title": "Supervised",
+      "pdf_page": 426,
+      "depth": 2
+    },
+    {
+      "title": "Augmented SBERT",
+      "pdf_page": 429,
+      "depth": 2
+    },
+    {
+      "title": "Unsupervised Learning",
+      "pdf_page": 435,
+      "depth": 1
+    },
+    {
+      "title": "Transformer-Based Sequential Denoising Auto-Encoder",
+      "pdf_page": 435,
+      "depth": 2
+    },
+    {
+      "title": "Using TSDAE for Domain Adaptation",
+      "pdf_page": 441,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 443,
+      "depth": 1
+    }
+  ]
+}

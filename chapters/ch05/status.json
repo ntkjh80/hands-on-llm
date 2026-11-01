@@ -1,0 +1,59 @@
+{
+  "chapter": 5,
+  "status": "complete",
+  "title": "텍스트 군집화와 토픽 모델링",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "assets/ctfidf-example.svg",
+    "coverage.json",
+    "source-map.json",
+    "status.json"
+  ],
+  "lab_command": "python3 chapters/ch05/lab.py --check",
+  "validation": [
+    "원문 PDF 192–235쪽 전체 추출본을 읽고 209–210쪽 c-TF-IDF 및 224쪽 KeyBERTInspired 그림을 시각적으로 확인",
+    "원문 11개 절, Figure 5-1–5-24, 5개 결과 표를 coverage.json에서 연결",
+    "Python 기본 실습과 경계 사례 검산 PASS; 반경/최소이웃수/불용어/MMR 변경 실험 실행",
+    "Markdown 링크·앵커·코드 펜스·details 쌍 확인",
+    "SVG XML 파싱 및 실습 계산값과 숫자 일치 확인",
+    "HTML JavaScript 구문 검사 통과",
+    "Chrome에서 3개 시각 실험 조작 확인; 런타임 오류 0; 390px 모바일 문서 가로 넘침 없음",
+    "1100px 데스크톱 및 390px 모바일 렌더링 검토",
+    "최종 SVG를 브라우저에서 렌더링해 글자·막대·수치 확인; 모바일 화면을 구간별로 다시 확인"
+  ],
+  "statistics": {
+    "study.md": {
+      "characters": 30856,
+      "korean_syllables": 14793
+    },
+    "lecture.md": {
+      "characters": 5792,
+      "korean_syllables": 2645
+    },
+    "lecture-script.md": {
+      "characters": 10820,
+      "korean_syllables": 6812
+    },
+    "lab-guide.md": {
+      "characters": 7312,
+      "korean_syllables": 3029
+    },
+    "quiz.md": {
+      "characters": 8754,
+      "korean_syllables": 4217
+    }
+  },
+  "limitations": [
+    "실제 arXiv 다운로드 및 임베딩·UMAP·HDBSCAN·BERTopic·생성 모델 실행은 수행하지 않음.",
+    "Python 실습과 상호작용 시각화는 가상 문서/좌표/벡터로 DBSCAN·기본 c-TF-IDF·MMR 원리를 계산함.",
+    "2024년 원문의 모델/API 사용 가능성 및 최신 패키지 호환성은 검증하지 않음."
+  ]
+}

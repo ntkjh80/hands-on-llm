@@ -1,0 +1,76 @@
+{
+  "number": 3,
+  "title_en": "3. Looking Inside Large Language Models",
+  "title_ko": "트랜스포머 내부 구조",
+  "pdf_start": 116,
+  "pdf_end": 159,
+  "source": "source/ch03.txt",
+  "directory": "chapters/ch03",
+  "sections": [
+    {
+      "title": "An Overview of Transformer Models",
+      "pdf_page": 117,
+      "depth": 1
+    },
+    {
+      "title": "The Inputs and Outputs of a Trained Transformer LLM",
+      "pdf_page": 117,
+      "depth": 2
+    },
+    {
+      "title": "The Components of the Forward Pass",
+      "pdf_page": 121,
+      "depth": 2
+    },
+    {
+      "title": "Choosing a Single Token from the Probability Distribution (Sampling/Decoding)",
+      "pdf_page": 124,
+      "depth": 2
+    },
+    {
+      "title": "Parallel Token Processing and Context Size",
+      "pdf_page": 127,
+      "depth": 2
+    },
+    {
+      "title": "Speeding Up Generation by Caching Keys and Values",
+      "pdf_page": 129,
+      "depth": 2
+    },
+    {
+      "title": "Inside the Transformer Block",
+      "pdf_page": 132,
+      "depth": 2
+    },
+    {
+      "title": "Recent Improvements to the Transformer Architecture",
+      "pdf_page": 143,
+      "depth": 1
+    },
+    {
+      "title": "More Efficient Attention",
+      "pdf_page": 144,
+      "depth": 2
+    },
+    {
+      "title": "The Transformer Block",
+      "pdf_page": 150,
+      "depth": 2
+    },
+    {
+      "title": "Positional Embeddings (RoPE)",
+      "pdf_page": 153,
+      "depth": 2
+    },
+    {
+      "title": "Other Architectural Experiments and Improvements",
+      "pdf_page": 156,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 157,
+      "depth": 1
+    }
+  ]
+}

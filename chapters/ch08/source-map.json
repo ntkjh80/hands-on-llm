@@ -1,0 +1,71 @@
+{
+  "number": 8,
+  "title_en": "8. Semantic Search and Retrieval-Augmented Generation",
+  "title_ko": "시맨틱 검색과 RAG",
+  "pdf_start": 316,
+  "pdf_end": 359,
+  "source": "source/ch08.txt",
+  "directory": "chapters/ch08",
+  "sections": [
+    {
+      "title": "Overview of Semantic Search and RAG",
+      "pdf_page": 317,
+      "depth": 1
+    },
+    {
+      "title": "Semantic Search with Language Models",
+      "pdf_page": 319,
+      "depth": 1
+    },
+    {
+      "title": "Dense Retrieval",
+      "pdf_page": 319,
+      "depth": 2
+    },
+    {
+      "title": "Reranking",
+      "pdf_page": 336,
+      "depth": 2
+    },
+    {
+      "title": "Retrieval Evaluation Metrics",
+      "pdf_page": 341,
+      "depth": 2
+    },
+    {
+      "title": "Retrieval-Augmented Generation (RAG)",
+      "pdf_page": 349,
+      "depth": 1
+    },
+    {
+      "title": "From Search to RAG",
+      "pdf_page": 349,
+      "depth": 2
+    },
+    {
+      "title": "Example: Grounded Generation with an LLM API",
+      "pdf_page": 351,
+      "depth": 2
+    },
+    {
+      "title": "Example: RAG with Local Models",
+      "pdf_page": 352,
+      "depth": 2
+    },
+    {
+      "title": "Advanced RAG Techniques",
+      "pdf_page": 355,
+      "depth": 2
+    },
+    {
+      "title": "RAG Evaluation",
+      "pdf_page": 357,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 358,
+      "depth": 1
+    }
+  ]
+}

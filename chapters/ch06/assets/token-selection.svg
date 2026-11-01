@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+<title id="title">온도 적용과 top-p 제한 후의 확률 비교</title>
+<desc id="desc">가상 로짓 2,1,0,-1에 T=1을 적용하고 top-p 0.8을 적용하면 A와 B만 남는다. 최종 확률은 A 73.1%, B 26.9%다.</desc>
+<rect width="960" height="520" fill="#f8fafb"/>
+<g font-family="Apple SD Gothic Neo, sans-serif" fill="#172332">
+<text x="48" y="55" font-size="27" font-weight="600">온도와 후보 제한은 다른 계산이다</text>
+<text x="48" y="88" font-size="17">교육용 로짓 [2, 1, 0, −1] · 온도 T=1 · top-p=0.8</text>
+<rect x="48" y="113" width="15" height="15" fill="#7795a4"/><text x="72" y="126" font-size="15">온도 적용</text>
+<rect x="203" y="113" width="15" height="15" fill="#176177"/><text x="227" y="126" font-size="15">후보 제한 후</text>
+<text x="49" y="196" font-size="21">A</text>
+<rect x="93" y="174" width="650" height="17" fill="#e7edf0"/>
+<rect x="93" y="198" width="650" height="17" fill="#e7edf0"/>
+<rect x="93" y="174" width="418.544" height="17" fill="#7795a4"/>
+<rect x="93" y="198" width="475.188" height="17" fill="#176177"/>
+<text x="775" y="189" font-size="16">64.4%</text>
+<text x="775" y="213" font-size="16">73.1%</text>
+<text x="49" y="264" font-size="21">B</text>
+<rect x="93" y="242" width="650" height="17" fill="#e7edf0"/>
+<rect x="93" y="266" width="650" height="17" fill="#e7edf0"/>
+<rect x="93" y="242" width="153.974" height="17" fill="#7795a4"/>
+<rect x="93" y="266" width="174.812" height="17" fill="#176177"/>
+<text x="775" y="257" font-size="16">23.7%</text>
+<text x="775" y="281" font-size="16">26.9%</text>
+<text x="49" y="332" font-size="21">C</text>
+<rect x="93" y="310" width="650" height="17" fill="#e7edf0"/>
+<rect x="93" y="334" width="650" height="17" fill="#e7edf0"/>
+<rect x="93" y="310" width="56.644" height="17" fill="#7795a4"/>
+<rect x="93" y="334" width="0.000" height="17" fill="#176177"/>
+<text x="775" y="325" font-size="16">8.7%</text>
+<text x="775" y="349" font-size="16">0.0%</text>
+<text x="49" y="400" font-size="21">D</text>
+<rect x="93" y="378" width="650" height="17" fill="#e7edf0"/>
+<rect x="93" y="402" width="650" height="17" fill="#e7edf0"/>
+<rect x="93" y="378" width="20.838" height="17" fill="#7795a4"/>
+<rect x="93" y="402" width="0.000" height="17" fill="#176177"/>
+<text x="775" y="393" font-size="16">3.2%</text>
+<text x="775" y="417" font-size="16">0.0%</text>
+<text x="93" y="456" font-size="14">0%</text>
+<text x="408" y="456" font-size="14">50%</text>
+<text x="710" y="456" font-size="14">100%</text>
+<text x="48" y="493" font-size="17">A+B의 누적 확률 88.1%로 임계값을 넘김 → 두 후보를 남기고 다시 정규화</text>
+</g></svg>

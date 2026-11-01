@@ -1,0 +1,106 @@
+{
+  "number": 6,
+  "title_en": "6. Prompt Engineering",
+  "title_ko": "프롬프트 엔지니어링",
+  "pdf_start": 236,
+  "pdf_end": 279,
+  "source": "source/ch06.txt",
+  "directory": "chapters/ch06",
+  "sections": [
+    {
+      "title": "Using Text Generation Models",
+      "pdf_page": 236,
+      "depth": 1
+    },
+    {
+      "title": "Choosing a Text Generation Model",
+      "pdf_page": 236,
+      "depth": 2
+    },
+    {
+      "title": "Loading a Text Generation Model",
+      "pdf_page": 237,
+      "depth": 2
+    },
+    {
+      "title": "Controlling Model Output",
+      "pdf_page": 240,
+      "depth": 2
+    },
+    {
+      "title": "Intro to Prompt Engineering",
+      "pdf_page": 244,
+      "depth": 1
+    },
+    {
+      "title": "The Basic Ingredients of a Prompt",
+      "pdf_page": 244,
+      "depth": 2
+    },
+    {
+      "title": "Instruction-Based Prompting",
+      "pdf_page": 247,
+      "depth": 2
+    },
+    {
+      "title": "Advanced Prompt Engineering",
+      "pdf_page": 250,
+      "depth": 1
+    },
+    {
+      "title": "The Potential Complexity of a Prompt",
+      "pdf_page": 251,
+      "depth": 2
+    },
+    {
+      "title": "In-Context Learning: Providing Examples",
+      "pdf_page": 255,
+      "depth": 2
+    },
+    {
+      "title": "Chain Prompting: Breaking up the Problem",
+      "pdf_page": 257,
+      "depth": 2
+    },
+    {
+      "title": "Reasoning with Generative Models",
+      "pdf_page": 260,
+      "depth": 1
+    },
+    {
+      "title": "Chain-of-Thought: Think Before Answering",
+      "pdf_page": 261,
+      "depth": 2
+    },
+    {
+      "title": "Self-Consistency: Sampling Outputs",
+      "pdf_page": 265,
+      "depth": 2
+    },
+    {
+      "title": "Tree-of-Thought: Exploring Intermediate Steps",
+      "pdf_page": 266,
+      "depth": 2
+    },
+    {
+      "title": "Output Verification",
+      "pdf_page": 270,
+      "depth": 1
+    },
+    {
+      "title": "Providing Examples",
+      "pdf_page": 272,
+      "depth": 2
+    },
+    {
+      "title": "Grammar: Constrained Sampling",
+      "pdf_page": 274,
+      "depth": 2
+    },
+    {
+      "title": "Summary",
+      "pdf_page": 278,
+      "depth": 1
+    }
+  ]
+}

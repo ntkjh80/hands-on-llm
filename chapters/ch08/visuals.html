@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>8장 검색과 평가 시각 실험</title>
+<link rel="stylesheet" href="../../assets/study.css">
+<style>
+#ch08-viz{max-width:1080px}#ch08-viz .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px 24px}#ch08-viz .controls label{margin:0}#ch08-viz input[type=range]{width:100%}#ch08-viz .value{font-variant-numeric:tabular-nums;font-weight:600}#ch08-viz .experiment{margin:36px 0 64px}#ch08-viz .plot{width:100%;display:block;height:330px}#ch08-viz .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem}#ch08-viz .dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#19677c}#ch08-viz .qdot{background:#b44b24}#ch08-viz .result-list{padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}#ch08-viz .result-list li{padding:10px 14px;border-bottom:1px solid #d7e0e5}#ch08-viz .rank-row{display:grid;grid-template-columns:130px 1fr 140px;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid #d7e0e5}#ch08-viz .rank-row label{margin:0}#ch08-viz .bar-track{height:22px;background:#e5eaed}#ch08-viz .bar{height:22px;background:#19677c;min-width:0}#ch08-viz .rank-row[data-relevant=false] .bar{background:#aab8bf}#ch08-viz .metrics{display:flex;flex-wrap:wrap;gap:15px 30px;padding:20px 0;font-size:1.05rem}#ch08-viz .metrics strong{display:block;font-size:1.5rem;line-height:1.4}#ch08-viz .chunk{display:flex;gap:6px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid #d7e0e5}#ch08-viz .word{padding:4px 8px;background:#eaf4f5;border-radius:4px}#ch08-viz .word.overlap{background:#fff0d0}#ch08-viz .chunk-label{font-weight:600;min-width:35px}#ch08-viz .small{font-size:.85rem;color:#536271}#ch08-viz .answer{padding:16px 20px;background:#eaf4f5;min-height:65px}#ch08-viz .ref{margin-top:36px;font-size:.86rem}#ch08-viz button:focus-visible,#ch08-viz input:focus-visible{outline:3px solid #b44b24;outline-offset:3px}@media(max-width:600px){#ch08-viz .rank-row{grid-template-columns:110px 1fr;gap:8px}#ch08-viz .rank-row .rank-value{grid-column:2}#ch08-viz .metrics strong{font-size:1.2rem}}@media print{#ch08-viz .controls{display:none}.experiment{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main id="ch08-viz">
+<nav aria-label="학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="visuals.html">시각 실험</a><a href="lab-guide.md">실습</a><a href="quiz.md">복습 문제</a></nav>
+<h1>검색은 무엇을 고르고, 평가는 무엇을 세는가</h1>
+<p class="lead">좌표·순위·청크 경계를 직접 바꾸며 8장의 핵심 관계를 확인하세요.</p>
+<p>모든 좌표와 텍스트는 교육용 가상 데이터입니다. 실제 임베딩이나 모델의 성능을 표시하지 않습니다. 외부 서비스 연결 없이 동작합니다.</p>
+<section class="experiment" aria-labelledby="nearest-heading">
+<h2 id="nearest-heading">1. 가장 가까움과 충분히 가까움</h2>
+<p>질의 점을 움직이고 결과 수와 최대 거리를 바꿉니다. top-k로 고른 뒤 거리 조건을 적용합니다. 결과가 없을 수도 있습니다.</p>
+<div class="controls">
+<label for="qx">질의 X <output id="qx-value" class="value">4.0</output><input id="qx" type="range" min="0" max="10" step="0.1" value="4"></label>
+<label for="qy">질의 Y <output id="qy-value" class="value">6.0</output><input id="qy" type="range" min="0" max="10" step="0.1" value="6"></label>
+<label for="topk">최대 결과 수 <output id="topk-value" class="value">3</output><input id="topk" type="range" min="1" max="6" step="1" value="3"></label>
+<label for="radius">허용 L2 거리 <output id="radius-value" class="value">4.0</output><input id="radius" type="range" min="0" max="14.2" step="0.1" value="4"></label>
+</div>
+<svg id="nearest-plot" class="plot" role="img" aria-label="교육용 2차원 문서 좌표와 질의, 선택 문서"></svg>
+<div class="legend"><span><i class="dot" aria-hidden="true"></i> 선택 문서: 진한 원</span><span><i class="dot" style="background:#aab8bf" aria-hidden="true"></i> 미선택 문서: 옅은 원</span><span><i class="dot qdot" aria-hidden="true"></i> 질의 Q: 주황색 마름모</span></div>
+<p id="nearest-summary" class="answer" aria-live="polite"></p>
+<ul id="nearest-results" class="result-list" aria-label="문서별 거리와 선택 여부"></ul>
+<p class="small">X와 Y는 이름을 붙이지 않은 가상 표현 축입니다. 원 안에 있어도 top-k 밖이면 반환되지 않습니다. 실제 관련성 정답을 나타내는 그림이 아닙니다.</p>
+</section>
+<section class="experiment" aria-labelledby="ap-heading">
+<h2 id="ap-heading">2. 정답 위치와 놓친 정답이 AP에 주는 영향</h2>
+<p>각 위치를 관련 문서로 지정해 보세요. “목록 밖에서 놓친 정답”을 늘리면 같은 반환 순위에서도 AP가 낮아집니다. 막대는 해당 위치까지의 정밀도입니다.</p>
+<div id="rank-rows">
+<div class="rank-row" data-position="1"><label><input type="checkbox" class="relevant" checked> 1위 관련</label><div class="bar-track"><div class="bar"></div></div><span class="rank-value"></span></div>
+<div class="rank-row" data-position="2"><label><input type="checkbox" class="relevant"> 2위 관련</label><div class="bar-track"><div class="bar"></div></div><span class="rank-value"></span></div>
+<div class="rank-row" data-position="3"><label><input type="checkbox" class="relevant" checked> 3위 관련</label><div class="bar-track"><div class="bar"></div></div><span class="rank-value"></span></div>
+<div class="rank-row" data-position="4"><label><input type="checkbox" class="relevant"> 4위 관련</label><div class="bar-track"><div class="bar"></div></div><span class="rank-value"></span></div>
+<div class="rank-row" data-position="5"><label><input type="checkbox" class="relevant"> 5위 관련</label><div class="bar-track"><div class="bar"></div></div><span class="rank-value"></span></div>
+</div>
+<label for="missing">목록 밖에서 놓친 정답 <output id="missing-value" class="value">0개</output><input id="missing" type="range" min="0" max="4" step="1" value="0"></label>
+<div class="metrics" aria-live="polite">
+<div>전체 정답 수 R<strong id="total-relevant"></strong></div>
+<div>P@5<strong id="precision"></strong></div>
+<div>Recall@5<strong id="recall"></strong></div>
+<div>AP@5<strong id="ap"></strong></div>
+</div>
+<p id="ap-calculation" class="answer" aria-live="polite"></p>
+<button id="reset-ap" type="button">1위와 3위만 관련인 예제로 돌아가기</button>
+<p class="small">분모는 전체 관련 문서 수 R입니다. AP@5의 다른 정의도 있으므로 결과를 비교할 때 정의를 맞춰야 합니다. 정답이 0개이면 AP와 Recall을 계산하지 않습니다.</p>
+</section>
+<section class="experiment" aria-labelledby="chunk-heading">
+<h2 id="chunk-heading">3. 청크 경계와 겹침</h2>
+<p>가상 문장: “제품 아우로라는 국내에서 4월 출시된다 그러나 해외 판매는 인증 완료 후 결정된다”. 공백 단어 단위 실험이며 모델 토큰 단위가 아닙니다.</p>
+<div class="controls">
+<label for="chunk-size">청크 최대 단어 수 <output id="chunk-size-value" class="value"></output><input id="chunk-size" type="range" min="3" max="10" step="1" value="6"></label>
+<label for="overlap">겹침 단어 수 <output id="overlap-value" class="value"></output><input id="overlap" type="range" min="0" max="5" step="1" value="2"></label>
+</div>
+<div id="chunks" aria-label="분할된 청크 목록"></div>
+<p id="chunk-summary" class="answer" aria-live="polite"></p>
+<p class="small">노란 단어는 이전 청크와 겹치는 부분입니다. 겹침은 경계 문맥을 보존하지만 중복 처리량도 늘립니다.</p>
+</section>
+<p class="ref">개념 출처: Hands-On Large Language Models, Chapter 8, 제공 PDF 물리 페이지 319–348. 이 페이지의 그림과 계산 예제는 별도 제작한 학습 자료입니다.</p>
+<nav aria-label="다음 학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="visuals.html">시각 실험</a><a href="lab-guide.md">실습</a><a href="quiz.md">복습 문제</a></nav>
+</main>
+<script>
+'use strict';
+(() => {
+  const root = document.getElementById('ch08-viz');
+  const get = id => root.querySelector('#' + id);
+  const data = [{id:'D1',x:2,y:8},{id:'D2',x:4,y:7},{id:'D3',x:8,y:7},{id:'D4',x:7,y:2},{id:'D5',x:2,y:2},{id:'D6',x:5,y:4}];
+  const ns = 'http://www.w3.org/2000/svg';
+  function svgNode(tag, attrs, label) {
+    const e = document.createElementNS(ns,tag);
+    Object.entries(attrs).forEach(([key,value])=>e.setAttribute(key,String(value)));
+    if(label !== undefined) e.textContent = label;
+    return e;
+  }
+  function drawNearest() {
+    const x=Number(get('qx').value), y=Number(get('qy').value), k=Number(get('topk').value), radius=Number(get('radius').value);
+    get('qx-value').textContent=x.toFixed(1);get('qy-value').textContent=y.toFixed(1);get('topk-value').textContent=k;get('radius-value').textContent=radius.toFixed(1);
+    const ordered=data.map(d=>({...d,distance:Math.hypot(d.x-x,d.y-y)})).sort((a,b)=>a.distance-b.distance||a.id.localeCompare(b.id));
+    const selected=new Set(ordered.slice(0,k).filter(d=>d.distance<=radius).map(d=>d.id));
+    const svg=get('nearest-plot');svg.replaceChildren();
+    const width=Math.max(280,Math.round(svg.getBoundingClientRect().width)),height=330;
+    svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+    const left=40,right=22,top=18,bottom=42;
+    const scale=Math.min((width-left-right)/10,(height-top-bottom)/10);
+    const plotWidth=10*scale,plotHeight=10*scale;
+    const ox=left+(width-left-right-plotWidth)/2,oy=top+(height-top-bottom-plotHeight)/2;
+    const sx=value=>ox+value*scale,sy=value=>oy+plotHeight-value*scale;
+    svg.append(svgNode('title',{},`질의 (${x.toFixed(1)}, ${y.toFixed(1)}), 선택 ${selected.size}개`));
+    const defs=svgNode('defs',{}),clip=svgNode('clipPath',{id:'plot-clip'});
+    clip.append(svgNode('rect',{x:ox,y:oy,width:plotWidth,height:plotHeight}));defs.append(clip);svg.append(defs);
+    for(let tick=0;tick<=10;tick+=2){
+      svg.append(svgNode('line',{x1:sx(tick),x2:sx(tick),y1:oy,y2:oy+plotHeight,stroke:'#d7e0e5'}));
+      svg.append(svgNode('line',{x1:ox,x2:ox+plotWidth,y1:sy(tick),y2:sy(tick),stroke:'#d7e0e5'}));
+      svg.append(svgNode('text',{x:sx(tick),y:oy+plotHeight+19,'text-anchor':'middle','font-size':12,fill:'#536271'},tick));
+      svg.append(svgNode('text',{x:ox-10,y:sy(tick)+4,'text-anchor':'end','font-size':12,fill:'#536271'},tick));
+    }
+    svg.append(svgNode('circle',{cx:sx(x),cy:sy(y),r:radius*scale,fill:'#b44b24','fill-opacity':0.06,stroke:'#b44b24','stroke-opacity':0.4,'stroke-dasharray':'4 4','clip-path':'url(#plot-clip)'}));
+    ordered.forEach(d=>{
+      const active=selected.has(d.id);
+      if(active)svg.append(svgNode('line',{x1:sx(x),y1:sy(y),x2:sx(d.x),y2:sy(d.y),stroke:'#19677c','stroke-width':1.5}));
+      svg.append(svgNode('circle',{cx:sx(d.x),cy:sy(d.y),r:active?7:5,fill:active?'#19677c':'#aab8bf'}));
+      svg.append(svgNode('text',{x:sx(d.x)+10,y:sy(d.y)-9,'font-size':13,fill:'#172332'},d.id));
+    });
+    const qx=sx(x),qy=sy(y);
+    svg.append(svgNode('path',{d:`M${qx} ${qy-8}L${qx+8} ${qy}L${qx} ${qy+8}L${qx-8} ${qy}Z`,fill:'#b44b24'}));
+    svg.append(svgNode('text',{x:Math.min(width-18,qx+11),y:Math.max(14,qy-12),'font-size':14,fill:'#b44b24'},'Q'));
+    svg.append(svgNode('text',{x:ox+plotWidth/2,y:height-5,'font-size':12,'text-anchor':'middle',fill:'#536271'},'가상 표현 축 X'));
+    get('nearest-summary').textContent=selected.size ? `반환 ${selected.size}개: ${ordered.filter(d=>selected.has(d.id)).map(d=>d.id).join(', ')}. top-${k} 안이면서 거리 ${radius.toFixed(1)} 이하인 문서입니다.` : `반환 0개: top-${k} 후보 중 거리 ${radius.toFixed(1)} 이하인 문서가 없습니다.`;
+    const list=get('nearest-results');list.replaceChildren();
+    ordered.forEach((d,i)=>{const li=document.createElement('li');li.textContent=`${i+1}위 ${d.id} · 거리 ${d.distance.toFixed(3)} · ${selected.has(d.id)?'선택':'미선택'}`;list.append(li);});
+  }
+  function drawAP(){
+    let found=0,sum=0;const terms=[];
+    root.querySelectorAll('.rank-row').forEach((row,index)=>{
+      const relevant=row.querySelector('input').checked;
+      if(relevant)found++;
+      const precision=found/(index+1);
+      row.dataset.relevant=String(relevant);row.querySelector('.bar').style.width=(precision*100)+'%';
+      row.querySelector('.rank-value').textContent=`P@${index+1} = ${found}/${index+1} = ${precision.toFixed(3)}`;
+      if(relevant){sum+=precision;terms.push(`${found}/${index+1}`);}
+    });
+    const missing=Number(get('missing').value),total=found+missing;
+    get('missing-value').textContent=missing+'개';get('total-relevant').textContent=total+'개';get('precision').textContent=(found/5).toFixed(4);
+    get('recall').textContent=total?(found/total).toFixed(4):'정의하지 않음';get('ap').textContent=total?(sum/total).toFixed(4):'정의하지 않음';
+    get('ap-calculation').textContent=total?`AP@5 = (${terms.length?terms.join(' + '):'0'}) / ${total} = ${(sum/total).toFixed(4)}. 관련 문서가 나온 위치의 정밀도만 합합니다.`:'전체 정답이 0개입니다. 이 자료에서는 AP를 계산하지 않고 무응답 품질을 따로 평가합니다.';
+  }
+  function drawChunks(){
+    const words='제품 아우로라는 국내에서 4월 출시된다 그러나 해외 판매는 인증 완료 후 결정된다'.split(' ');
+    const size=Number(get('chunk-size').value);
+    get('overlap').max=String(size-1);
+    const overlap=Math.min(Number(get('overlap').value),size-1);get('overlap').value=overlap;
+    get('chunk-size-value').textContent=size+'개';get('overlap-value').textContent=overlap+'개';
+    const container=get('chunks');container.replaceChildren();let count=0,total=0;
+    for(let start=0;start<words.length;start+=size-overlap){
+      count++;const row=document.createElement('div');row.className='chunk';
+      const label=document.createElement('span');label.className='chunk-label';label.textContent='C'+count;row.append(label);
+      words.slice(start,start+size).forEach((word,i)=>{const span=document.createElement('span');span.className='word'+(start>0&&i<overlap?' overlap':'');span.textContent=word;row.append(span);total++;});
+      container.append(row);if(start+size>=words.length)break;
+    }
+    get('chunk-summary').textContent=`원문 ${words.length}단어 → 청크 ${count}개, 중복을 포함해 ${total}단어 처리. 추가 처리량 ${total-words.length}단어.`;
+  }
+  ['qx','qy','topk','radius'].forEach(id=>get(id).addEventListener('input',drawNearest));
+  root.querySelectorAll('.relevant').forEach(input=>input.addEventListener('change',drawAP));get('missing').addEventListener('input',drawAP);
+  get('reset-ap').addEventListener('click',()=>{root.querySelectorAll('.relevant').forEach((input,i)=>input.checked=i===0||i===2);get('missing').value=0;drawAP();});
+  ['chunk-size','overlap'].forEach(id=>get(id).addEventListener('input',drawChunks));
+  new ResizeObserver(drawNearest).observe(get('nearest-plot'));
+  drawNearest();drawAP();drawChunks();
+})();
+</script>
+</body>
+</html>

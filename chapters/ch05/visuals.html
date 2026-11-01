@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5장 시각 실험 · 군집과 토픽 표현</title>
+<link rel="stylesheet" href="../../assets/study.css">
+<style>
+#lab5{max-width:1060px}.caption{color:#526574;font-size:.88rem}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 28px}.controls label{margin:0}.controls input[type=range]{width:100%}.result{font-weight:600;color:#155b70}.plot{width:100%;display:block;min-height:320px;background:#f5f8fa;border-radius:8px}.barrow{display:grid;grid-template-columns:100px 1fr 78px;gap:10px;align-items:center;margin:14px 0}.bartrack{height:25px;background:#e9eff1}.barfill{height:100%;background:#1d7589;min-width:0}.num{font-variant-numeric:tabular-nums}.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{padding:6px 10px;background:#eaf4f5;border-radius:5px}.term-list{display:grid;gap:8px}#mmrTable{min-width:530px}#tfTable table{min-width:520px}#tfTable td{white-space:nowrap}.table-scroll{overflow:auto}.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:.9rem}.legend span::before{content:'●';color:var(--dot);margin-right:5px}.legend span:last-child::before{content:'×'}.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media(max-width:500px){.barrow{grid-template-columns:86px 1fr 70px;gap:7px}.plot{min-height:320px}}
+</style>
+</head>
+<body>
+<main id="lab5">
+<nav aria-label="학습 자료"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lecture-script.md">대본</a><a href="visuals.html">시각화</a><a href="lab-guide.md">실습</a><a href="quiz.md">문제</a></nav>
+<h1>문서를 묶는 일과<br>주제를 설명하는 일</h1>
+<p class="lead">반경, 단어 빈도, 다양성 비중을 바꾸며 세 단계의 결정을 따로 관찰합니다.</p>
+<p class="caption">모든 좌표·문서·키워드 벡터는 교육용 가상 데이터입니다. 실제 임베딩, UMAP, HDBSCAN, BERTopic, 생성 모델을 실행하지 않습니다. 아래 첫 실험은 단순 DBSCAN입니다. 외부 연결 없이 동작합니다.</p>
+<section aria-labelledby="clusterTitle">
+<h2 id="clusterTitle">1. 밀도와 미배정 문서</h2>
+<p>가까운 점이 충분히 모이면 군집이 됩니다. 반경을 넓히면 따로 있던 묶음이 연결될 수 있습니다. 최소 이웃 수에는 자기 자신이 포함됩니다.</p>
+<div class="controls">
+<label for="eps">이웃 반경 ε <output id="epsValue" class="num">0.45</output><input id="eps" type="range" min="0.1" max="3.0" step="0.05" value="0.45"></label>
+<label for="minPoints">최소 이웃 수 <output id="minValue" class="num">3</output><input id="minPoints" type="range" min="2" max="6" step="1" value="3"></label>
+</div>
+<p id="clusterSummary" class="result" aria-live="polite"></p>
+<svg id="clusterPlot" class="plot" role="img" aria-labelledby="plotTitle plotDesc"><title id="plotTitle">밀도 기반 군집 결과</title><desc id="plotDesc">14개 가상 문서의 위치와 군집 결과. 문서 ID는 표에서도 확인할 수 있습니다.</desc></svg>
+<div id="clusterLegend" class="legend" aria-label="군집 범례"></div>
+<details><summary>문서별 라벨과 내용</summary><div id="docTable" class="table-scroll"></div></details>
+<p class="caption">좌표 축은 학습용 임의 값입니다. 실제 의미 거리나 UMAP 결과가 아닙니다. 라벨 -1은 미배정 상자이며 하나의 일관된 주제를 뜻하지 않습니다.</p>
+</section>
+<section aria-labelledby="tfTitle">
+<h2 id="tfTitle">2. c-TF-IDF는 왜 흔한 단어를 낮출까</h2>
+<p>군집은 3개로 고정합니다. 각 군집에만 있는 핵심어 4회, 보조어 3회, 공통 단어 model 2회가 있습니다. 세 군집에 공통으로 넣을 the의 빈도를 바꿔 봅니다. 첫 실험의 군집 설정과 독립적입니다.</p>
+<div class="controls">
+<label for="common">군집마다 the의 출현 횟수 <output id="commonValue" class="num">3</output><input id="common" type="range" min="0" max="15" step="1" value="3"></label>
+<label><input id="removeThe" type="checkbox"> 계산 전에 the 제거</label>
+</div>
+<p class="formula">가중치 = 군집 내 상대 빈도 × ln(1 + 군집 평균 길이 / 전체 단어 빈도)</p>
+<p id="tfSummary" class="result" aria-live="polite"></p>
+<div id="tfBars" role="img" aria-label="음성 토픽의 단어별 c-TF-IDF 가중치"></div>
+<div id="tfTable" class="table-scroll"></div>
+<p class="caption">막대 길이의 기준 상한은 0.60이며 동일한 기준으로 비교합니다. 가중치는 확률이 아닙니다. 흔한 단어의 IDF가 작아져도 군집 내 빈도가 높으면 상위에 남을 수 있습니다.</p>
+</section>
+<section aria-labelledby="mmrTitle">
+<h2 id="mmrTitle">3. 같은 말 네 번과 서로 다른 관점 네 개</h2>
+<p>요약 토픽의 6개 후보에서 4개를 선택합니다. 첫 단어는 관련성이 가장 높은 후보입니다. 다음 단어부터 이미 선택한 단어와의 중복을 벌점으로 줍니다.</p>
+<label for="diversity">다양성 비중 d <output id="diversityValue" class="num">0.70</output><input id="diversity" type="range" min="0" max="1" step="0.05" value="0.7"></label>
+<p class="formula">점수 = (1 − d) × 주제 관련성 − d × 선택된 단어와의 최대 유사도</p>
+<div id="selectedWords" class="pills" aria-live="polite"></div>
+<div class="table-scroll"><table id="mmrTable"><thead><tr><th>선택 순서</th><th>키워드</th><th>관련성</th><th>최대 중복</th><th>선택 점수</th></tr></thead><tbody></tbody></table></div>
+<p class="caption">summary·summaries가 summarization과 거의 같은 방향을 갖도록 직접 만든 벡터입니다. 실제 모델 성능이 아닙니다. 음수 점수도 순위 비교에 쓸 수 있고, d를 높였다고 의미 품질이 자동으로 높아지는 것은 아닙니다.</p>
+</section>
+<p class="caption">개념 근거: Hands-On Large Language Models, 2024년 초판 5장, PDF 194–210쪽과 226–228쪽. 실제 책의 실험 수치와 교육용 가상 수치는 구분됩니다.</p>
+<p>이 세 실험 뒤에 생성 모델로 이름을 붙일 수 있지만, 그 이름은 앞 단계의 군집과 키워드를 설명하는 별도 결과입니다. 이 시각화는 생성 이름을 만들지 않습니다.</p>
+<nav aria-label="학습 자료 끝"><a href="../../README.md">전체 목차</a><a href="study.md">학습 노트</a><a href="lecture.md">강의안</a><a href="lecture-script.md">대본</a><a href="visuals.html">시각화</a><a href="lab-guide.md">실습</a><a href="quiz.md">문제</a></nav>
+</main>
+<script>
+'use strict';
+const docs=[
+['S1','speech audio model the',0,0],['S2','speech audio the',.2,.1],['S3','speech audio model',-.1,.2],['S4','speech the',.1,-.2],
+['T1','translation language model the',2,0],['T2','translation language the',2.2,.1],['T3','translation language model',1.9,.2],['T4','translation the',2.1,-.2],
+['H1','clinical patient model the',1,2],['H2','clinical patient the',1.2,2.1],['H3','clinical patient model',.9,2.2],['H4','clinical the',1.1,1.8],
+['X1','niche quantum discourse',4.5,3.8],['X2','unusual music notation',-2.5,3.5]];
+const byId=id=>document.getElementById(id);
+const colors=['#176a82','#97501f','#4d6d30','#704c96','#8c455c','#37616b'];
+function dbscan(eps,minPoints){
+ const near=docs.map(a=>docs.map((b,i)=>Math.hypot(a[2]-b[2],a[3]-b[3])<=eps?i:-1).filter(i=>i>=0));
+ const labels=docs.map(()=>null),seen=new Set();let c=0;
+ docs.forEach((_,i)=>{if(seen.has(i))return;seen.add(i);if(near[i].length<minPoints){labels[i]=-1;return;}labels[i]=c;const queue=[...near[i]],added=new Set(queue);
+ for(let q=0;q<queue.length;q++){const j=queue[q];if(!seen.has(j)){seen.add(j);if(near[j].length>=minPoints){for(const k of near[j])if(!added.has(k)){queue.push(k);added.add(k);}}}if(labels[j]===null||labels[j]===-1)labels[j]=c;}c++;});return labels;
+}
+function cluster(){
+ const eps=+byId('eps').value,minPoints=+byId('minPoints').value,labels=dbscan(eps,minPoints);
+ byId('epsValue').value=eps.toFixed(2);byId('minValue').value=minPoints;
+ const topics=[...new Set(labels.filter(x=>x!==-1))],noise=labels.filter(x=>x===-1).length;
+ byId('clusterSummary').textContent=`일반 군집 ${topics.length}개 · 미배정 ${noise}/14개 · 고유 라벨 ${new Set(labels).size}개`;
+ const svg=byId('clusterPlot'),w=Math.max(280,svg.clientWidth),h=340;
+ const x=v=>42+(v+3)/8*(w-70),y=v=>h-38-(v+1)/5.5*(h-62);
+ svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+ let str='<title id="plotTitle">밀도 기반 군집 결과</title><desc id="plotDesc">교육용 좌표의 문서 14개. 라벨 -1은 x표로 표시.</desc>';
+ str+=`<path d="M42 24 V${h-38} H${w-28}" stroke="#70818b" fill="none"/><text x="${w-30}" y="${h-13}" text-anchor="end" font-size="12">임의 x 좌표</text><text x="42" y="16" font-size="12">임의 y 좌표</text>`;
+ [-2,0,2,4].forEach(t=>{str+=`<text x="${x(t)}" y="${h-21}" text-anchor="middle" font-size="12" fill="#526574">${t}</text>`;});
+ [-0,2,4].forEach(t=>{str+=`<text x="31" y="${y(t)+4}" text-anchor="end" font-size="12" fill="#526574">${t}</text>`;});
+ docs.forEach((d,i)=>{const px=x(d[2]),py=y(d[3]),color=labels[i]===-1?'#667783':colors[labels[i]%colors.length];str+=`<g><title>${d[0]}: label ${labels[i]} · ${d[1]}</title>`;
+ str+=labels[i]===-1?`<path d="M${px-5} ${py-5}l10 10m0-10l-10 10" stroke="${color}" stroke-width="2"/>`:`<circle cx="${px}" cy="${py}" r="6" fill="${color}"/>`;str+='</g>';});
+ // Group labels are placed away from dense points; individual IDs are in the table.
+ topics.forEach(c=>{const members=docs.filter((_,i)=>labels[i]===c),mx=members.reduce((s,d)=>s+d[2],0)/members.length,my=members.reduce((s,d)=>s+d[3],0)/members.length;str+=`<text x="${x(mx)}" y="${y(my)-24}" text-anchor="middle" font-size="13" fill="${colors[c%colors.length]}">군집 ${c}</text>`;});
+ svg.innerHTML=str;
+ byId('clusterLegend').innerHTML=topics.map(c=>`<span style="--dot:${colors[c%colors.length]}">군집 ${c}</span>`).join('')+'<span style="--dot:#667783">미배정 -1</span>';
+ byId('docTable').innerHTML='<table><thead><tr><th>문서</th><th>라벨</th><th>가상 내용</th></tr></thead><tbody>'+docs.map((d,i)=>`<tr><td>${d[0]}</td><td>${labels[i]}</td><td>${d[1]}</td></tr>`).join('')+'</tbody></table>';
+}
+function tfidf(){
+ const amount=+byId('common').value,drop=byId('removeThe').checked,k=drop?0:amount,A=9+k;
+ byId('commonValue').value=amount;
+ const rows=[['speech',4,4],['audio',3,3],['model',2,6],['the',k,3*k]].map(([word,f,total])=>({word,f,total,tf:f/A,idf:total?Math.log1p(A/total):0})).map(r=>({...r,weight:r.tf*r.idf})).sort((a,b)=>b.weight-a.weight);
+ byId('tfSummary').textContent=`군집 평균 길이 A=${A} · 군집 수 3개 · 불용어 제거 ${drop?'적용':'미적용'}`;
+ byId('tfBars').innerHTML=rows.map(r=>`<div class="barrow"><span>${r.word}</span><div class="bartrack"><div class="barfill" style="width:${100*r.weight/.6}%"></div></div><span class="num">${r.weight.toFixed(4)}</span></div>`).join('');
+ byId('tfTable').innerHTML='<table><thead><tr><th>단어</th><th>군집 빈도</th><th>전체 빈도</th><th>cTF</th><th>IDF</th><th>가중치</th></tr></thead><tbody>'+rows.map(r=>`<tr><td>${r.word}</td><td>${r.f}</td><td>${r.total}</td><td>${r.tf.toFixed(4)}</td><td>${r.idf.toFixed(4)}</td><td>${r.weight.toFixed(4)}</td></tr>`).join('')+'</tbody></table>';
+}
+const candidates={summarization:[1,0,0],summary:[.99,.02,0],summaries:[.98,-.02,0],document:[.8,.6,0],extractive:[.75,0,.66],rouge:[.55,.45,.7]};
+function cosine(a,b){return a.reduce((s,x,i)=>s+x*b[i],0)/(Math.hypot(...a)*Math.hypot(...b));}
+function mmr(){
+ const d=+byId('diversity').value,remaining=Object.keys(candidates),selected=[],trace=[];
+ byId('diversityValue').value=d.toFixed(2);
+ while(selected.length<4){let best=null;remaining.forEach(word=>{const rel=cosine(candidates[word],[1,0,0]),red=selected.length?Math.max(...selected.map(s=>cosine(candidates[word],candidates[s]))):0,score=selected.length?(1-d)*rel-d*red:rel;if(!best||score>best.score)best={word,rel,red,score};});selected.push(best.word);trace.push(best);remaining.splice(remaining.indexOf(best.word),1);}
+ byId('selectedWords').innerHTML=selected.map((s,i)=>`<span class="pill">${i+1}. ${s}</span>`).join('');
+ byId('mmrTable').querySelector('tbody').innerHTML=trace.map((r,i)=>`<tr><td>${i+1}</td><td>${r.word}</td><td class="num">${r.rel.toFixed(4)}</td><td class="num">${r.red.toFixed(4)}</td><td class="num">${r.score.toFixed(4)}</td></tr>`).join('');
+}
+['eps','minPoints'].forEach(id=>byId(id).addEventListener('input',cluster));
+byId('common').addEventListener('input',tfidf);byId('removeThe').addEventListener('change',tfidf);byId('diversity').addEventListener('input',mmr);
+cluster();tfidf();mmr();new ResizeObserver(cluster).observe(byId('clusterPlot'));
+</script>
+</body>
+</html>

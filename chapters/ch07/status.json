@@ -1,0 +1,41 @@
+{
+  "chapter": 7,
+  "status": "complete",
+  "files": [
+    "README.md",
+    "study.md",
+    "lecture.md",
+    "lecture-script.md",
+    "visuals.html",
+    "lab.py",
+    "lab-output.txt",
+    "lab-guide.md",
+    "quiz.md",
+    "coverage.json",
+    "source-map.json",
+    "status.json"
+  ],
+  "lab_command": "python3 chapters/ch07/lab.py",
+  "validation": [
+    "Read the complete chapter source for PDF pages 280-315.",
+    "Mapped all 12 source subsections and all 17 figures plus Table 7-1.",
+    "Checked GitHub-compatible math delimiters, Markdown links, explicit anchors, fences and details blocks.",
+    "Executed standard-library CPU lab, alternate window, first-lookup failure recovery, and maximum-step termination.",
+    "Browser checks passed for memory mode changes, agent recovery, exchange-rate changes and quantization output.",
+    "Browser reported zero page errors; inspected desktop and mobile screenshots and checked horizontal overflow."
+  ],
+  "counts": {
+    "study_characters": 32854,
+    "study_korean_characters": 18203,
+    "script_korean_characters": 7196,
+    "mermaid_diagrams": 6,
+    "quiz_questions": 16,
+    "interactive_experiments": 3
+  },
+  "limitations": [
+    "Historical 2024 LangChain and model examples are explained; current package compatibility and actual GGUF, GPU, API execution are not verified.",
+    "CPU lab and visualizations use deterministic rules, not actual LLM generation, summarization, or agent evaluation.",
+    "Conversation length is whitespace word count, not model tokenizer tokens or costs.",
+    "Prices and exchange rates are fictional teaching fixtures, not current market data."
+  ]
+}
